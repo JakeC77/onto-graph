@@ -1,0 +1,2 @@
+event_id,start_date,duration_weeks,ot_hours_per_week_per_person,affected_employees,description
+EVT-018,2025-07-21,6,8,"['EMP-002', 'EMP-004', 'EMP-005', 'EMP-006']","Crew overtime to cover Vega gap â€” 6-week period, avg +8 hrs OT/week per remaining journeyman"
