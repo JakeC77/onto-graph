@@ -1,0 +1,564 @@
+# Project archetypes — templates for generating realistic projects
+# Each archetype defines typical ranges and phase structures
+
+archetypes:
+
+  kitchen_remodel:
+    label: "Kitchen Remodel"
+    type: renovation
+    trade: general
+    duration_weeks: [6, 10]
+    contract_value: [38000, 125000]
+    target_margin: [0.28, 0.40]
+    seasonal_weight: [0.7, 1.2, 1.3, 1.0, 1.4, 1.5, 1.5, 1.4, 1.3, 1.2, 0.9, 0.6]
+    permit_required_pct: 0.60
+    customer_type: residential
+    phases:
+      - code: "01-DEMO"
+        name: "Demolition"
+        labor_pct: 0.08
+        material_pct: 0.00
+        sub_pct: 0.00
+      - code: "02-ROUGH-PLUMB"
+        name: "Rough Plumbing"
+        labor_pct: 0.00
+        material_pct: 0.04
+        sub_pct: 0.12
+        sub_vendor_type: plumbing
+      - code: "03-ROUGH-ELEC"
+        name: "Rough Electrical"
+        labor_pct: 0.00
+        material_pct: 0.03
+        sub_pct: 0.10
+        sub_vendor_type: electrical
+      - code: "04-INSULATION"
+        name: "Insulation"
+        labor_pct: 0.03
+        material_pct: 0.02
+        sub_pct: 0.00
+      - code: "05-DRYWALL"
+        name: "Drywall"
+        labor_pct: 0.07
+        material_pct: 0.04
+        sub_pct: 0.00
+      - code: "06-CABINETS"
+        name: "Cabinet Installation"
+        labor_pct: 0.06
+        material_pct: 0.18
+        sub_pct: 0.00
+      - code: "07-COUNTERTOPS"
+        name: "Countertops"
+        labor_pct: 0.00
+        material_pct: 0.00
+        sub_pct: 0.12
+        sub_vendor_type: countertops
+      - code: "08-TILE"
+        name: "Tile Work"
+        labor_pct: 0.00
+        material_pct: 0.03
+        sub_pct: 0.08
+        sub_vendor_type: tile
+      - code: "09-PAINT"
+        name: "Paint"
+        labor_pct: 0.05
+        material_pct: 0.02
+        sub_pct: 0.00
+      - code: "10-FINISH-CARP"
+        name: "Finish Carpentry & Trim"
+        labor_pct: 0.06
+        material_pct: 0.03
+        sub_pct: 0.00
+      - code: "11-FIXTURES"
+        name: "Fixtures & Appliances"
+        labor_pct: 0.03
+        material_pct: 0.10
+        sub_pct: 0.00
+      - code: "12-CLEANUP"
+        name: "Final Cleanup & Punch"
+        labor_pct: 0.02
+        material_pct: 0.00
+        sub_pct: 0.00
+
+  bathroom_remodel:
+    label: "Bathroom Remodel"
+    type: renovation
+    trade: general
+    duration_weeks: [3, 6]
+    contract_value: [12000, 52000]
+    target_margin: [0.30, 0.44]
+    seasonal_weight: [0.9, 1.0, 1.1, 1.2, 1.2, 1.1, 1.0, 1.0, 1.1, 1.1, 0.9, 0.8]
+    permit_required_pct: 0.40
+    customer_type: residential
+    phases:
+      - code: "01-DEMO"
+        name: "Demolition"
+        labor_pct: 0.10
+        material_pct: 0.00
+        sub_pct: 0.00
+      - code: "02-ROUGH-PLUMB"
+        name: "Rough Plumbing"
+        labor_pct: 0.00
+        material_pct: 0.05
+        sub_pct: 0.18
+        sub_vendor_type: plumbing
+      - code: "03-ROUGH-ELEC"
+        name: "Rough Electrical"
+        labor_pct: 0.00
+        material_pct: 0.02
+        sub_pct: 0.08
+        sub_vendor_type: electrical
+      - code: "04-BACKER"
+        name: "Cement Board & Waterproofing"
+        labor_pct: 0.06
+        material_pct: 0.04
+        sub_pct: 0.00
+      - code: "05-TILE"
+        name: "Tile & Shower"
+        labor_pct: 0.00
+        material_pct: 0.08
+        sub_pct: 0.20
+        sub_vendor_type: tile
+      - code: "06-VANITY"
+        name: "Vanity & Fixtures"
+        labor_pct: 0.05
+        material_pct: 0.12
+        sub_pct: 0.00
+      - code: "07-PAINT"
+        name: "Paint"
+        labor_pct: 0.04
+        material_pct: 0.02
+        sub_pct: 0.00
+      - code: "08-CLEANUP"
+        name: "Final Cleanup & Punch"
+        labor_pct: 0.02
+        material_pct: 0.00
+        sub_pct: 0.00
+
+  deck_addition:
+    label: "Deck / Outdoor Structure"
+    type: addition
+    trade: general
+    duration_weeks: [3, 7]
+    contract_value: [18000, 75000]
+    target_margin: [0.32, 0.44]
+    seasonal_weight: [0.2, 0.3, 0.8, 1.5, 1.8, 1.6, 1.4, 1.4, 1.2, 0.7, 0.3, 0.1]
+    permit_required_pct: 0.90
+    customer_type: residential
+    phases:
+      - code: "01-FOOTINGS"
+        name: "Footings & Posts"
+        labor_pct: 0.15
+        material_pct: 0.08
+        sub_pct: 0.00
+        equipment_needed: true
+      - code: "02-FRAMING"
+        name: "Framing & Decking"
+        labor_pct: 0.25
+        material_pct: 0.28
+        sub_pct: 0.00
+      - code: "03-STAIRS"
+        name: "Stairs & Railings"
+        labor_pct: 0.12
+        material_pct: 0.10
+        sub_pct: 0.00
+      - code: "04-FINISH"
+        name: "Finish & Sealing"
+        labor_pct: 0.08
+        material_pct: 0.04
+        sub_pct: 0.00
+      - code: "05-CLEANUP"
+        name: "Cleanup & Final Inspection"
+        labor_pct: 0.02
+        material_pct: 0.00
+        sub_pct: 0.00
+
+  room_addition:
+    label: "Room Addition"
+    type: addition
+    trade: general
+    duration_weeks: [8, 20]
+    contract_value: [65000, 220000]
+    target_margin: [0.24, 0.36]
+    seasonal_weight: [0.5, 0.6, 1.0, 1.3, 1.4, 1.3, 1.2, 1.2, 1.3, 1.2, 0.8, 0.5]
+    permit_required_pct: 1.00
+    customer_type: residential
+    phases:
+      - code: "01-DEMO"
+        name: "Demo & Prep"
+        labor_pct: 0.04
+        material_pct: 0.00
+        sub_pct: 0.00
+      - code: "02-FOUNDATION"
+        name: "Foundation"
+        labor_pct: 0.08
+        material_pct: 0.10
+        sub_pct: 0.00
+        equipment_needed: true
+      - code: "03-FRAMING"
+        name: "Framing"
+        labor_pct: 0.14
+        material_pct: 0.16
+        sub_pct: 0.00
+      - code: "04-ROOFING"
+        name: "Roofing & Sheathing"
+        labor_pct: 0.06
+        material_pct: 0.06
+        sub_pct: 0.00
+      - code: "05-WINDOWS-DOORS"
+        name: "Windows & Exterior Doors"
+        labor_pct: 0.04
+        material_pct: 0.08
+        sub_pct: 0.00
+      - code: "06-ROUGH-PLUMB"
+        name: "Rough Plumbing"
+        labor_pct: 0.00
+        material_pct: 0.02
+        sub_pct: 0.07
+        sub_vendor_type: plumbing
+      - code: "07-ROUGH-ELEC"
+        name: "Rough Electrical"
+        labor_pct: 0.00
+        material_pct: 0.03
+        sub_pct: 0.08
+        sub_vendor_type: electrical
+      - code: "08-HVAC"
+        name: "HVAC"
+        labor_pct: 0.00
+        material_pct: 0.00
+        sub_pct: 0.09
+        sub_vendor_type: hvac
+      - code: "09-INSULATION"
+        name: "Insulation"
+        labor_pct: 0.03
+        material_pct: 0.03
+        sub_pct: 0.00
+      - code: "10-DRYWALL"
+        name: "Drywall"
+        labor_pct: 0.07
+        material_pct: 0.04
+        sub_pct: 0.00
+      - code: "11-PAINT"
+        name: "Paint"
+        labor_pct: 0.05
+        material_pct: 0.02
+        sub_pct: 0.00
+      - code: "12-TRIM"
+        name: "Trim & Finish Carpentry"
+        labor_pct: 0.06
+        material_pct: 0.04
+        sub_pct: 0.00
+      - code: "13-FLOORING"
+        name: "Flooring"
+        labor_pct: 0.04
+        material_pct: 0.06
+        sub_pct: 0.00
+      - code: "14-CLEANUP"
+        name: "Cleanup & Punch"
+        labor_pct: 0.02
+        material_pct: 0.00
+        sub_pct: 0.00
+
+  new_construction:
+    label: "New Construction"
+    type: new_construction
+    trade: general
+    duration_weeks: [18, 40]
+    contract_value: [280000, 620000]
+    target_margin: [0.16, 0.26]
+    seasonal_weight: [0.4, 0.5, 0.9, 1.2, 1.3, 1.2, 1.1, 1.1, 1.2, 1.1, 0.7, 0.4]
+    permit_required_pct: 1.00
+    customer_type: [residential, commercial]
+    phases:
+      - code: "01-SITE"
+        name: "Site Work & Excavation"
+        labor_pct: 0.03
+        material_pct: 0.02
+        sub_pct: 0.05
+        equipment_needed: true
+      - code: "02-FOUNDATION"
+        name: "Foundation"
+        labor_pct: 0.05
+        material_pct: 0.07
+        sub_pct: 0.03
+        equipment_needed: true
+      - code: "03-FRAMING"
+        name: "Framing"
+        labor_pct: 0.10
+        material_pct: 0.14
+        sub_pct: 0.00
+      - code: "04-ROOFING"
+        name: "Roofing"
+        labor_pct: 0.04
+        material_pct: 0.05
+        sub_pct: 0.00
+      - code: "05-WINDOWS-DOORS"
+        name: "Windows & Exterior Doors"
+        labor_pct: 0.03
+        material_pct: 0.09
+        sub_pct: 0.00
+      - code: "06-ROUGH-PLUMB"
+        name: "Rough Plumbing"
+        labor_pct: 0.00
+        material_pct: 0.02
+        sub_pct: 0.07
+        sub_vendor_type: plumbing
+      - code: "07-ROUGH-ELEC"
+        name: "Rough Electrical"
+        labor_pct: 0.00
+        material_pct: 0.03
+        sub_pct: 0.07
+        sub_vendor_type: electrical
+      - code: "08-HVAC"
+        name: "HVAC"
+        labor_pct: 0.00
+        material_pct: 0.00
+        sub_pct: 0.07
+        sub_vendor_type: hvac
+      - code: "09-INSULATION"
+        name: "Insulation"
+        labor_pct: 0.02
+        material_pct: 0.03
+        sub_pct: 0.00
+      - code: "10-SIDING"
+        name: "Exterior Siding & Trim"
+        labor_pct: 0.04
+        material_pct: 0.06
+        sub_pct: 0.00
+      - code: "11-DRYWALL"
+        name: "Drywall"
+        labor_pct: 0.04
+        material_pct: 0.03
+        sub_pct: 0.00
+      - code: "12-PAINT"
+        name: "Paint - Interior & Exterior"
+        labor_pct: 0.03
+        material_pct: 0.02
+        sub_pct: 0.00
+      - code: "13-CABINETS"
+        name: "Cabinets"
+        labor_pct: 0.03
+        material_pct: 0.06
+        sub_pct: 0.00
+      - code: "14-COUNTERTOPS"
+        name: "Countertops"
+        labor_pct: 0.00
+        material_pct: 0.00
+        sub_pct: 0.04
+        sub_vendor_type: countertops
+      - code: "15-FLOORING"
+        name: "Flooring"
+        labor_pct: 0.03
+        material_pct: 0.05
+        sub_pct: 0.00
+      - code: "16-TRIM"
+        name: "Finish Carpentry & Trim"
+        labor_pct: 0.04
+        material_pct: 0.03
+        sub_pct: 0.00
+      - code: "17-FIXTURES"
+        name: "Fixtures & Appliances"
+        labor_pct: 0.02
+        material_pct: 0.06
+        sub_pct: 0.00
+      - code: "18-LANDSCAPING"
+        name: "Final Grade & Landscaping"
+        labor_pct: 0.01
+        material_pct: 0.02
+        sub_pct: 0.02
+      - code: "19-CLEANUP"
+        name: "Final Cleanup & CO"
+        labor_pct: 0.02
+        material_pct: 0.00
+        sub_pct: 0.00
+
+  repair_service:
+    label: "Repair / Service Call"
+    type: repair
+    trade: general
+    duration_weeks: [0.2, 1.5]
+    contract_value: [350, 6500]
+    target_margin: [0.45, 0.68]
+    seasonal_weight: [1.2, 1.1, 1.0, 0.9, 0.8, 0.8, 0.8, 0.9, 1.0, 1.0, 1.1, 1.3]
+    permit_required_pct: 0.05
+    customer_type: [residential, commercial]
+    phases:
+      - code: "01-LABOR"
+        name: "Labor"
+        labor_pct: 0.60
+        material_pct: 0.00
+        sub_pct: 0.00
+      - code: "02-MATERIALS"
+        name: "Materials"
+        labor_pct: 0.00
+        material_pct: 0.40
+        sub_pct: 0.00
+
+  tenant_improvement:
+    label: "Commercial Tenant Improvement"
+    type: tenant_improvement
+    trade: general
+    duration_weeks: [5, 14]
+    contract_value: [35000, 210000]
+    target_margin: [0.20, 0.32]
+    seasonal_weight: [1.0, 1.0, 1.1, 1.1, 1.0, 0.9, 0.9, 1.0, 1.1, 1.1, 1.0, 0.9]
+    permit_required_pct: 0.85
+    customer_type: commercial
+    retention_pct: 0.10
+    phases:
+      - code: "01-DEMO"
+        name: "Demolition"
+        labor_pct: 0.07
+        material_pct: 0.00
+        sub_pct: 0.00
+      - code: "02-FRAMING"
+        name: "Framing & Partitions"
+        labor_pct: 0.12
+        material_pct: 0.08
+        sub_pct: 0.00
+      - code: "03-ROUGH-ELEC"
+        name: "Rough Electrical"
+        labor_pct: 0.00
+        material_pct: 0.03
+        sub_pct: 0.12
+        sub_vendor_type: electrical
+      - code: "04-ROUGH-PLUMB"
+        name: "Rough Plumbing"
+        labor_pct: 0.00
+        material_pct: 0.02
+        sub_pct: 0.07
+        sub_vendor_type: plumbing
+      - code: "05-HVAC"
+        name: "HVAC"
+        labor_pct: 0.00
+        material_pct: 0.00
+        sub_pct: 0.10
+        sub_vendor_type: hvac
+      - code: "06-CEILING"
+        name: "Ceiling Grid & Tiles"
+        labor_pct: 0.06
+        material_pct: 0.05
+        sub_pct: 0.00
+      - code: "07-DRYWALL"
+        name: "Drywall"
+        labor_pct: 0.07
+        material_pct: 0.04
+        sub_pct: 0.00
+      - code: "08-PAINT"
+        name: "Paint"
+        labor_pct: 0.05
+        material_pct: 0.02
+        sub_pct: 0.00
+      - code: "09-FLOORING"
+        name: "Flooring"
+        labor_pct: 0.04
+        material_pct: 0.06
+        sub_pct: 0.00
+      - code: "10-DOORS"
+        name: "Doors & Hardware"
+        labor_pct: 0.03
+        material_pct: 0.05
+        sub_pct: 0.00
+      - code: "11-CLEANUP"
+        name: "Final Cleanup"
+        labor_pct: 0.02
+        material_pct: 0.00
+        sub_pct: 0.00
+
+# Customer pool — pre-defined customers to reuse across projects
+customers:
+  residential:
+    - id: "CUST-001"
+      name: "Mark & Lisa Johnson"
+      email: "mjohnson@gmail.com"
+      phone: "717-555-2201"
+      address: "2214 Fairview Lane, Camp Hill, PA 17011"
+      payment_terms: "net_30"
+      source: "referral"
+      notes: "Good clients, slow payer — typically 45 days"
+    - id: "CUST-002"
+      name: "Patricia Morrison"
+      email: "pmorrison@hotmail.com"
+      phone: "717-555-3318"
+      address: "8 Glenbrook Drive, Carlisle, PA 17013"
+      payment_terms: "due_on_receipt"
+      source: "repeat"
+    - id: "CUST-003"
+      name: "David & Renee Park"
+      email: "dpark@verizon.net"
+      phone: "717-555-4402"
+      address: "641 Overlook Drive, Mechanicsburg, PA 17055"
+      payment_terms: "net_15"
+      source: "google"
+    - id: "CUST-004"
+      name: "Tony & Angela Russo"
+      email: "trusso@comcast.net"
+      phone: "717-555-5519"
+      address: "1103 Orchard View Rd, New Cumberland, PA 17070"
+      payment_terms: "net_30"
+      source: "referral"
+    - id: "CUST-005"
+      name: "James & Carol Sutton"
+      email: "jsutton@gmail.com"
+      phone: "717-555-6624"
+      address: "3350 Farmview Circle, Enola, PA 17025"
+      payment_terms: "net_30"
+      source: "yard_sign"
+    - id: "CUST-006"
+      name: "Helen Nakamura"
+      email: "hnakamura@yahoo.com"
+      phone: "717-555-7703"
+      address: "88 Birchwood Ct, Lemoyne, PA 17043"
+      payment_terms: "due_on_receipt"
+      source: "repeat"
+    - id: "CUST-007"
+      name: "William & Donna Hartley"
+      email: "bhartley@outlook.com"
+      phone: "717-555-8811"
+      address: "515 Highpoint Drive, Hampden Township, PA 17050"
+      payment_terms: "net_30"
+      source: "referral"
+    - id: "CUST-008"
+      name: "Kevin & Pam Foster"
+      email: "kfoster@gmail.com"
+      phone: "717-555-9920"
+      address: "2900 Ridge Rd, Dillsburg, PA 17019"
+      payment_terms: "net_30"
+      source: "google"
+    - id: "CUST-009"
+      name: "Sandra Okafor"
+      email: "sokafor@gmail.com"
+      phone: "717-555-1034"
+      address: "74 Cypress Court, Harrisburg, PA 17112"
+      payment_terms: "net_15"
+      source: "referral"
+    - id: "CUST-010"
+      name: "Brian & Tara Weiss"
+      email: "bweiss@comcast.net"
+      phone: "717-555-2247"
+      address: "1801 Rolling Hills Dr, York, PA 17402"
+      payment_terms: "net_30"
+      source: "repeat"
+  commercial:
+    - id: "CUST-011"
+      name: "Keystone Properties LLC"
+      email: "jgrant@keystoneprop.com"
+      phone: "717-555-3301"
+      address: "200 Commerce Dr, Suite 400, Harrisburg, PA 17109"
+      payment_terms: "net_30"
+      source: "direct_outreach"
+      tax_exempt: false
+    - id: "CUST-012"
+      name: "Blue Ridge Medical Group"
+      email: "facilities@blueridgemedical.com"
+      phone: "717-555-4415"
+      address: "5500 Devonshire Rd, Harrisburg, PA 17112"
+      payment_terms: "net_45"
+      source: "referral"
+      tax_exempt: false
+    - id: "CUST-013"
+      name: "Valley Ventures Group"
+      email: "pm@valleyventures.com"
+      phone: "717-555-5529"
+      address: "1000 Enterprise Blvd, Carlisle, PA 17015"
+      payment_terms: "net_30"
+      source: "direct_outreach"

@@ -1,0 +1,243 @@
+# Narrative events — injected into the timeline to make the data feel like a real business
+# These override or perturb the otherwise-random generation in specific ways.
+
+events:
+
+  # ── 2024 ────────────────────────────────────────────────────────────────────
+
+  - id: "EVT-001"
+    date: "2024-01-15"
+    type: overhead_bill
+    description: "Annual general liability insurance renewal"
+    vendor_id: "VEN-010"
+    amount: 8400
+    category: insurance
+
+  - id: "EVT-002"
+    date: "2024-03-28"
+    type: late_payment
+    description: "Johnson kitchen — $38K progress invoice goes 45 days past due"
+    project_tag: "johnson_kitchen_2024"
+    invoice_delay_days: 45
+    effect: cash_strain
+    notes: "Owner uses $22K from line of credit to cover payroll on April 11"
+
+  - id: "EVT-003"
+    date: "2024-04-11"
+    type: loc_draw
+    description: "Line of credit draw to cover payroll during Johnson payment delay"
+    amount: 22000
+    trigger_event: "EVT-002"
+
+  - id: "EVT-004"
+    date: "2024-06-10"
+    type: budget_overrun
+    description: "Hit ledge rock on Morrison addition footings — 3 extra days of equipment and labor"
+    project_tag: "morrison_addition_2024"
+    phase_code: "02-FOUNDATION"
+    cost_overrun: 8200
+    change_order_submitted: true
+    change_order_approved_amount: 4000
+    margin_impact: -0.09
+    notes: "Owner eats $4200 after GC only approves partial CO"
+
+  - id: "EVT-005"
+    date: "2024-07-22"
+    type: sub_insurance_expiry_warning
+    description: "Hartmann Plumbing COI expires June 30 — caught late, work paused 1 week on Park job"
+    vendor_id: "VEN-003"
+    project_tag: "park_bathroom_2024"
+    schedule_delay_days: 5
+
+  - id: "EVT-006"
+    date: "2024-08-12"
+    type: new_hire
+    description: "Hired Luis Pena (journeyman) to support new construction project starting November"
+    employee_id: "EMP-006"
+
+  - id: "EVT-007"
+    date: "2024-09-05"
+    type: big_win
+    description: "Awarded Sutton new construction — $418K. First new-build job."
+    project_tag: "sutton_newbuild_2024"
+    contract_amount: 418000
+    notes: "Opens supplier account at Mid-State Lumber for the volume"
+
+  - id: "EVT-008"
+    date: "2024-09-12"
+    type: supplier_account
+    description: "Opened account at Mid-State Lumber & Building Products for Sutton new-build volume"
+    vendor_id: "VEN-008"
+    credit_limit: 25000
+
+  - id: "EVT-009"
+    date: "2024-11-04"
+    type: weather_delay
+    description: "Early frost delays concrete pour on Sutton foundation by 8 days"
+    project_tag: "sutton_newbuild_2024"
+    phase_code: "02-FOUNDATION"
+    schedule_delay_days: 8
+
+  - id: "EVT-010"
+    date: "2024-12-20"
+    type: retention_release
+    description: "Retention released on 3 completed summer projects — $14,800 in"
+    amount: 14800
+    project_tags: ["johnson_kitchen_2024", "park_bathroom_2024", "russo_deck_2024"]
+
+  # ── 2025 ────────────────────────────────────────────────────────────────────
+
+  - id: "EVT-011"
+    date: "2025-01-10"
+    type: overhead_bill
+    description: "Annual general liability insurance renewal — rate up 12%"
+    vendor_id: "VEN-010"
+    amount: 9408
+    category: insurance
+
+  - id: "EVT-012"
+    date: "2025-02-14"
+    type: sub_failure
+    description: "Apex Electrical no-shows on Parkview TI job — 6 business days lost. Had to find replacement."
+    vendor_id: "VEN-004"
+    project_tag: "parkview_ti_2025"
+    schedule_delay_days: 6
+    cost_impact: 2100
+    notes: "Apex reliability drops from 4 to 3. Considering using regional replacement for future bids."
+
+  - id: "EVT-013"
+    date: "2025-03-03"
+    type: new_hire
+    description: "Hired Ryan Oakes as apprentice — volume ramping for spring"
+    employee_id: "EMP-007"
+
+  - id: "EVT-014"
+    date: "2025-04-01"
+    type: pricing_change
+    description: "Owner raises T&M service call labor rate from $85/hr to $110/hr"
+    notes: "Realized burden + overhead wasn't covered at $85. Service jobs should be highest-margin work."
+    effective_date: "2025-04-01"
+    applies_to: repair_service
+    old_bill_rate: 85
+    new_bill_rate: 110
+
+  - id: "EVT-015"
+    date: "2025-05-01"
+    type: promotion
+    description: "Jordan Mills promoted from apprentice to journeyman"
+    employee_id: "EMP-005"
+
+  - id: "EVT-016"
+    date: "2025-06-18"
+    type: change_order_dispute
+    description: "Blue Ridge Medical disputes $8,400 CO on TI project — owner/GC standoff 3 weeks"
+    project_tag: "blueridge_ti_2025"
+    co_amount: 8400
+    resolved_amount: 6000
+    resolution_date: "2025-07-09"
+    notes: "Owner gives up $2,400 to keep relationship. Will be more explicit in future scope exclusions."
+
+  - id: "EVT-017"
+    date: "2025-07-18"
+    type: employee_departure
+    description: "Carlos Vega leaves for union ironworkers apprenticeship — 2 weeks notice"
+    employee_id: "EMP-003"
+    notes: "Losing senior journeyman mid-peak season. Overtime spikes for 6 weeks on Weiss addition."
+
+  - id: "EVT-018"
+    date: "2025-07-21"
+    type: overtime_spike
+    description: "Crew overtime to cover Vega gap — 6-week period, avg +8 hrs OT/week per remaining journeyman"
+    trigger_event: "EVT-017"
+    duration_weeks: 6
+    ot_hours_per_week_per_person: 8
+    affected_employees: ["EMP-002", "EMP-004", "EMP-005", "EMP-006"]
+
+  - id: "EVT-019"
+    date: "2025-08-25"
+    type: new_hire
+    description: "Hired Dani Kovacs (journeyman) to replace Vega"
+    employee_id: "EMP-008"
+
+  - id: "EVT-020"
+    date: "2025-09-30"
+    type: sub_insurance_expiry
+    description: "Central PA HVAC COI expired Sep 30 — renewal not received. Hold on new bids involving HVAC."
+    vendor_id: "VEN-005"
+    notes: "Resolved Oct 14 when updated COI received."
+
+  - id: "EVT-021"
+    date: "2025-10-14"
+    type: sub_insurance_renewed
+    description: "Central PA HVAC COI renewed — cleared to bid again"
+    vendor_id: "VEN-005"
+    new_expiry: "2026-09-30"
+
+  - id: "EVT-022"
+    date: "2025-11-03"
+    type: new_hire
+    description: "Hired Steph Wren as part-time office admin — AR follow-up, scheduling support"
+    employee_id: "EMP-009"
+    notes: "Owner was losing 8-10 hours/week on admin. Paying $22/hr, billing rate $0 (overhead)."
+
+  - id: "EVT-023"
+    date: "2025-11-10"
+    type: weather_delay
+    description: "3 weeks of rain and early frost — exterior work on 2 fall projects stalls"
+    affected_project_tags: ["foster_addition_2025", "hartley_deck_2025"]
+    schedule_delay_days: 18
+    notes: "Both projects compress into December. Owner approves limited OT to close before holidays."
+
+  - id: "EVT-024"
+    date: "2025-12-15"
+    type: retention_release
+    description: "Year-end retention release push — collect on 4 completed projects"
+    amount: 22400
+    project_tags: ["weiss_addition_2025", "nakamura_kitchen_2025", "keystone_ti_2025", "parkview_ti_2025"]
+
+  - id: "EVT-025"
+    date: "2025-12-31"
+    type: year_end_summary
+    description: "Year-end close: 1.9M revenue, ~$485K gross profit (25.5% GM), 1 new-build completed"
+    revenue: 1900000
+    gross_profit: 485000
+    gross_margin: 0.255
+    notes: "GM below 35% target — Vega departure, rock on Morrison, Apex delay, and Blue Ridge CO dispute cost ~$38K in combined margin. Target 30% for 2026."
+
+# Overhead bills — recurring monthly charges to inject as vendor bills
+recurring_overhead:
+  - description: "Shop/office rent"
+    vendor_id: "VEN-010"
+    amount: 3200
+    day_of_month: 1
+    category: rent
+  - description: "Truck payments (3 trucks)"
+    vendor_id: "VEN-010"
+    amount: 2850
+    day_of_month: 5
+    category: vehicles
+  - description: "Fuel & vehicle maintenance"
+    vendor_id: "VEN-010"
+    amount_range: [600, 1100]
+    day_of_month: 28
+    category: vehicles
+  - description: "Cell phones & internet"
+    vendor_id: "VEN-010"
+    amount: 380
+    day_of_month: 15
+    category: utilities
+  - description: "Software (QBO, takeoff, scheduling)"
+    vendor_id: "VEN-010"
+    amount: 290
+    day_of_month: 1
+    category: software
+  - description: "Workers comp installment"
+    vendor_id: "VEN-010"
+    amount_range: [1400, 1800]
+    day_of_month: 10
+    category: insurance
+  - description: "Small tools & consumables"
+    vendor_id: "VEN-010"
+    amount_range: [200, 600]
+    day_of_month: 20
+    category: tools

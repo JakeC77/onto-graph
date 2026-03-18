@@ -1,0 +1,241 @@
+company:
+  name: "Ridgeline Builders"
+  trade: "general"
+  region: "mid-atlantic"
+  year_founded: 2019
+  owner_name: "Mike Torres"
+  owner_employee_id: "EMP-001"
+  address: "4412 Depot Road, Mechanicsburg, PA 17050"
+  phone: "717-555-0182"
+  email: "mike@ridgelinebuilders.com"
+  license_number: "PA-HIC-083421"
+
+financials:
+  overhead_monthly: 18000        # rent, insurance, trucks, office
+  line_of_credit_limit: 75000
+  target_gross_margin: 0.35
+  labor_burden_multiplier: 1.32  # 32% above base rate covers taxes, WC, benefits
+  default_retention_pct: 0.10
+  default_payment_terms: "net_30"
+  service_call_min: 250
+
+revenue_trajectory:
+  # year: [Q1, Q2, Q3, Q4]
+  2024: [280000, 390000, 420000, 310000]   # 1.4M year
+  2025: [340000, 510000, 620000, 430000]   # 1.9M year
+
+win_rate_by_type:
+  new_construction: 0.50
+  renovation: 0.55
+  addition: 0.60
+  repair: 0.80
+  service_call: 0.95
+  tenant_improvement: 0.45
+
+crew_timeline:
+  - date: "2024-01-01"
+    employees:
+      - id: "EMP-001"
+        name: "Mike Torres"
+        role: "owner"
+        trade: "general"
+        base_rate: 0          # owner draws, not hourly
+        burden_rate: 0
+        bill_rate: 135
+      - id: "EMP-002"
+        name: "Derek Haas"
+        role: "foreman"
+        trade: "general"
+        base_rate: 32.00
+        burden_rate: 42.24
+        bill_rate: 95
+      - id: "EMP-003"
+        name: "Carlos Vega"
+        role: "journeyman"
+        trade: "general"
+        base_rate: 26.00
+        burden_rate: 34.32
+        bill_rate: 85
+      - id: "EMP-004"
+        name: "Tom Ridley"
+        role: "journeyman"
+        trade: "general"
+        base_rate: 25.00
+        burden_rate: 33.00
+        bill_rate: 85
+      - id: "EMP-005"
+        name: "Jordan Mills"
+        role: "apprentice"
+        trade: "general"
+        base_rate: 17.00
+        burden_rate: 22.44
+        bill_rate: 65
+  - date: "2024-08-12"
+    add:
+      - id: "EMP-006"
+        name: "Luis Pena"
+        role: "journeyman"
+        trade: "general"
+        base_rate: 25.50
+        burden_rate: 33.66
+        bill_rate: 85
+  - date: "2025-03-03"
+    add:
+      - id: "EMP-007"
+        name: "Ryan Oakes"
+        role: "apprentice"
+        trade: "general"
+        base_rate: 16.00
+        burden_rate: 21.12
+        bill_rate: 60
+  - date: "2025-05-01"
+    promote:
+      id: "EMP-005"
+      new_role: "journeyman"
+      new_base_rate: 24.00
+      new_burden_rate: 31.68
+      new_bill_rate: 85
+  - date: "2025-07-18"
+    terminate:
+      id: "EMP-003"
+      reason: "left for union shop"
+  - date: "2025-08-25"
+    add:
+      - id: "EMP-008"
+        name: "Dani Kovacs"
+        role: "journeyman"
+        trade: "general"
+        base_rate: 25.00
+        burden_rate: 33.00
+        bill_rate: 85
+  - date: "2025-11-03"
+    add:
+      - id: "EMP-009"
+        name: "Steph Wren"
+        role: "office_admin"
+        trade: null
+        base_rate: 22.00
+        burden_rate: 29.04
+        bill_rate: 0
+
+vendors:
+  - id: "VEN-001"
+    name: "Keystone Supply Co."
+    type: "supplier"
+    trade: "general"
+    contact: "Bob Franks"
+    phone: "717-555-0210"
+    email: "bob@keystonesupply.com"
+    payment_terms: "net_30"
+    tax_id: "23-1884420"
+    w9_on_file: true
+    insurance_expiry: null
+    rating: 5
+  - id: "VEN-002"
+    name: "Capital Electric Supply"
+    type: "supplier"
+    trade: "electrical"
+    contact: "Marta Doyle"
+    phone: "717-555-0334"
+    email: "marta@capelec.com"
+    payment_terms: "net_30"
+    tax_id: "23-2001447"
+    w9_on_file: true
+    insurance_expiry: null
+    rating: 4
+  - id: "VEN-003"
+    name: "Hartmann Plumbing & Heating"
+    type: "subcontractor"
+    trade: "plumbing"
+    contact: "Greg Hartmann"
+    phone: "717-555-0491"
+    email: "greg@hartmannph.com"
+    payment_terms: "net_15"
+    tax_id: "23-3104892"
+    w9_on_file: true
+    insurance_expiry: "2025-06-30"
+    rating: 4
+  - id: "VEN-004"
+    name: "Apex Electrical Contractors"
+    type: "subcontractor"
+    trade: "electrical"
+    contact: "Sam Obi"
+    phone: "717-555-0567"
+    email: "sam@apexelec.com"
+    payment_terms: "net_15"
+    tax_id: "23-4208731"
+    w9_on_file: true
+    insurance_expiry: "2026-01-15"
+    rating: 3
+  - id: "VEN-005"
+    name: "Central PA HVAC"
+    type: "subcontractor"
+    trade: "hvac"
+    contact: "Donna Frye"
+    phone: "717-555-0628"
+    email: "donna@centralpahvac.com"
+    payment_terms: "net_30"
+    tax_id: "23-5312004"
+    w9_on_file: true
+    insurance_expiry: "2025-09-30"
+    rating: 5
+  - id: "VEN-006"
+    name: "Pro Tile & Stone"
+    type: "subcontractor"
+    trade: "tile"
+    contact: "Ray Morales"
+    phone: "717-555-0712"
+    email: "ray@protilesstone.com"
+    payment_terms: "net_15"
+    tax_id: "23-6401228"
+    w9_on_file: true
+    insurance_expiry: "2025-12-31"
+    rating: 4
+  - id: "VEN-007"
+    name: "Sunshine Equipment Rental"
+    type: "equipment_rental"
+    trade: null
+    contact: "Phil Gatto"
+    phone: "717-555-0834"
+    email: "phil@sunshinerent.com"
+    payment_terms: "due_on_receipt"
+    tax_id: "23-7500119"
+    w9_on_file: true
+    insurance_expiry: null
+    rating: 4
+  - id: "VEN-008"
+    name: "Mid-State Lumber & Building Products"
+    type: "supplier"
+    trade: "general"
+    contact: "Janet Chu"
+    phone: "717-555-0955"
+    email: "janet@midstatelumber.com"
+    payment_terms: "net_30"
+    tax_id: "23-8602345"
+    w9_on_file: true
+    insurance_expiry: null
+    rating: 5
+  - id: "VEN-009"
+    name: "Pinnacle Countertop Studio"
+    type: "subcontractor"
+    trade: "countertops"
+    contact: "Alicia Stern"
+    phone: "717-555-1022"
+    email: "alicia@pinnaclecountertop.com"
+    payment_terms: "net_15"
+    tax_id: "23-9700882"
+    w9_on_file: true
+    insurance_expiry: "2026-03-31"
+    rating: 5
+  - id: "VEN-010"
+    name: "Overhead & Recurring"
+    type: "professional_service"
+    trade: null
+    contact: null
+    phone: null
+    email: null
+    payment_terms: "net_30"
+    tax_id: null
+    w9_on_file: false
+    insurance_expiry: null
+    rating: null
