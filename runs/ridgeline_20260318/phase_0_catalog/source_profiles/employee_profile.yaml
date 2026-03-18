@@ -1,0 +1,123 @@
+source_id: 78b8b8fdb27f
+path: C:\Users\Jake0\Documents\GitHub\onto-graph\.claude\worktrees\pedantic-borg\data\ridgeline_builders\data_room\employee.csv
+format: csv
+size_bytes: 449
+sheet_name: null
+columns:
+- name: id
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 5
+  is_unique: true
+  sample_values:
+  - EMP-001
+  - EMP-002
+  - EMP-003
+  - EMP-004
+  - EMP-005
+  is_candidate_key: true
+  is_candidate_fk: false
+- name: name
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 5
+  is_unique: true
+  sample_values:
+  - Mike Torres
+  - Derek Haas
+  - Carlos Vega
+  - Tom Ridley
+  - Jordan Mills
+  is_candidate_key: true
+  is_candidate_fk: false
+- name: role
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 3
+  is_unique: false
+  sample_values:
+  - owner
+  - foreman
+  - journeyman
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: trade
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: false
+  sample_values:
+  - general
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: base_rate
+  inferred_type: integer
+  null_rate: 0.0
+  cardinality: 5
+  is_unique: true
+  sample_values:
+  - '0.0'
+  - '32.0'
+  - '26.0'
+  - '25.0'
+  - '17.0'
+  is_candidate_key: true
+  is_candidate_fk: false
+- name: burden_rate
+  inferred_type: float
+  null_rate: 0.0
+  cardinality: 5
+  is_unique: true
+  sample_values:
+  - '0.0'
+  - '42.24'
+  - '34.32'
+  - '33.0'
+  - '22.44'
+  is_candidate_key: true
+  is_candidate_fk: false
+- name: bill_rate
+  inferred_type: integer
+  null_rate: 0.0
+  cardinality: 4
+  is_unique: false
+  sample_values:
+  - '135'
+  - '95'
+  - '85'
+  - '65'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: status
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 2
+  is_unique: false
+  sample_values:
+  - active
+  - terminated
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: hire_date
+  inferred_type: date
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: false
+  sample_values:
+  - '2024-01-01'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: termination_date
+  inferred_type: date
+  null_rate: 0.8
+  cardinality: 1
+  is_unique: false
+  sample_values:
+  - '2025-07-18'
+  is_candidate_key: false
+  is_candidate_fk: false
+row_count: 5
+grain: one record per unique id
+date_range:
+  earliest: '2024-01-01'
+  latest: '2025-07-18'

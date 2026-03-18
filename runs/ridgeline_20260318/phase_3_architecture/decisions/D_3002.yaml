@@ -1,0 +1,87 @@
+# Decision Record D_3002
+# Phase 3: ETL Architecture
+
+decision:
+  id: D_3002
+  phase: architecture
+  created_at: "2026-03-18"
+
+  category: pipeline_topology
+
+  question: >-
+    In what order should entities and relationships be loaded into Neo4j?
+    Should relationships be created inline with entity ingestion, or in
+    a separate pass after all entities exist?
+
+  decision: >-
+    Load all entities first across ordered stages (master data, then
+    estimates, projects, financials, execution, events), then load all
+    relationships in a dedicated load_relationships stage that depends
+    on all entity stages completing.
+
+  alternatives_considered:
+    - option: "Inline relationship creation during entity ingestion"
+      pros:
+        - Single pass per source file
+        - Fewer pipeline stages
+      cons:
+        - Requires careful stage ordering to ensure both endpoints exist
+        - Fails when relationship endpoints span stages (e.g., ESTIMATE_BECOMES_PROJECT needs both Estimate and Project)
+        - Cross-stage FK references create tight coupling between stages
+        - Error recovery is harder when entity and relationship creation are interleaved
+
+    - option: "Entities first, then relationships in a separate stage (chosen)"
+      pros:
+        - Guarantees both endpoints exist before any MERGE on relationships
+        - Simpler error isolation (entity errors vs relationship errors)
+        - Each stage has a single concern
+        - Relationship stage can be re-run independently after entity fixes
+      cons:
+        - Two passes over some source files (once for entities, once for FK extraction)
+        - Slightly longer total pipeline time
+
+    - option: "Fully parallel with retry on missing endpoints"
+      pros:
+        - Maximum parallelism
+        - No ordering constraints
+      cons:
+        - Complex retry logic
+        - Non-deterministic execution order
+        - Hard to debug failures
+        - Overkill for a 5,000-row dataset
+
+  rationale: >-
+    Neo4j MERGE on relationships requires both endpoint nodes to exist.
+    The Ridgeline ontology has 14 relationship types spanning 14 entity
+    types with complex FK chains (e.g., Customer -> Estimate -> Project
+    -> Job -> TimeEntry). Loading entities first eliminates ordering
+    concerns entirely. The dataset is small enough (under 5,000 total
+    rows) that the two-pass overhead is negligible. This approach also
+    makes the pipeline easier to debug and extend.
+
+  evidence:
+    - source: ontology.yaml
+      location: relationship_types
+      observation: >-
+        14 relationship types connect entities across multiple levels of
+        the hierarchy. ESTIMATE_BECOMES_PROJECT, PROJECT_HAS_JOB, and
+        JOB_HAS_TIME_ENTRY form a 4-level deep chain requiring strict
+        ordering if done inline.
+      role: primary
+
+    - source: neo4j_schema.cypher
+      location: Relationship types section
+      observation: >-
+        All 14 relationship types require both from-node and to-node to
+        exist. No self-referential relationships that could be created
+        inline safely.
+      role: corroborating
+
+  confidence: high
+  reversibility: easy
+  downstream_impact: >-
+    If inline creation were preferred, the pipeline DAG would need
+    restructuring but the mapping plan and ontology remain unchanged.
+    The entity extraction and relationship extraction specs in
+    pipeline_specs already separate these concerns, so switching
+    approaches requires only DAG reconfiguration.

@@ -1,0 +1,92 @@
+source_id: 381f49880b21
+path: C:\Users\Jake0\Documents\GitHub\onto-graph\.claude\worktrees\pedantic-borg\data\ridgeline_builders\data_room\company.csv
+format: csv
+size_bytes: 241
+sheet_name: null
+columns:
+- name: name
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - Ridgeline Builders
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: trade
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - general
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: region
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - mid-atlantic
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: owner_name
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - Mike Torres
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: owner_employee_id
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - EMP-001
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: address
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - 4412 Depot Road, Mechanicsburg, PA 17050
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: phone
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - 717-555-0182
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: email
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - mike@ridgelinebuilders.com
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: license_number
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - PA-HIC-083421
+  is_candidate_key: false
+  is_candidate_fk: false
+row_count: 1
+grain: null
+date_range:
+  earliest: null
+  latest: null

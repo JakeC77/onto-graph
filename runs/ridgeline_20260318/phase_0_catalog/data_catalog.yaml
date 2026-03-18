@@ -1,0 +1,2305 @@
+# Data Catalog — Phase 0 Track B Output
+# Ridgeline Builders engagement
+# Generated: 2026-03-18
+
+data_catalog:
+  metadata:
+    company: Ridgeline Builders
+    data_room_path: data/ridgeline_builders/data_room/
+    run_id: ridgeline_20260318
+    created_at: "2026-03-18"
+    total_sources: 18
+    total_size_bytes: 3132125
+    system_manifest_ref: null
+
+  sources:
+    # ── Company ──────────────────────────────────────────────────────────
+    - source_id: 381f49880b21
+      path: company.csv
+      format: csv
+      size_bytes: 241
+      sheet_name: null
+      columns:
+        - name: name
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["Ridgeline Builders"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: trade
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["general"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: region
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["mid-atlantic"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: owner_name
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["Mike Torres"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: owner_employee_id
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["EMP-001"]
+          is_candidate_key: false
+          is_candidate_fk: true
+        - name: address
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["4412 Depot Road, Mechanicsburg, PA 17050"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: phone
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["717-555-0182"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: email
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["mike@ridgelinebuilders.com"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: license_number
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["PA-HIC-083421"]
+          is_candidate_key: false
+          is_candidate_fk: false
+      row_count: 1
+      grain: one company record (singleton)
+      date_range:
+        earliest: null
+        latest: null
+      document_type: null
+      word_count: null
+      key_terms: []
+      entities_mentioned: []
+      candidate_entity_types:
+        - Company
+      quality_issues: []
+      notes: >-
+        Single-row company profile. owner_employee_id links to employee.csv.
+
+    # ── Customer ─────────────────────────────────────────────────────────
+    - source_id: dab846594bbb
+      path: customer.csv
+      format: csv
+      size_bytes: 2277
+      sheet_name: null
+      columns:
+        - name: id
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 13
+          is_unique: true
+          sample_values: ["CUST-001", "CUST-002", "CUST-003", "CUST-004", "CUST-005"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: name
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 13
+          is_unique: true
+          sample_values: ["Mark & Lisa Johnson", "Patricia Morrison", "David & Renee Park"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: email
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 13
+          is_unique: true
+          sample_values: ["mjohnson@gmail.com", "pmorrison@hotmail.com", "dpark@verizon.net"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: phone
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 13
+          is_unique: true
+          sample_values: ["717-555-2201", "717-555-3318", "717-555-4402"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: address
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 13
+          is_unique: true
+          sample_values: ["2214 Fairview Lane, Camp Hill, PA 17011", "8 Glenbrook Drive, Carlisle, PA 17013"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: payment_terms
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 4
+          is_unique: false
+          sample_values: ["net_30", "due_on_receipt", "net_15", "net_45"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: source
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 5
+          is_unique: false
+          sample_values: ["referral", "repeat", "google", "yard_sign", "direct_outreach"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: notes
+          inferred_type: string
+          null_rate: 0.9231
+          cardinality: 1
+          is_unique: false
+          sample_values: ["Good clients, slow payer"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: type
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 2
+          is_unique: false
+          sample_values: ["residential", "commercial"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: tax_exempt
+          inferred_type: integer
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: false
+          sample_values: ["False"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: credit_limit
+          inferred_type: integer
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: false
+          sample_values: ["0"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: status
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: false
+          sample_values: ["active"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: created_at
+          inferred_type: date
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: false
+          sample_values: ["2024-01-01"]
+          is_candidate_key: false
+          is_candidate_fk: false
+      row_count: 13
+      grain: one customer
+      date_range:
+        earliest: "2024-01-01"
+        latest: "2024-01-01"
+      document_type: null
+      word_count: null
+      key_terms: []
+      entities_mentioned: []
+      candidate_entity_types:
+        - Customer
+      quality_issues:
+        - notes column is 92.3% null
+      notes: >-
+        13 customers, mix of residential and commercial. All created on
+        2024-01-01 (bulk import). CUST-xxx ID pattern.
+
+    # ── Vendor ───────────────────────────────────────────────────────────
+    - source_id: 580ea3721ca9
+      path: vendor.csv
+      format: csv
+      size_bytes: 1430
+      sheet_name: null
+      columns:
+        - name: id
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 10
+          is_unique: true
+          sample_values: ["VEN-001", "VEN-002", "VEN-003", "VEN-004", "VEN-005"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: name
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 10
+          is_unique: true
+          sample_values: ["Keystone Supply Co.", "Capital Electric Supply", "Hartmann Plumbing & Heating"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: type
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 4
+          is_unique: false
+          sample_values: ["supplier", "subcontractor", "equipment_rental", "professional_service"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: trade
+          inferred_type: string
+          null_rate: 0.2
+          cardinality: 6
+          is_unique: false
+          sample_values: ["general", "electrical", "plumbing", "hvac", "tile", "countertops"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: contact
+          inferred_type: string
+          null_rate: 0.1
+          cardinality: 9
+          is_unique: false
+          sample_values: ["Bob Franks", "Marta Doyle", "Greg Hartmann"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: phone
+          inferred_type: string
+          null_rate: 0.1
+          cardinality: 9
+          is_unique: false
+          sample_values: ["717-555-0210", "717-555-0334", "717-555-0491"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: email
+          inferred_type: string
+          null_rate: 0.1
+          cardinality: 9
+          is_unique: false
+          sample_values: ["bob@keystonesupply.com", "marta@capelec.com", "greg@hartmannph.com"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: payment_terms
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 3
+          is_unique: false
+          sample_values: ["net_30", "net_15", "due_on_receipt"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: tax_id
+          inferred_type: string
+          null_rate: 0.1
+          cardinality: 9
+          is_unique: false
+          sample_values: ["23-1884420", "23-2001447", "23-3104892"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: w9_on_file
+          inferred_type: integer
+          null_rate: 0.0
+          cardinality: 2
+          is_unique: false
+          sample_values: ["True", "False"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: insurance_expiry
+          inferred_type: date
+          null_rate: 0.5
+          cardinality: 5
+          is_unique: false
+          sample_values: ["2025-06-30", "2026-01-15", "2026-09-30"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: rating
+          inferred_type: integer
+          null_rate: 0.1
+          cardinality: 3
+          is_unique: false
+          sample_values: ["5.0", "4.0", "3.0"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: credit_limit
+          inferred_type: integer
+          null_rate: 0.9
+          cardinality: 1
+          is_unique: false
+          sample_values: ["25000.0"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: account_opened
+          inferred_type: date
+          null_rate: 0.9
+          cardinality: 1
+          is_unique: false
+          sample_values: ["2024-09-12"]
+          is_candidate_key: false
+          is_candidate_fk: false
+      row_count: 10
+      grain: one vendor
+      date_range:
+        earliest: "2024-09-12"
+        latest: "2026-09-30"
+      document_type: null
+      word_count: null
+      key_terms: []
+      entities_mentioned: []
+      candidate_entity_types:
+        - Vendor
+      quality_issues:
+        - insurance_expiry is 50% null (suppliers without insurance tracking)
+        - credit_limit is 90% null
+        - account_opened is 90% null
+      notes: >-
+        10 vendors with VEN-xxx pattern. Mix of suppliers, subcontractors,
+        equipment rental, and professional services. VEN-010 is
+        "Overhead & Recurring" — a synthetic vendor for non-project costs.
+
+    # ── Employee ─────────────────────────────────────────────────────────
+    - source_id: 78b8b8fdb27f
+      path: employee.csv
+      format: csv
+      size_bytes: 449
+      sheet_name: null
+      columns:
+        - name: id
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 5
+          is_unique: true
+          sample_values: ["EMP-001", "EMP-002", "EMP-003", "EMP-004", "EMP-005"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: name
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 5
+          is_unique: true
+          sample_values: ["Mike Torres", "Derek Haas", "Carlos Vega", "Tom Ridley", "Jordan Mills"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: role
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 3
+          is_unique: false
+          sample_values: ["owner", "foreman", "journeyman"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: trade
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: false
+          sample_values: ["general"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: base_rate
+          inferred_type: integer
+          null_rate: 0.0
+          cardinality: 5
+          is_unique: true
+          sample_values: ["0.0", "32.0", "26.0", "25.0", "17.0"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: burden_rate
+          inferred_type: float
+          null_rate: 0.0
+          cardinality: 5
+          is_unique: true
+          sample_values: ["0.0", "42.24", "34.32", "33.0", "22.44"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: bill_rate
+          inferred_type: integer
+          null_rate: 0.0
+          cardinality: 4
+          is_unique: false
+          sample_values: ["135", "95", "85", "65"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: status
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 2
+          is_unique: false
+          sample_values: ["active", "terminated"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: hire_date
+          inferred_type: date
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: false
+          sample_values: ["2024-01-01"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: termination_date
+          inferred_type: date
+          null_rate: 0.8
+          cardinality: 1
+          is_unique: false
+          sample_values: ["2025-07-18"]
+          is_candidate_key: false
+          is_candidate_fk: false
+      row_count: 5
+      grain: one employee
+      date_range:
+        earliest: "2024-01-01"
+        latest: "2025-07-18"
+      document_type: null
+      word_count: null
+      key_terms: []
+      entities_mentioned: []
+      candidate_entity_types:
+        - Employee
+      quality_issues: []
+      notes: >-
+        5 employees with EMP-xxx pattern. Includes owner (base_rate=0),
+        foreman, and journeymen. One terminated employee (Carlos Vega).
+        Overtime event references additional EMP-006 not in this file.
+
+    # ── Estimate ─────────────────────────────────────────────────────────
+    - source_id: ce1c4e604911
+      path: estimate.csv
+      format: csv
+      size_bytes: 35884
+      sheet_name: null
+      columns:
+        - name: estimate_id
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 100
+          is_unique: true
+          sample_values: ["EST-4F32A47F", "EST-FB854CDC", "EST-264E571D"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: estimate_number
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 100
+          is_unique: true
+          sample_values: ["EST-0001", "EST-0002", "EST-0003"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: version
+          inferred_type: integer
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: false
+          sample_values: ["1"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: customer_id
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 13
+          is_unique: false
+          sample_values: ["CUST-011", "CUST-006", "CUST-008", "CUST-001"]
+          is_candidate_key: false
+          is_candidate_fk: true
+        - name: archetype
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 7
+          is_unique: false
+          sample_values: ["repair_service", "room_addition", "bathroom_remodel", "kitchen_remodel", "deck_addition", "new_construction", "tenant_improvement"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: status
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 4
+          is_unique: false
+          sample_values: ["accepted", "expired", "declined", "sent"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: scope_description
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 7
+          is_unique: false
+          sample_values: ["Repair and service work per scope discussed on site."]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: exclusions
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 7
+          is_unique: false
+          sample_values: ["Unrelated work discovered during service call."]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: assumptions
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 7
+          is_unique: false
+          sample_values: ["Materials available locally. No concealed damage beyond visible scope."]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: total
+          inferred_type: float
+          null_rate: 0.0
+          cardinality: 100
+          is_unique: true
+          sample_values: ["4825.27", "80407.51", "25308.7"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: cost_estimate
+          inferred_type: float
+          null_rate: 0.0
+          cardinality: 100
+          is_unique: true
+          sample_values: ["2524.8", "55902.33", "17328.76"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: markup_pct
+          inferred_type: float
+          null_rate: 0.0
+          cardinality: 100
+          is_unique: true
+          sample_values: ["0.9111", "0.4384", "0.4605"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: tax_amount
+          inferred_type: integer
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: false
+          sample_values: ["0.0"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: created_at
+          inferred_type: date
+          null_rate: 0.0
+          cardinality: 89
+          is_unique: false
+          sample_values: ["2024-01-02", "2024-01-26", "2024-02-11"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: sent_at
+          inferred_type: date
+          null_rate: 0.0
+          cardinality: 93
+          is_unique: false
+          sample_values: ["2024-01-06", "2024-01-30", "2024-02-13"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: valid_until
+          inferred_type: date
+          null_rate: 0.0
+          cardinality: 89
+          is_unique: false
+          sample_values: ["2024-02-01", "2024-02-25", "2024-03-12"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: accepted_at
+          inferred_type: date
+          null_rate: 0.49
+          cardinality: 49
+          is_unique: false
+          sample_values: ["2024-01-21", "2024-02-02", "2024-04-01"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: project_id
+          inferred_type: string
+          null_rate: 0.49
+          cardinality: 51
+          is_unique: false
+          sample_values: ["PROJ-30C2FC8F", "PROJ-0B34E038", "PROJ-B719F4A7"]
+          is_candidate_key: false
+          is_candidate_fk: true
+        - name: narrative_tag
+          inferred_type: unknown
+          null_rate: 1.0
+          cardinality: 0
+          is_unique: false
+          sample_values: []
+          is_candidate_key: false
+          is_candidate_fk: false
+      row_count: 100
+      grain: one estimate
+      date_range:
+        earliest: "2024-01-02"
+        latest: "2026-01-24"
+      document_type: null
+      word_count: null
+      key_terms: []
+      entities_mentioned: []
+      candidate_entity_types:
+        - Estimate
+      quality_issues:
+        - narrative_tag column is 100% null
+        - accepted_at is 49% null (expected — not all estimates are accepted)
+        - project_id is 49% null (only accepted estimates have projects)
+      notes: >-
+        100 estimates with EST-xxx UUID pattern and sequential EST-nnnn
+        number. 7 project archetypes. ~51 accepted, 49 not converted.
+        Links to customer via customer_id, to project via project_id.
+
+    # ── Estimate Line Item ───────────────────────────────────────────────
+    - source_id: e03d6c5ed7d7
+      path: estimate_line_item.csv
+      format: csv
+      size_bytes: 122477
+      sheet_name: null
+      columns:
+        - name: line_id
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 1173
+          is_unique: true
+          sample_values: ["ELI-74BF9B68", "ELI-46DE18CA", "ELI-872314BC"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: estimate_id
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 100
+          is_unique: false
+          sample_values: ["EST-4F32A47F", "EST-FB854CDC", "EST-264E571D"]
+          is_candidate_key: false
+          is_candidate_fk: true
+        - name: cost_code
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 56
+          is_unique: false
+          sample_values: ["01-LABOR", "02-MATERIALS", "01-DEMO", "02-FOUNDATION", "03-FRAMING"]
+          is_candidate_key: false
+          is_candidate_fk: true
+        - name: description
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 76
+          is_unique: false
+          sample_values: ["Labor", "Materials", "Demo & Prep"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: quantity
+          inferred_type: integer
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: false
+          sample_values: ["1"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: unit
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: false
+          sample_values: ["ls"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: unit_cost
+          inferred_type: float
+          null_rate: 0.0
+          cardinality: 625
+          is_unique: false
+          sample_values: ["1514.88", "1009.92", "2236.09"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: unit_price
+          inferred_type: float
+          null_rate: 0.0
+          cardinality: 625
+          is_unique: false
+          sample_values: ["2895.16", "1930.11", "3216.3"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: line_total
+          inferred_type: float
+          null_rate: 0.0
+          cardinality: 625
+          is_unique: false
+          sample_values: ["2895.16", "1930.11", "3216.3"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: category
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 3
+          is_unique: false
+          sample_values: ["labor", "material", "subcontractor"]
+          is_candidate_key: false
+          is_candidate_fk: false
+      row_count: 1173
+      grain: one estimate line item
+      date_range:
+        earliest: null
+        latest: null
+      document_type: null
+      word_count: null
+      key_terms: []
+      entities_mentioned: []
+      candidate_entity_types:
+        - EstimateLineItem
+      quality_issues:
+        - quantity is always 1, unit is always "ls" (lump sum) — no true quantity tracking
+      notes: >-
+        1173 line items across 100 estimates (~11.7 lines per estimate).
+        ELI-xxx pattern. cost_code links to job.code. All lump-sum pricing.
+
+    # ── Project ──────────────────────────────────────────────────────────
+    - source_id: 7b95d9ad0f5f
+      path: project.csv
+      format: csv
+      size_bytes: 12811
+      sheet_name: null
+      columns:
+        - name: project_id
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 51
+          is_unique: true
+          sample_values: ["PROJ-30C2FC8F", "PROJ-0B34E038", "PROJ-B719F4A7"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: estimate_id
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 51
+          is_unique: true
+          sample_values: ["EST-4F32A47F", "EST-FB854CDC", "EST-490BF9A8"]
+          is_candidate_key: true
+          is_candidate_fk: true
+        - name: customer_id
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 13
+          is_unique: false
+          sample_values: ["CUST-011", "CUST-006", "CUST-007", "CUST-001"]
+          is_candidate_key: false
+          is_candidate_fk: true
+        - name: name
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 28
+          is_unique: false
+          sample_values: ["Nakamura \u2014 Room Addition", "Hartley \u2014 Bathroom Remodel"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: archetype
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 7
+          is_unique: false
+          sample_values: ["repair_service", "room_addition", "bathroom_remodel", "new_construction", "kitchen_remodel", "deck_addition", "tenant_improvement"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: type
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 5
+          is_unique: false
+          sample_values: ["repair", "addition", "renovation", "new_construction", "tenant_improvement"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: trade
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: false
+          sample_values: ["general"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: status
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: false
+          sample_values: ["complete"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: site_address
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 13
+          is_unique: false
+          sample_values: ["200 Commerce Dr, Suite 400, Harrisburg, PA 17109"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: start_date
+          inferred_type: date
+          null_rate: 0.0
+          cardinality: 50
+          is_unique: false
+          sample_values: ["2024-02-11", "2024-02-18", "2024-04-25"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: end_date
+          inferred_type: date
+          null_rate: 0.0
+          cardinality: 48
+          is_unique: false
+          sample_values: ["2024-02-21", "2024-05-02", "2024-05-19"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: actual_start
+          inferred_type: date
+          null_rate: 0.0
+          cardinality: 50
+          is_unique: false
+          sample_values: ["2024-02-11", "2024-02-18", "2024-04-25"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: actual_end
+          inferred_type: date
+          null_rate: 0.0
+          cardinality: 48
+          is_unique: false
+          sample_values: ["2024-02-21", "2024-05-02", "2024-05-19"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: contract_amount
+          inferred_type: float
+          null_rate: 0.0
+          cardinality: 51
+          is_unique: true
+          sample_values: ["4825.27", "80407.51", "27976.99"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: contract_type
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: false
+          sample_values: ["fixed_price"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: markup_pct
+          inferred_type: float
+          null_rate: 0.0
+          cardinality: 51
+          is_unique: true
+          sample_values: ["0.9111", "0.4384", "0.5222"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: retention_pct
+          inferred_type: float
+          null_rate: 0.0
+          cardinality: 2
+          is_unique: false
+          sample_values: ["0.05", "0.1"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: retention_released
+          inferred_type: integer
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: false
+          sample_values: ["True"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: permit_required
+          inferred_type: integer
+          null_rate: 0.0
+          cardinality: 2
+          is_unique: false
+          sample_values: ["False", "True"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: permit_number
+          inferred_type: string
+          null_rate: 0.7059
+          cardinality: 15
+          is_unique: false
+          sample_values: ["BLDG-23475", "BLDG-82806", "BLDG-58789"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: narrative_tag
+          inferred_type: unknown
+          null_rate: 1.0
+          cardinality: 0
+          is_unique: false
+          sample_values: []
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: notes
+          inferred_type: unknown
+          null_rate: 1.0
+          cardinality: 0
+          is_unique: false
+          sample_values: []
+          is_candidate_key: false
+          is_candidate_fk: false
+      row_count: 51
+      grain: one project
+      date_range:
+        earliest: "2024-02-11"
+        latest: "2026-01-04"
+      document_type: null
+      word_count: null
+      key_terms: []
+      entities_mentioned: []
+      candidate_entity_types:
+        - Project
+      quality_issues:
+        - narrative_tag column is 100% null
+        - notes column is 100% null
+        - permit_number is 70.6% null (expected — not all projects need permits)
+      notes: >-
+        51 projects with PROJ-xxx UUID pattern. Central hub entity — linked
+        from estimate, job, bill, invoice, payment, time_entry. All status
+        is "complete" (historical data). 7 archetypes match estimate archetypes.
+
+    # ── Job (Cost Code) ─────────────────────────────────────────────────
+    - source_id: d8e86831c3bc
+      path: job.csv
+      format: csv
+      size_bytes: 35558
+      sheet_name: null
+      columns:
+        - name: job_id
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 279
+          is_unique: true
+          sample_values: ["JOB-10476A34", "JOB-5349D80A", "JOB-80A1D221"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: project_id
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 51
+          is_unique: false
+          sample_values: ["PROJ-30C2FC8F", "PROJ-0B34E038", "PROJ-B719F4A7"]
+          is_candidate_key: false
+          is_candidate_fk: true
+        - name: code
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 56
+          is_unique: false
+          sample_values: ["01-LABOR", "02-MATERIALS", "01-DEMO", "02-FOUNDATION", "03-FRAMING"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: name
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 42
+          is_unique: false
+          sample_values: ["Labor", "Materials", "Demo & Prep", "Foundation", "Framing"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: budgeted_labor_hours
+          inferred_type: float
+          null_rate: 0.0
+          cardinality: 142
+          is_unique: false
+          sample_values: ["43.3", "0.0", "63.9"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: budgeted_labor_cost
+          inferred_type: float
+          null_rate: 0.0
+          cardinality: 156
+          is_unique: false
+          sample_values: ["1514.88", "0.0", "2236.09"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: budgeted_material_cost
+          inferred_type: float
+          null_rate: 0.0
+          cardinality: 147
+          is_unique: false
+          sample_values: ["0.0", "1009.92", "5590.23"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: budgeted_sub_cost
+          inferred_type: float
+          null_rate: 0.0
+          cardinality: 62
+          is_unique: false
+          sample_values: ["0.0", "3913.16", "4472.19"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: budgeted_equipment_cost
+          inferred_type: integer
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: false
+          sample_values: ["0.0"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: budgeted_other_cost
+          inferred_type: integer
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: false
+          sample_values: ["0.0"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: status
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: false
+          sample_values: ["complete"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: sort_order
+          inferred_type: integer
+          null_rate: 0.0
+          cardinality: 19
+          is_unique: false
+          sample_values: ["0", "1", "2", "3", "4"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: sub_vendor_type
+          inferred_type: string
+          null_rate: 0.7706
+          cardinality: 5
+          is_unique: false
+          sample_values: ["plumbing", "electrical", "hvac", "tile", "countertops"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: equipment_needed
+          inferred_type: integer
+          null_rate: 0.0
+          cardinality: 2
+          is_unique: false
+          sample_values: ["False", "True"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: actual_start
+          inferred_type: date
+          null_rate: 0.0
+          cardinality: 234
+          is_unique: false
+          sample_values: ["2024-02-11", "2024-02-17", "2024-02-18"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: actual_end
+          inferred_type: date
+          null_rate: 0.0
+          cardinality: 226
+          is_unique: false
+          sample_values: ["2024-02-17", "2024-02-21", "2024-02-20"]
+          is_candidate_key: false
+          is_candidate_fk: false
+      row_count: 279
+      grain: one cost-code within a project
+      date_range:
+        earliest: "2024-02-11"
+        latest: "2026-01-04"
+      document_type: null
+      word_count: null
+      key_terms: []
+      entities_mentioned: []
+      candidate_entity_types:
+        - Job
+      quality_issues:
+        - sub_vendor_type is 77% null (expected — only subcontractor jobs have vendor types)
+        - budgeted_equipment_cost and budgeted_other_cost are always 0.0
+      notes: >-
+        279 jobs with JOB-xxx UUID pattern. Each job is a cost code
+        within a project (~5.5 jobs per project). 56 distinct cost codes.
+        Links to project via project_id. job.code matches
+        estimate_line_item.cost_code for budget-to-actual tracking.
+
+    # ── Time Entry ───────────────────────────────────────────────────────
+    - source_id: a1d7892ddd7d
+      path: time_entry.csv
+      format: csv
+      size_bytes: 161693
+      sheet_name: null
+      columns:
+        - name: entry_id
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 1710
+          is_unique: true
+          sample_values: ["TE-65D1FA0D", "TE-17AEB3AD", "TE-665358F0"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: employee_id
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 4
+          is_unique: false
+          sample_values: ["EMP-005", "EMP-004", "EMP-003", "EMP-002"]
+          is_candidate_key: false
+          is_candidate_fk: true
+        - name: project_id
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 51
+          is_unique: false
+          sample_values: ["PROJ-30C2FC8F", "PROJ-0B34E038", "PROJ-B719F4A7"]
+          is_candidate_key: false
+          is_candidate_fk: true
+        - name: job_id
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 196
+          is_unique: false
+          sample_values: ["JOB-10476A34", "JOB-80A1D221", "JOB-85651125"]
+          is_candidate_key: false
+          is_candidate_fk: true
+        - name: date
+          inferred_type: date
+          null_rate: 0.0
+          cardinality: 415
+          is_unique: false
+          sample_values: ["2024-02-12", "2024-02-13", "2024-02-14"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: hours_regular
+          inferred_type: float
+          null_rate: 0.0
+          cardinality: 16
+          is_unique: false
+          sample_values: ["7.0", "5.0", "8.0", "3.5"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: hours_overtime
+          inferred_type: float
+          null_rate: 0.0
+          cardinality: 6
+          is_unique: false
+          sample_values: ["0.0", "0.5", "2.0", "1.5"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: cost
+          inferred_type: float
+          null_rate: 0.0
+          cardinality: 76
+          is_unique: false
+          sample_values: ["157.08", "165.0", "288.75"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: notes
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 36
+          is_unique: false
+          sample_values: ["Labor work", "Demo & Prep work", "Foundation work"]
+          is_candidate_key: false
+          is_candidate_fk: false
+      row_count: 1710
+      grain: one time entry per employee per job per date
+      date_range:
+        earliest: "2024-02-12"
+        latest: "2026-01-02"
+      document_type: null
+      word_count: null
+      key_terms: []
+      entities_mentioned: []
+      candidate_entity_types:
+        - TimeEntry
+      quality_issues: []
+      notes: >-
+        1710 time entries with TE-xxx pattern. Only 4 distinct employee_ids
+        (EMP-001/owner not logging time). Links to employee, project, and
+        job. Tracks regular and overtime hours separately with computed cost.
+
+    # ── Bill ─────────────────────────────────────────────────────────────
+    - source_id: 3ec971acc703
+      path: bill.csv
+      format: csv
+      size_bytes: 88684
+      sheet_name: null
+      columns:
+        - name: bill_id
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 745
+          is_unique: true
+          sample_values: ["BILL-B7EBAB84", "BILL-54BF2085", "BILL-FFF188A9"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: vendor_id
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 9
+          is_unique: false
+          sample_values: ["VEN-002", "VEN-001", "VEN-008", "VEN-003"]
+          is_candidate_key: false
+          is_candidate_fk: true
+        - name: project_id
+          inferred_type: string
+          null_rate: 0.2282
+          cardinality: 51
+          is_unique: false
+          sample_values: ["PROJ-30C2FC8F", "PROJ-0B34E038", "PROJ-B719F4A7"]
+          is_candidate_key: false
+          is_candidate_fk: true
+        - name: job_id
+          inferred_type: string
+          null_rate: 0.2282
+          cardinality: 211
+          is_unique: false
+          sample_values: ["JOB-5349D80A", "JOB-85651125", "JOB-C0C11B60"]
+          is_candidate_key: false
+          is_candidate_fk: true
+        - name: vendor_invoice_number
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 743
+          is_unique: false
+          sample_values: ["SI-23906", "SI-93527", "SI-94623"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: status
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: false
+          sample_values: ["paid"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: received_date
+          inferred_type: date
+          null_rate: 0.0
+          cardinality: 399
+          is_unique: false
+          sample_values: ["2024-02-19", "2024-02-17", "2024-02-21"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: due_date
+          inferred_type: date
+          null_rate: 0.0
+          cardinality: 420
+          is_unique: false
+          sample_values: ["2024-03-20", "2024-03-18", "2024-03-22"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: total
+          inferred_type: float
+          null_rate: 0.0
+          cardinality: 705
+          is_unique: false
+          sample_values: ["586.24", "341.0", "1352.61"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: paid_date
+          inferred_type: date
+          null_rate: 0.0
+          cardinality: 443
+          is_unique: false
+          sample_values: ["2024-03-19", "2024-03-23", "2024-03-13"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: payment_method
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 2
+          is_unique: false
+          sample_values: ["check", "ach"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: check_number
+          inferred_type: integer
+          null_rate: 0.2416
+          cardinality: 541
+          is_unique: false
+          sample_values: ["7631.0", "9234.0", "3035.0"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: category
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 8
+          is_unique: false
+          sample_values: ["material", "subcontractor", "rent", "vehicles", "utilities", "software", "insurance", "tools"]
+          is_candidate_key: false
+          is_candidate_fk: false
+      row_count: 745
+      grain: one vendor bill
+      date_range:
+        earliest: "2024-01-01"
+        latest: "2026-02-05"
+      document_type: null
+      word_count: null
+      key_terms: []
+      entities_mentioned: []
+      candidate_entity_types:
+        - Bill
+      quality_issues:
+        - project_id is 22.8% null (overhead bills not tied to projects)
+        - job_id is 22.8% null (same overhead bills)
+        - check_number is 24.2% null (ACH payments have no check number)
+      notes: >-
+        745 bills with BILL-xxx UUID pattern. 9 distinct vendors (VEN-007
+        not referenced). 22.8% are overhead/non-project bills. All status
+        is "paid" (historical). 8 spend categories.
+
+    # ── Bill Line Item ───────────────────────────────────────────────────
+    - source_id: cc08c48ce725
+      path: bill_line_item.csv
+      format: csv
+      size_bytes: 78386
+      sheet_name: null
+      columns:
+        - name: line_id
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 745
+          is_unique: true
+          sample_values: ["BLI-8F3D1502", "BLI-B4F279C0", "BLI-84978810"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: bill_id
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 745
+          is_unique: true
+          sample_values: ["BILL-B7EBAB84", "BILL-54BF2085", "BILL-FFF188A9"]
+          is_candidate_key: true
+          is_candidate_fk: true
+        - name: project_id
+          inferred_type: string
+          null_rate: 0.2282
+          cardinality: 51
+          is_unique: false
+          sample_values: ["PROJ-30C2FC8F", "PROJ-0B34E038", "PROJ-B719F4A7"]
+          is_candidate_key: false
+          is_candidate_fk: true
+        - name: job_id
+          inferred_type: string
+          null_rate: 0.2282
+          cardinality: 211
+          is_unique: false
+          sample_values: ["JOB-5349D80A", "JOB-85651125", "JOB-C0C11B60"]
+          is_candidate_key: false
+          is_candidate_fk: true
+        - name: description
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 53
+          is_unique: false
+          sample_values: ["Materials materials", "Foundation materials", "Framing materials"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: quantity
+          inferred_type: integer
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: false
+          sample_values: ["1"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: unit_cost
+          inferred_type: float
+          null_rate: 0.0
+          cardinality: 705
+          is_unique: false
+          sample_values: ["586.24", "341.0", "1352.61"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: line_total
+          inferred_type: float
+          null_rate: 0.0
+          cardinality: 705
+          is_unique: false
+          sample_values: ["586.24", "341.0", "1352.61"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: category
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 8
+          is_unique: false
+          sample_values: ["material", "subcontractor", "rent", "vehicles", "utilities", "software", "insurance", "tools"]
+          is_candidate_key: false
+          is_candidate_fk: false
+      row_count: 745
+      grain: one bill line item
+      date_range:
+        earliest: null
+        latest: null
+      document_type: null
+      word_count: null
+      key_terms: []
+      entities_mentioned: []
+      candidate_entity_types:
+        - BillLineItem
+      quality_issues:
+        - 1:1 relationship with bill (745 bills, 745 line items) — effectively denormalized
+      notes: >-
+        745 line items with BLI-xxx pattern. One line item per bill (1:1).
+        bill_id is unique, indicating single-line-item bills. quantity is
+        always 1 (lump sum).
+
+    # ── Invoice ──────────────────────────────────────────────────────────
+    - source_id: d03c595c4b33
+      path: invoice.csv
+      format: csv
+      size_bytes: 14506
+      sheet_name: null
+      columns:
+        - name: invoice_id
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 134
+          is_unique: true
+          sample_values: ["INV-04F11446", "INV-82E5205D", "INV-6968A92C"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: invoice_number
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 134
+          is_unique: true
+          sample_values: ["INV-0001", "INV-0002", "INV-0003"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: project_id
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 51
+          is_unique: false
+          sample_values: ["PROJ-30C2FC8F", "PROJ-0B34E038", "PROJ-B719F4A7"]
+          is_candidate_key: false
+          is_candidate_fk: true
+        - name: customer_id
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 13
+          is_unique: false
+          sample_values: ["CUST-011", "CUST-006", "CUST-007", "CUST-001"]
+          is_candidate_key: false
+          is_candidate_fk: true
+        - name: type
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 3
+          is_unique: false
+          sample_values: ["final", "retention", "progress"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: status
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: false
+          sample_values: ["paid"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: issued_date
+          inferred_type: date
+          null_rate: 0.0
+          cardinality: 123
+          is_unique: false
+          sample_values: ["2024-02-21", "2024-05-08", "2024-03-13"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: due_date
+          inferred_type: date
+          null_rate: 0.0
+          cardinality: 123
+          is_unique: false
+          sample_values: ["2024-03-22", "2024-06-07", "2024-03-18"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: subtotal
+          inferred_type: float
+          null_rate: 0.0
+          cardinality: 71
+          is_unique: false
+          sample_values: ["4825.27", "0.0", "26802.5"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: retention_held
+          inferred_type: float
+          null_rate: 0.0
+          cardinality: 71
+          is_unique: false
+          sample_values: ["241.26", "0.0", "1340.13"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: tax
+          inferred_type: integer
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: false
+          sample_values: ["0.0"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: total_due
+          inferred_type: float
+          null_rate: 0.0
+          cardinality: 121
+          is_unique: false
+          sample_values: ["4584.01", "241.26", "25462.37"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: notes
+          inferred_type: unknown
+          null_rate: 1.0
+          cardinality: 0
+          is_unique: false
+          sample_values: []
+          is_candidate_key: false
+          is_candidate_fk: false
+      row_count: 134
+      grain: one invoice
+      date_range:
+        earliest: "2024-02-21"
+        latest: "2026-04-20"
+      document_type: null
+      word_count: null
+      key_terms: []
+      entities_mentioned: []
+      candidate_entity_types:
+        - Invoice
+      quality_issues:
+        - notes column is 100% null
+      notes: >-
+        134 invoices with INV-xxx UUID pattern and sequential INV-nnnn
+        number. 3 types: progress, final, retention. All status "paid".
+        Retention billing mechanics present (retention_held column).
+
+    # ── Payment ──────────────────────────────────────────────────────────
+    - source_id: 491b7ff7ab76
+      path: payment.csv
+      format: csv
+      size_bytes: 12300
+      sheet_name: null
+      columns:
+        - name: payment_id
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 134
+          is_unique: true
+          sample_values: ["PAY-07250858", "PAY-8FE758A0", "PAY-55934A28"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: invoice_id
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 134
+          is_unique: true
+          sample_values: ["INV-04F11446", "INV-82E5205D", "INV-6968A92C"]
+          is_candidate_key: true
+          is_candidate_fk: true
+        - name: project_id
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 51
+          is_unique: false
+          sample_values: ["PROJ-30C2FC8F", "PROJ-0B34E038", "PROJ-B719F4A7"]
+          is_candidate_key: false
+          is_candidate_fk: true
+        - name: customer_id
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 13
+          is_unique: false
+          sample_values: ["CUST-011", "CUST-006", "CUST-007", "CUST-001"]
+          is_candidate_key: false
+          is_candidate_fk: true
+        - name: amount
+          inferred_type: float
+          null_rate: 0.0
+          cardinality: 121
+          is_unique: false
+          sample_values: ["4584.01", "241.26", "25462.37"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: method
+          inferred_type: string
+          null_rate: 0.0
+          cardinality: 3
+          is_unique: false
+          sample_values: ["ach", "check", "credit_card"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: reference
+          inferred_type: integer
+          null_rate: 0.0
+          cardinality: 134
+          is_unique: true
+          sample_values: ["3917", "8629", "4352"]
+          is_candidate_key: true
+          is_candidate_fk: false
+        - name: received_date
+          inferred_type: date
+          null_rate: 0.0
+          cardinality: 120
+          is_unique: false
+          sample_values: ["2024-03-22", "2024-06-03", "2024-03-16"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: deposited_date
+          inferred_type: date
+          null_rate: 0.0
+          cardinality: 125
+          is_unique: false
+          sample_values: ["2024-03-22", "2024-06-05", "2024-03-17"]
+          is_candidate_key: false
+          is_candidate_fk: false
+      row_count: 134
+      grain: one payment received
+      date_range:
+        earliest: "2024-03-16"
+        latest: "2026-04-22"
+      document_type: null
+      word_count: null
+      key_terms: []
+      entities_mentioned: []
+      candidate_entity_types:
+        - Payment
+      quality_issues: []
+      notes: >-
+        134 payments with PAY-xxx UUID pattern. 1:1 with invoices
+        (134 invoices, 134 payments). All invoices fully paid.
+        3 payment methods: ACH, check, credit card.
+
+    # ── LOC Event (Narrative) ────────────────────────────────────────────
+    - source_id: fadb29a0034e
+      path: loc_event.csv
+      format: csv
+      size_bytes: 136
+      sheet_name: null
+      columns:
+        - name: event_id
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["EVT-003"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: date
+          inferred_type: date
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["2024-04-11"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: amount
+          inferred_type: integer
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["22000"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: type
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["draw"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: description
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["Line of credit draw to cover payroll during Johnson payment delay"]
+          is_candidate_key: false
+          is_candidate_fk: false
+      row_count: 1
+      grain: one narrative event
+      date_range:
+        earliest: "2024-04-11"
+        latest: "2024-04-11"
+      document_type: null
+      word_count: null
+      key_terms: []
+      entities_mentioned: []
+      candidate_entity_types:
+        - NarrativeEvent
+      quality_issues:
+        - Only 1 row — very sparse
+      notes: >-
+        Single line-of-credit draw event. Part of narrative event
+        system (EVT-xxx pattern). Records a $22,000 LOC draw to cover
+        a payroll gap caused by customer payment delay.
+
+    # ── Overtime Event (Narrative) ───────────────────────────────────────
+    - source_id: d17411f8d40e
+      path: overtime_event.csv
+      format: csv
+      size_bytes: 269
+      sheet_name: null
+      columns:
+        - name: event_id
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["EVT-018"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: start_date
+          inferred_type: date
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["2025-07-21"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: duration_weeks
+          inferred_type: integer
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["6"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: ot_hours_per_week_per_person
+          inferred_type: integer
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["8"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: affected_employees
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["['EMP-002', 'EMP-004', 'EMP-005', 'EMP-006']"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: description
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["Crew overtime to cover Vega gap"]
+          is_candidate_key: false
+          is_candidate_fk: false
+      row_count: 1
+      grain: one narrative event
+      date_range:
+        earliest: "2025-07-21"
+        latest: "2025-07-21"
+      document_type: null
+      word_count: null
+      key_terms: []
+      entities_mentioned: []
+      candidate_entity_types:
+        - NarrativeEvent
+      quality_issues:
+        - Only 1 row — very sparse
+        - affected_employees stored as string-encoded list, not normalized
+        - References EMP-006 which does not exist in employee.csv
+      notes: >-
+        Single overtime event. 6-week overtime period after Carlos Vega
+        departure. References EMP-006 not in employee.csv (possible
+        future hire or data gap).
+
+    # ── Pricing Change (Narrative) ───────────────────────────────────────
+    - source_id: 28104fac72b5
+      path: pricing_change.csv
+      format: csv
+      size_bytes: 206
+      sheet_name: null
+      columns:
+        - name: event_id
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["EVT-014"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: effective_date
+          inferred_type: date
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["2025-04-01"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: applies_to
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["repair_service"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: old_bill_rate
+          inferred_type: integer
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["85"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: new_bill_rate
+          inferred_type: integer
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["110"]
+          is_candidate_key: false
+          is_candidate_fk: false
+        - name: notes
+          inferred_type: id
+          null_rate: 0.0
+          cardinality: 1
+          is_unique: true
+          sample_values: ["Burden + overhead wasn't covered at $85"]
+          is_candidate_key: false
+          is_candidate_fk: false
+      row_count: 1
+      grain: one pricing change event
+      date_range:
+        earliest: "2025-04-01"
+        latest: "2025-04-01"
+      document_type: null
+      word_count: null
+      key_terms: []
+      entities_mentioned: []
+      candidate_entity_types:
+        - NarrativeEvent
+      quality_issues:
+        - Only 1 row — very sparse
+      notes: >-
+        Single pricing change event. Bill rate increase for repair/service
+        archetype from $85 to $110. Part of narrative event system.
+
+    # ── data.json (alternate format) ─────────────────────────────────────
+    - source_id: data_json
+      path: data.json
+      format: json
+      size_bytes: 1868498
+      sheet_name: null
+      columns: []
+      row_count: null
+      grain: null
+      date_range:
+        earliest: null
+        latest: null
+      document_type: null
+      word_count: null
+      key_terms: []
+      entities_mentioned: []
+      candidate_entity_types: []
+      quality_issues: []
+      notes: >-
+        JSON export of the same data contained in CSV files. Not profiled
+        separately — CSV files are the primary source for this catalog.
+
+    # ── builder.db (SQLite alternate format) ─────────────────────────────
+    - source_id: builder_db
+      path: builder.db
+      format: sqlite
+      size_bytes: 696320
+      sheet_name: null
+      columns: []
+      row_count: null
+      grain: null
+      date_range:
+        earliest: null
+        latest: null
+      document_type: null
+      word_count: null
+      key_terms: []
+      entities_mentioned: []
+      candidate_entity_types: []
+      quality_issues: []
+      notes: >-
+        SQLite database containing the same data as CSV files. Not profiled
+        separately — CSV files are the primary source for this catalog.
+
+  # ════════════════════════════════════════════════════════════════════════
+  # Join Candidates
+  # ════════════════════════════════════════════════════════════════════════
+  join_candidates:
+    # Bill ↔ Bill Line Item (1:1 in this dataset)
+    - source_a: 3ec971acc703
+      column_a: bill_id
+      source_b: cc08c48ce725
+      column_b: bill_id
+      overlap_rate: 1.0
+      confidence: 1.0
+      notes: "Exact 1:1 match — every bill has exactly one line item."
+
+    # Bill → Project
+    - source_a: 3ec971acc703
+      column_a: project_id
+      source_b: 7b95d9ad0f5f
+      column_b: project_id
+      overlap_rate: 1.0
+      confidence: 1.0
+      notes: "All non-null bill.project_id values match project.project_id. 22.8% of bills are overhead (null project_id)."
+
+    # Bill → Job
+    - source_a: 3ec971acc703
+      column_a: job_id
+      source_b: d8e86831c3bc
+      column_b: job_id
+      overlap_rate: 0.829
+      confidence: 0.829
+      notes: "Most bill job_ids match job.job_id. Some bills reference jobs not in job.csv or are overhead."
+
+    # Bill Line Item → Vendor
+    - source_a: cc08c48ce725
+      column_a: vendor_id
+      source_b: 580ea3721ca9
+      column_b: id
+      overlap_rate: 0.93
+      confidence: 0.93
+      notes: "Bill line items carry vendor_id inherited from bill header. Note: bill_line_item.csv does not have vendor_id directly; join via bill.vendor_id."
+
+    # Customer → Estimate
+    - source_a: dab846594bbb
+      column_a: id
+      source_b: ce1c4e604911
+      column_b: customer_id
+      overlap_rate: 1.0
+      confidence: 1.0
+      notes: "All estimate customer_ids found in customer.id."
+
+    # Customer → Project
+    - source_a: dab846594bbb
+      column_a: id
+      source_b: 7b95d9ad0f5f
+      column_b: customer_id
+      overlap_rate: 1.0
+      confidence: 1.0
+      notes: "All project customer_ids found in customer.id."
+
+    # Customer → Invoice
+    - source_a: dab846594bbb
+      column_a: id
+      source_b: d03c595c4b33
+      column_b: customer_id
+      overlap_rate: 1.0
+      confidence: 1.0
+      notes: "All invoice customer_ids found in customer.id."
+
+    # Customer → Payment
+    - source_a: dab846594bbb
+      column_a: id
+      source_b: 491b7ff7ab76
+      column_b: customer_id
+      overlap_rate: 1.0
+      confidence: 1.0
+      notes: "All payment customer_ids found in customer.id."
+
+    # Estimate → Estimate Line Item
+    - source_a: ce1c4e604911
+      column_a: estimate_id
+      source_b: e03d6c5ed7d7
+      column_b: estimate_id
+      overlap_rate: 1.0
+      confidence: 1.0
+      notes: "All estimate_line_item.estimate_id values match estimate.estimate_id."
+
+    # Estimate Line Item cost_code → Job code
+    - source_a: e03d6c5ed7d7
+      column_a: cost_code
+      source_b: d8e86831c3bc
+      column_b: code
+      overlap_rate: 1.0
+      confidence: 1.0
+      notes: "Estimate line item cost codes match job cost codes. Enables budget-vs-actual comparison."
+
+    # Project → Job
+    - source_a: 7b95d9ad0f5f
+      column_a: project_id
+      source_b: d8e86831c3bc
+      column_b: project_id
+      overlap_rate: 1.0
+      confidence: 1.0
+      notes: "All job.project_id values found in project.project_id."
+
+    # Project → Bill
+    - source_a: 7b95d9ad0f5f
+      column_a: project_id
+      source_b: 3ec971acc703
+      column_b: project_id
+      overlap_rate: 1.0
+      confidence: 1.0
+      notes: "All non-null bill.project_id values found in project.project_id."
+
+    # Project → Invoice
+    - source_a: 7b95d9ad0f5f
+      column_a: project_id
+      source_b: d03c595c4b33
+      column_b: project_id
+      overlap_rate: 1.0
+      confidence: 1.0
+      notes: "All invoice.project_id values found in project.project_id."
+
+    # Project → Payment
+    - source_a: 7b95d9ad0f5f
+      column_a: project_id
+      source_b: 491b7ff7ab76
+      column_b: project_id
+      overlap_rate: 1.0
+      confidence: 1.0
+      notes: "All payment.project_id values found in project.project_id."
+
+    # Project → Time Entry
+    - source_a: 7b95d9ad0f5f
+      column_a: project_id
+      source_b: a1d7892ddd7d
+      column_b: project_id
+      overlap_rate: 1.0
+      confidence: 1.0
+      notes: "All time_entry.project_id values found in project.project_id."
+
+    # Job → Time Entry
+    - source_a: d8e86831c3bc
+      column_a: job_id
+      source_b: a1d7892ddd7d
+      column_b: job_id
+      overlap_rate: 0.792
+      confidence: 0.792
+      notes: "Most time_entry.job_id values match job.job_id. 196 of 279 jobs have time entries."
+
+    # Invoice → Payment (1:1)
+    - source_a: d03c595c4b33
+      column_a: invoice_id
+      source_b: 491b7ff7ab76
+      column_b: invoice_id
+      overlap_rate: 1.0
+      confidence: 1.0
+      notes: "Exact 1:1 — every invoice has exactly one payment."
+
+    # Employee → Time Entry
+    - source_a: 78b8b8fdb27f
+      column_a: id
+      source_b: a1d7892ddd7d
+      column_b: employee_id
+      overlap_rate: 0.86
+      confidence: 0.86
+      notes: "4 of 5 employees have time entries. EMP-001 (owner) does not log time."
+
+    # Company → Employee (owner link)
+    - source_a: 381f49880b21
+      column_a: owner_employee_id
+      source_b: 78b8b8fdb27f
+      column_b: id
+      overlap_rate: 1.0
+      confidence: 0.44
+      notes: "Single-value join. company.owner_employee_id = EMP-001. Low confidence due to single-row cardinality."
+
+    # Bill → Vendor
+    - source_a: 3ec971acc703
+      column_a: vendor_id
+      source_b: 580ea3721ca9
+      column_b: id
+      overlap_rate: 0.93
+      confidence: 0.93
+      notes: "9 of 10 vendors appear in bills. VEN-007 (Sunshine Equipment Rental) has no bills."
+
+  # ════════════════════════════════════════════════════════════════════════
+  # Candidate Entity Types
+  # ════════════════════════════════════════════════════════════════════════
+  candidate_entity_types:
+    - name: Company
+      sources:
+        - 381f49880b21
+      instance_count_estimate: 1
+      identifier_pattern: "Single record — no ID column; identified by name"
+      notes: >-
+        Singleton entity representing Ridgeline Builders itself. Contains
+        company metadata, owner reference, licensing info.
+
+    - name: Customer
+      sources:
+        - dab846594bbb
+      instance_count_estimate: 13
+      identifier_pattern: "CUST-xxx sequential (CUST-001 through CUST-013)"
+      notes: >-
+        Property owners who commission construction work. Mix of
+        residential and commercial clients in central PA.
+
+    - name: Vendor
+      sources:
+        - 580ea3721ca9
+      instance_count_estimate: 10
+      identifier_pattern: "VEN-xxx sequential (VEN-001 through VEN-010)"
+      notes: >-
+        Material suppliers, subcontractors, equipment rental companies,
+        and professional services. VEN-010 is a synthetic "Overhead &
+        Recurring" vendor for non-project costs.
+
+    - name: Employee
+      sources:
+        - 78b8b8fdb27f
+      instance_count_estimate: 5
+      identifier_pattern: "EMP-xxx sequential (EMP-001 through EMP-005)"
+      notes: >-
+        W-2 employees. Roles include owner, foreman, journeyman.
+        Overtime event references EMP-006 not present in employee.csv
+        (possible 6-9 total employees over time).
+
+    - name: Estimate
+      sources:
+        - ce1c4e604911
+      instance_count_estimate: 100
+      identifier_pattern: "EST-xxx UUID (EST-4F32A47F) + sequential number (EST-0001)"
+      notes: >-
+        Proposals sent to customers. ~51% accepted and converted to
+        projects. 7 project archetypes.
+
+    - name: EstimateLineItem
+      sources:
+        - e03d6c5ed7d7
+      instance_count_estimate: 1173
+      identifier_pattern: "ELI-xxx UUID (composite key: estimate_id + line_id)"
+      notes: >-
+        Cost-code-level detail within estimates. ~11.7 lines per
+        estimate. Links to job.code for budget-vs-actual.
+
+    - name: Project
+      sources:
+        - 7b95d9ad0f5f
+      instance_count_estimate: 51
+      identifier_pattern: "PROJ-xxx UUID (PROJ-30C2FC8F)"
+      notes: >-
+        Central hub entity. Created from accepted estimates. Links to
+        jobs, bills, invoices, payments, and time entries. All 51
+        projects are complete (historical dataset).
+
+    - name: Job
+      sources:
+        - d8e86831c3bc
+      instance_count_estimate: 279
+      identifier_pattern: "JOB-xxx UUID (JOB-10476A34)"
+      notes: >-
+        Cost codes within projects (~5.5 per project). 56 distinct
+        cost code types. Tracks budgeted costs by category (labor,
+        material, subcontractor). Links to time_entry and bill for
+        actual cost tracking.
+
+    - name: TimeEntry
+      sources:
+        - a1d7892ddd7d
+      instance_count_estimate: 1710
+      identifier_pattern: "TE-xxx UUID (TE-65D1FA0D)"
+      notes: >-
+        Daily time records per employee per job. Tracks regular and
+        overtime hours separately. 4 active time-logging employees.
+
+    - name: Bill
+      sources:
+        - 3ec971acc703
+      instance_count_estimate: 745
+      identifier_pattern: "BILL-xxx UUID (BILL-B7EBAB84)"
+      notes: >-
+        Vendor invoices received. 77.2% project-related, 22.8%
+        overhead. 8 spend categories. All status "paid".
+
+    - name: BillLineItem
+      sources:
+        - cc08c48ce725
+      instance_count_estimate: 745
+      identifier_pattern: "BLI-xxx UUID (BLI-8F3D1502)"
+      notes: >-
+        1:1 with bills in this dataset (single line item per bill).
+        May represent a simplified export; real system may support
+        multi-line bills.
+
+    - name: Invoice
+      sources:
+        - d03c595c4b33
+      instance_count_estimate: 134
+      identifier_pattern: "INV-xxx UUID (INV-04F11446) + sequential number (INV-0001)"
+      notes: >-
+        Customer-facing invoices. 3 types: progress, final, retention.
+        Supports retention billing (5-10% held).
+
+    - name: Payment
+      sources:
+        - 491b7ff7ab76
+      instance_count_estimate: 134
+      identifier_pattern: "PAY-xxx UUID (PAY-07250858)"
+      notes: >-
+        Customer payments received. 1:1 with invoices. 3 methods:
+        ACH, check, credit card.
+
+    - name: NarrativeEvent
+      sources:
+        - fadb29a0034e
+        - d17411f8d40e
+        - 28104fac72b5
+      instance_count_estimate: 3
+      identifier_pattern: "EVT-xxx sequential (EVT-003, EVT-014, EVT-018)"
+      notes: >-
+        Business narrative events spanning 3 CSV files with different
+        schemas: LOC draw, overtime mandate, pricing change. Very
+        sparse (1 row each). Used for simulation scenario modeling.
+
+  # ════════════════════════════════════════════════════════════════════════
+  # Gaps
+  # ════════════════════════════════════════════════════════════════════════
+  gaps:
+    - description: >-
+        narrative_tag and notes columns in project.csv are 100% null.
+        These columns exist in the schema but contain no data.
+      severity: minor
+      downstream_impact: >-
+        No narrative tagging available for projects. Phase 1 cannot
+        use these fields for relationship inference or classification.
+
+    - description: >-
+        loc_event.csv, overtime_event.csv, and pricing_change.csv each
+        contain only 1 row. Very sparse narrative event data.
+      severity: minor
+      downstream_impact: >-
+        NarrativeEvent entity type will have minimal instances. Limited
+        value for pattern recognition but important for simulation
+        scenario modeling.
+
+    - description: >-
+        change_order entity type mentioned in engagement brief but no
+        dedicated change_order.csv found in the data room. Change orders
+        may be embedded in other data or not tracked in this system.
+      severity: minor
+      downstream_impact: >-
+        Phase 1 cannot confirm or model change orders as a first-class
+        entity type without additional data source or evidence.
+
+    - description: >-
+        data.json and builder.db are alternate format exports of the same
+        data. Not profiled separately as CSV files serve as the primary
+        source. Totals reflect 16 CSV + 1 JSON + 1 SQLite = 18 files.
+      severity: minor
+      downstream_impact: >-
+        No impact on ontology discovery. These files may be useful for
+        ETL pipeline validation in Phase 3 (cross-format consistency check).
+
+    - description: >-
+        overtime_event.csv references EMP-006 in affected_employees list,
+        but employee.csv only contains EMP-001 through EMP-005. Possible
+        future hire or data gap.
+      severity: minor
+      downstream_impact: >-
+        Employee entity count may be understated. Phase 1 should note
+        potential for additional employees beyond the 5 in employee.csv.
+
+    - description: >-
+        invoice.csv notes column is 100% null. estimate.csv narrative_tag
+        column is 100% null.
+      severity: minor
+      downstream_impact: >-
+        No free-text annotation available on invoices or estimate
+        narrative tags. No impact on core ontology but limits
+        qualitative enrichment.

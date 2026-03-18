@@ -1,0 +1,66 @@
+source_id: 28104fac72b5
+path: C:\Users\Jake0\Documents\GitHub\onto-graph\.claude\worktrees\pedantic-borg\data\ridgeline_builders\data_room\pricing_change.csv
+format: csv
+size_bytes: 206
+sheet_name: null
+columns:
+- name: event_id
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - EVT-014
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: effective_date
+  inferred_type: date
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - '2025-04-01'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: applies_to
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - repair_service
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: old_bill_rate
+  inferred_type: integer
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - '85'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: new_bill_rate
+  inferred_type: integer
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - '110'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: notes
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - Realized burden + overhead wasn't covered at $85. Service jobs should be highest-margin
+    work.
+  is_candidate_key: false
+  is_candidate_fk: false
+row_count: 1
+grain: null
+date_range:
+  earliest: '2025-04-01'
+  latest: '2025-04-01'

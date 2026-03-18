@@ -1,0 +1,89 @@
+# Decision Record D_1003
+# BillLineItem: separate entity type or collapse into Bill
+
+decision:
+  id: D_1003
+  phase: ontology
+  created_at: "2026-03-18"
+
+  category: entity_classification
+
+  question: >-
+    Should BillLineItem be modeled as a separate entity type, or should its
+    properties be collapsed into the Bill entity given the 1:1 cardinality
+    in the current dataset?
+
+  decision: >-
+    Keep BillLineItem as a separate entity type despite the current 1:1
+    relationship with Bill.
+
+  alternatives_considered:
+    - option: >-
+        Keep BillLineItem as a separate entity type
+      pros:
+        - Preserves the logical distinction between bill header and line-item detail
+        - bill_line_item carries project_id and job_id for cost allocation at the line-item level
+        - The 1:1 cardinality likely reflects a simplified export; real accounting systems support multi-line bills
+        - Consistent with EstimateLineItem being a separate entity (parallel structure)
+        - Future data may have multi-line bills, making the separation essential
+      cons:
+        - Current data shows exact 1:1 — every bill has exactly one line item
+        - Adds an entity type and relationship that is currently degenerate
+        - Slightly more complex graph traversal for bill queries
+
+    - option: >-
+        Collapse BillLineItem properties into Bill entity
+      pros:
+        - Simpler graph with one fewer entity type
+        - No redundant 1:1 relationship to traverse
+        - All bill information on a single node
+      cons:
+        - Loses the header/detail distinction
+        - If future data has multi-line bills, the ontology would need restructuring
+        - Inconsistent with EstimateLineItem treatment
+        - line_id (BLI-xxx) would become a property on Bill rather than its own identifier
+
+  rationale: >-
+    The 1:1 cardinality in the current dataset is likely an artifact of a
+    simplified data export. Real construction accounting systems routinely
+    produce multi-line vendor bills (e.g., a lumber supplier bill with
+    separate lines for framing lumber, hardware, and delivery). Keeping
+    BillLineItem separate preserves the logical schema, maintains structural
+    consistency with EstimateLineItem, and avoids a costly ontology
+    restructuring if multi-line bill data appears in future data loads.
+    The project_id and job_id on BillLineItem provide line-level cost
+    allocation that is architecturally distinct from the bill header.
+
+  evidence:
+    - source: bill_line_item.csv
+      location: "bill_id column, all 745 rows"
+      observation: >-
+        745 line items with 745 unique bill_ids. Exact 1:1 with bill.csv.
+        Each bill has exactly one line item in the current export.
+      role: primary
+
+    - source: bill_line_item.csv
+      location: "project_id and job_id columns"
+      observation: >-
+        BillLineItem carries project_id and job_id for cost allocation.
+        These duplicate the bill header values in the 1:1 case but would
+        diverge in multi-line bills where lines allocate to different jobs.
+      role: corroborating
+
+    - source: estimate_line_item.csv
+      location: "estimate_id column"
+      observation: >-
+        EstimateLineItem has 1:N cardinality with Estimate (~11.7 lines
+        per estimate). This parallel structure supports keeping BillLineItem
+        separate for consistency.
+      role: corroborating
+
+  confidence: high
+  reversibility: moderate
+  downstream_impact: >-
+    If reversed (BillLineItem collapsed into Bill), the mapping plan would
+    merge bill_line_item.csv fields into the Bill node. Graph queries would
+    be simpler but would lose line-level cost allocation. If multi-line
+    bill data appears later, the ontology would need to be restructured
+    to re-introduce BillLineItem — a harder change than the current
+    forward-looking separation.

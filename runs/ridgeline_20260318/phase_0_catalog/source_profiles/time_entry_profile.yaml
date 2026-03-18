@@ -1,0 +1,163 @@
+source_id: a1d7892ddd7d
+path: C:\Users\Jake0\Documents\GitHub\onto-graph\.claude\worktrees\pedantic-borg\data\ridgeline_builders\data_room\time_entry.csv
+format: csv
+size_bytes: 161693
+sheet_name: null
+columns:
+- name: entry_id
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 1710
+  is_unique: true
+  sample_values:
+  - TE-65D1FA0D
+  - TE-17AEB3AD
+  - TE-665358F0
+  - TE-733AE26A
+  - TE-2F912603
+  - TE-D5547C98
+  - TE-B017A976
+  - TE-D8B40651
+  - TE-74FA3536
+  - TE-B0429C33
+  is_candidate_key: true
+  is_candidate_fk: false
+- name: employee_id
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 4
+  is_unique: false
+  sample_values:
+  - EMP-005
+  - EMP-004
+  - EMP-003
+  - EMP-002
+  is_candidate_key: false
+  is_candidate_fk: true
+- name: project_id
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 51
+  is_unique: false
+  sample_values:
+  - PROJ-30C2FC8F
+  - PROJ-0B34E038
+  - PROJ-B719F4A7
+  - PROJ-548ABFA2
+  - PROJ-2BD4EB76
+  - PROJ-B7191EAB
+  - PROJ-8BF7C356
+  - PROJ-0A179D7B
+  - PROJ-A0479F56
+  - PROJ-B781EA5C
+  is_candidate_key: false
+  is_candidate_fk: true
+- name: job_id
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 196
+  is_unique: false
+  sample_values:
+  - JOB-10476A34
+  - JOB-80A1D221
+  - JOB-85651125
+  - JOB-C0C11B60
+  - JOB-5545F1A9
+  - JOB-9E273CCF
+  - JOB-9A84E172
+  - JOB-49E979A2
+  - JOB-BF557810
+  - JOB-3FF1C062
+  is_candidate_key: false
+  is_candidate_fk: true
+- name: date
+  inferred_type: date
+  null_rate: 0.0
+  cardinality: 415
+  is_unique: false
+  sample_values:
+  - '2024-02-12'
+  - '2024-02-13'
+  - '2024-02-14'
+  - '2024-02-15'
+  - '2024-02-16'
+  - '2024-02-19'
+  - '2024-02-20'
+  - '2024-02-21'
+  - '2024-02-22'
+  - '2024-02-23'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: hours_regular
+  inferred_type: float
+  null_rate: 0.0
+  cardinality: 16
+  is_unique: false
+  sample_values:
+  - '7.0'
+  - '5.0'
+  - '8.0'
+  - '3.5'
+  - '6.0'
+  - '4.5'
+  - '4.0'
+  - '7.5'
+  - '5.5'
+  - '6.5'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: hours_overtime
+  inferred_type: float
+  null_rate: 0.0
+  cardinality: 6
+  is_unique: false
+  sample_values:
+  - '0.0'
+  - '0.5'
+  - '2.0'
+  - '1.5'
+  - '1.0'
+  - '1.6'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: cost
+  inferred_type: float
+  null_rate: 0.0
+  cardinality: 76
+  is_unique: false
+  sample_values:
+  - '157.08'
+  - '165.0'
+  - '288.75'
+  - '246.84'
+  - '115.5'
+  - '134.64'
+  - '363.0'
+  - '377.52'
+  - '464.64'
+  - '190.08'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: notes
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 36
+  is_unique: false
+  sample_values:
+  - Labor work
+  - Demo & Prep work
+  - Foundation work
+  - Framing work
+  - Roofing & Sheathing work
+  - Windows & Exterior Doors work
+  - Insulation work
+  - Drywall work
+  - Paint work
+  - Trim & Finish Carpentry work
+  is_candidate_key: false
+  is_candidate_fk: false
+row_count: 1710
+grain: one record per unique entry_id
+date_range:
+  earliest: '2024-02-12'
+  latest: '2026-01-02'

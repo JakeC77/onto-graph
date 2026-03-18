@@ -1,0 +1,327 @@
+source_id: 7b95d9ad0f5f
+path: C:\Users\Jake0\Documents\GitHub\onto-graph\.claude\worktrees\pedantic-borg\data\ridgeline_builders\data_room\project.csv
+format: csv
+size_bytes: 12811
+sheet_name: null
+columns:
+- name: project_id
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 51
+  is_unique: true
+  sample_values:
+  - PROJ-30C2FC8F
+  - PROJ-0B34E038
+  - PROJ-B719F4A7
+  - PROJ-548ABFA2
+  - PROJ-2BD4EB76
+  - PROJ-B7191EAB
+  - PROJ-8BF7C356
+  - PROJ-0A179D7B
+  - PROJ-A0479F56
+  - PROJ-B781EA5C
+  is_candidate_key: true
+  is_candidate_fk: false
+- name: estimate_id
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 51
+  is_unique: true
+  sample_values:
+  - EST-4F32A47F
+  - EST-FB854CDC
+  - EST-490BF9A8
+  - EST-D6185D74
+  - EST-69221ADF
+  - EST-8983E111
+  - EST-D08D21FC
+  - EST-2F660B84
+  - EST-48CFA138
+  - EST-08F4B687
+  is_candidate_key: true
+  is_candidate_fk: false
+- name: customer_id
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 13
+  is_unique: false
+  sample_values:
+  - CUST-011
+  - CUST-006
+  - CUST-007
+  - CUST-001
+  - CUST-013
+  - CUST-004
+  - CUST-009
+  - CUST-008
+  - CUST-003
+  - CUST-010
+  is_candidate_key: false
+  is_candidate_fk: true
+- name: name
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 28
+  is_unique: false
+  sample_values:
+  - "LLC \u2014 Repair / Service Call"
+  - "Nakamura \u2014 Room Addition"
+  - "Hartley \u2014 Bathroom Remodel"
+  - "Johnson \u2014 Bathroom Remodel"
+  - "Group \u2014 Repair / Service Call"
+  - "Group \u2014 New Construction"
+  - "Russo \u2014 Kitchen Remodel"
+  - "Okafor \u2014 Kitchen Remodel"
+  - "Foster \u2014 Kitchen Remodel"
+  - "Hartley \u2014 Repair / Service Call"
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: archetype
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 7
+  is_unique: false
+  sample_values:
+  - repair_service
+  - room_addition
+  - bathroom_remodel
+  - new_construction
+  - kitchen_remodel
+  - deck_addition
+  - tenant_improvement
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: type
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 5
+  is_unique: false
+  sample_values:
+  - repair
+  - addition
+  - renovation
+  - new_construction
+  - tenant_improvement
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: trade
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: false
+  sample_values:
+  - general
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: status
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: false
+  sample_values:
+  - complete
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: site_address
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 13
+  is_unique: false
+  sample_values:
+  - 200 Commerce Dr, Suite 400, Harrisburg, PA 17109
+  - 88 Birchwood Ct, Lemoyne, PA 17043
+  - 515 Highpoint Drive, Hampden Township, PA 17050
+  - 2214 Fairview Lane, Camp Hill, PA 17011
+  - 1000 Enterprise Blvd, Carlisle, PA 17015
+  - 1103 Orchard View Rd, New Cumberland, PA 17070
+  - 74 Cypress Court, Harrisburg, PA 17112
+  - 2900 Ridge Rd, Dillsburg, PA 17019
+  - 641 Overlook Drive, Mechanicsburg, PA 17055
+  - 1801 Rolling Hills Dr, York, PA 17402
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: start_date
+  inferred_type: date
+  null_rate: 0.0
+  cardinality: 50
+  is_unique: false
+  sample_values:
+  - '2024-02-11'
+  - '2024-02-18'
+  - '2024-04-25'
+  - '2024-04-13'
+  - '2024-04-15'
+  - '2024-05-12'
+  - '2024-06-14'
+  - '2024-06-22'
+  - '2024-08-05'
+  - '2024-08-02'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: end_date
+  inferred_type: date
+  null_rate: 0.0
+  cardinality: 48
+  is_unique: false
+  sample_values:
+  - '2024-02-21'
+  - '2024-05-02'
+  - '2024-05-19'
+  - '2024-05-23'
+  - '2024-04-18'
+  - '2024-05-15'
+  - '2024-06-17'
+  - '2025-01-19'
+  - '2024-09-28'
+  - '2024-09-13'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: actual_start
+  inferred_type: date
+  null_rate: 0.0
+  cardinality: 50
+  is_unique: false
+  sample_values:
+  - '2024-02-11'
+  - '2024-02-18'
+  - '2024-04-25'
+  - '2024-04-13'
+  - '2024-04-15'
+  - '2024-05-12'
+  - '2024-06-14'
+  - '2024-06-22'
+  - '2024-08-05'
+  - '2024-08-02'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: actual_end
+  inferred_type: date
+  null_rate: 0.0
+  cardinality: 48
+  is_unique: false
+  sample_values:
+  - '2024-02-21'
+  - '2024-05-02'
+  - '2024-05-19'
+  - '2024-05-23'
+  - '2024-04-18'
+  - '2024-05-15'
+  - '2024-06-17'
+  - '2025-01-19'
+  - '2024-09-28'
+  - '2024-09-13'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: contract_amount
+  inferred_type: float
+  null_rate: 0.0
+  cardinality: 51
+  is_unique: true
+  sample_values:
+  - '4825.27'
+  - '80407.51'
+  - '27976.99'
+  - '41383.05'
+  - '3926.28'
+  - '3628.62'
+  - '3399.95'
+  - '527245.44'
+  - '138710.13'
+  - '120611.7'
+  is_candidate_key: true
+  is_candidate_fk: false
+- name: contract_type
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: false
+  sample_values:
+  - fixed_price
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: markup_pct
+  inferred_type: float
+  null_rate: 0.0
+  cardinality: 51
+  is_unique: true
+  sample_values:
+  - '0.9111'
+  - '0.4384'
+  - '0.5222'
+  - '0.4459'
+  - '1.2223'
+  - '1.25'
+  - '1.2896'
+  - '0.2981'
+  - '0.4978'
+  - '0.4607'
+  is_candidate_key: true
+  is_candidate_fk: false
+- name: retention_pct
+  inferred_type: float
+  null_rate: 0.0
+  cardinality: 2
+  is_unique: false
+  sample_values:
+  - '0.05'
+  - '0.1'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: retention_released
+  inferred_type: integer
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: false
+  sample_values:
+  - 'True'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: permit_required
+  inferred_type: integer
+  null_rate: 0.0
+  cardinality: 2
+  is_unique: false
+  sample_values:
+  - 'False'
+  - 'True'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: permit_number
+  inferred_type: string
+  null_rate: 0.7059
+  cardinality: 15
+  is_unique: false
+  sample_values:
+  - BLDG-23475
+  - BLDG-82806
+  - BLDG-58789
+  - BLDG-23296
+  - BLDG-88584
+  - BLDG-97529
+  - BLDG-94091
+  - BLDG-21823
+  - BLDG-77467
+  - BLDG-93052
+  is_candidate_key: false
+  is_candidate_fk: true
+- name: narrative_tag
+  inferred_type: unknown
+  null_rate: 1.0
+  cardinality: 0
+  is_unique: false
+  sample_values: []
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: notes
+  inferred_type: unknown
+  null_rate: 1.0
+  cardinality: 0
+  is_unique: false
+  sample_values: []
+  is_candidate_key: false
+  is_candidate_fk: false
+row_count: 51
+grain: one initiative
+date_range:
+  earliest: '2024-02-11'
+  latest: '2026-01-04'

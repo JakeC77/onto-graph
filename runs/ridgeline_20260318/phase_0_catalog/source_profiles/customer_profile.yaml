@@ -1,0 +1,181 @@
+source_id: dab846594bbb
+path: C:\Users\Jake0\Documents\GitHub\onto-graph\.claude\worktrees\pedantic-borg\data\ridgeline_builders\data_room\customer.csv
+format: csv
+size_bytes: 2277
+sheet_name: null
+columns:
+- name: id
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 13
+  is_unique: true
+  sample_values:
+  - CUST-001
+  - CUST-002
+  - CUST-003
+  - CUST-004
+  - CUST-005
+  - CUST-006
+  - CUST-007
+  - CUST-008
+  - CUST-009
+  - CUST-010
+  is_candidate_key: true
+  is_candidate_fk: false
+- name: name
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 13
+  is_unique: true
+  sample_values:
+  - Mark & Lisa Johnson
+  - Patricia Morrison
+  - David & Renee Park
+  - Tony & Angela Russo
+  - James & Carol Sutton
+  - Helen Nakamura
+  - William & Donna Hartley
+  - Kevin & Pam Foster
+  - Sandra Okafor
+  - Brian & Tara Weiss
+  is_candidate_key: true
+  is_candidate_fk: false
+- name: email
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 13
+  is_unique: true
+  sample_values:
+  - mjohnson@gmail.com
+  - pmorrison@hotmail.com
+  - dpark@verizon.net
+  - trusso@comcast.net
+  - jsutton@gmail.com
+  - hnakamura@yahoo.com
+  - bhartley@outlook.com
+  - kfoster@gmail.com
+  - sokafor@gmail.com
+  - bweiss@comcast.net
+  is_candidate_key: true
+  is_candidate_fk: false
+- name: phone
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 13
+  is_unique: true
+  sample_values:
+  - 717-555-2201
+  - 717-555-3318
+  - 717-555-4402
+  - 717-555-5519
+  - 717-555-6624
+  - 717-555-7703
+  - 717-555-8811
+  - 717-555-9920
+  - 717-555-1034
+  - 717-555-2247
+  is_candidate_key: true
+  is_candidate_fk: false
+- name: address
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 13
+  is_unique: true
+  sample_values:
+  - 2214 Fairview Lane, Camp Hill, PA 17011
+  - 8 Glenbrook Drive, Carlisle, PA 17013
+  - 641 Overlook Drive, Mechanicsburg, PA 17055
+  - 1103 Orchard View Rd, New Cumberland, PA 17070
+  - 3350 Farmview Circle, Enola, PA 17025
+  - 88 Birchwood Ct, Lemoyne, PA 17043
+  - 515 Highpoint Drive, Hampden Township, PA 17050
+  - 2900 Ridge Rd, Dillsburg, PA 17019
+  - 74 Cypress Court, Harrisburg, PA 17112
+  - 1801 Rolling Hills Dr, York, PA 17402
+  is_candidate_key: true
+  is_candidate_fk: false
+- name: payment_terms
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 4
+  is_unique: false
+  sample_values:
+  - net_30
+  - due_on_receipt
+  - net_15
+  - net_45
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: source
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 5
+  is_unique: false
+  sample_values:
+  - referral
+  - repeat
+  - google
+  - yard_sign
+  - direct_outreach
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: notes
+  inferred_type: string
+  null_rate: 0.9231
+  cardinality: 1
+  is_unique: false
+  sample_values:
+  - "Good clients, slow payer \xE2\u20AC\u201D typically 45 days"
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: type
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 2
+  is_unique: false
+  sample_values:
+  - residential
+  - commercial
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: tax_exempt
+  inferred_type: integer
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: false
+  sample_values:
+  - 'False'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: credit_limit
+  inferred_type: integer
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: false
+  sample_values:
+  - '0'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: status
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: false
+  sample_values:
+  - active
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: created_at
+  inferred_type: date
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: false
+  sample_values:
+  - '2024-01-01'
+  is_candidate_key: false
+  is_candidate_fk: false
+row_count: 13
+grain: one record per unique id
+date_range:
+  earliest: '2024-01-01'
+  latest: '2024-01-01'

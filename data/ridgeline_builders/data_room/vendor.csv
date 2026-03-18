@@ -1,0 +1,11 @@
+id,name,type,trade,contact,phone,email,payment_terms,tax_id,w9_on_file,insurance_expiry,rating,credit_limit,account_opened
+VEN-001,Keystone Supply Co.,supplier,general,Bob Franks,717-555-0210,bob@keystonesupply.com,net_30,23-1884420,True,,5,,
+VEN-002,Capital Electric Supply,supplier,electrical,Marta Doyle,717-555-0334,marta@capelec.com,net_30,23-2001447,True,,4,,
+VEN-003,Hartmann Plumbing & Heating,subcontractor,plumbing,Greg Hartmann,717-555-0491,greg@hartmannph.com,net_15,23-3104892,True,2025-06-30,4,,
+VEN-004,Apex Electrical Contractors,subcontractor,electrical,Sam Obi,717-555-0567,sam@apexelec.com,net_15,23-4208731,True,2026-01-15,3,,
+VEN-005,Central PA HVAC,subcontractor,hvac,Donna Frye,717-555-0628,donna@centralpahvac.com,net_30,23-5312004,True,2026-09-30,5,,
+VEN-006,Pro Tile & Stone,subcontractor,tile,Ray Morales,717-555-0712,ray@protilesstone.com,net_15,23-6401228,True,2025-12-31,4,,
+VEN-007,Sunshine Equipment Rental,equipment_rental,,Phil Gatto,717-555-0834,phil@sunshinerent.com,due_on_receipt,23-7500119,True,,4,,
+VEN-008,Mid-State Lumber & Building Products,supplier,general,Janet Chu,717-555-0955,janet@midstatelumber.com,net_30,23-8602345,True,,5,25000,2024-09-12
+VEN-009,Pinnacle Countertop Studio,subcontractor,countertops,Alicia Stern,717-555-1022,alicia@pinnaclecountertop.com,net_15,23-9700882,True,2026-03-31,5,,
+VEN-010,Overhead & Recurring,professional_service,,,,,net_30,,False,,,,

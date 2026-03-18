@@ -1,0 +1,88 @@
+# Decision Record D_1002
+# NarrativeEvent: single type vs. separate types per event kind
+
+decision:
+  id: D_1002
+  phase: ontology
+  created_at: "2026-03-18"
+
+  category: entity_classification
+
+  question: >-
+    Should the three narrative event files (loc_event.csv, overtime_event.csv,
+    pricing_change.csv) be modeled as a single NarrativeEvent entity type
+    with an event_type discriminator, or as three separate entity types
+    (LocDrawEvent, OvertimeMandate, PricingChange)?
+
+  decision: >-
+    Model as a single NarrativeEvent entity type with an event_type
+    discriminator and a flexible event_metadata property for type-specific
+    fields.
+
+  alternatives_considered:
+    - option: >-
+        Single NarrativeEvent type with event_type discriminator
+      pros:
+        - Only 3 records total — separate types would each have exactly 1 instance
+        - Shared EVT-xxx identifier pattern across all three files
+        - All represent business events with temporal context
+        - Flexible metadata property accommodates varying schemas
+        - Simpler graph model for sparse data
+      cons:
+        - Different schemas per file (loc_event has amount, overtime_event has duration_weeks and affected_employees, pricing_change has rate fields)
+        - Loses type-level schema enforcement
+        - event_metadata as JSON blob is semi-structured
+
+    - option: >-
+        Three separate entity types (LocDrawEvent, OvertimeMandate, PricingChange)
+      pros:
+        - Each type has a distinct, well-defined schema
+        - Stronger typing for event-specific properties
+        - Cleaner for downstream analytics on specific event types
+      cons:
+        - 3 entity types with 1 instance each — extreme type proliferation
+        - Different schemas make common querying harder
+        - Adds 2 extra entity types to the ontology for 2 additional records
+        - No shared properties beyond event_id, date, and description
+
+  rationale: >-
+    With only 3 records across 3 files, creating separate entity types
+    would produce 3 types with 1 instance each. This is extreme type
+    proliferation for minimal data. The shared EVT-xxx ID pattern and
+    common semantic role (business events affecting operations) support a
+    single type. The varying schemas are accommodated by a flexible
+    event_metadata property. If narrative event data grows substantially,
+    this decision should be revisited.
+
+  evidence:
+    - source: loc_event.csv
+      location: "row 1, event_id column"
+      observation: >-
+        EVT-003 with fields: event_id, date, amount, type, description.
+        Schema specific to financial events (LOC draw).
+      role: primary
+
+    - source: overtime_event.csv
+      location: "row 1, event_id column"
+      observation: >-
+        EVT-018 with fields: event_id, start_date, duration_weeks,
+        ot_hours_per_week_per_person, affected_employees, description.
+        Schema specific to workforce events.
+      role: primary
+
+    - source: pricing_change.csv
+      location: "row 1, event_id column"
+      observation: >-
+        EVT-014 with fields: event_id, effective_date, applies_to,
+        old_bill_rate, new_bill_rate, notes. Schema specific to pricing
+        policy changes.
+      role: primary
+
+  confidence: medium
+  reversibility: easy
+  downstream_impact: >-
+    If reversed, NarrativeEvent would split into 3 entity types. With only
+    1 instance each, the impact on the graph is trivial. The ETL pipeline
+    would route each CSV to its own node type. Revisit this decision when
+    narrative event data exceeds 10 records or when distinct event-type
+    queries become a requirement.

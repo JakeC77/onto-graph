@@ -1,0 +1,162 @@
+source_id: cc08c48ce725
+path: C:\Users\Jake0\Documents\GitHub\onto-graph\.claude\worktrees\pedantic-borg\data\ridgeline_builders\data_room\bill_line_item.csv
+format: csv
+size_bytes: 78386
+sheet_name: null
+columns:
+- name: line_id
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 745
+  is_unique: true
+  sample_values:
+  - BLI-8F3D1502
+  - BLI-B4F279C0
+  - BLI-84978810
+  - BLI-835A188E
+  - BLI-47A9600F
+  - BLI-E72EBC5F
+  - BLI-8AF07012
+  - BLI-5F0ED84F
+  - BLI-D245A4A2
+  - BLI-20D4FFBA
+  is_candidate_key: true
+  is_candidate_fk: false
+- name: bill_id
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 745
+  is_unique: true
+  sample_values:
+  - BILL-B7EBAB84
+  - BILL-54BF2085
+  - BILL-FFF188A9
+  - BILL-D828CB44
+  - BILL-40E17D26
+  - BILL-F4FF9538
+  - BILL-15C48928
+  - BILL-D83833B9
+  - BILL-452FBC0E
+  - BILL-FF665F5A
+  is_candidate_key: true
+  is_candidate_fk: false
+- name: project_id
+  inferred_type: string
+  null_rate: 0.2282
+  cardinality: 51
+  is_unique: false
+  sample_values:
+  - PROJ-30C2FC8F
+  - PROJ-0B34E038
+  - PROJ-B719F4A7
+  - PROJ-548ABFA2
+  - PROJ-2BD4EB76
+  - PROJ-B7191EAB
+  - PROJ-8BF7C356
+  - PROJ-0A179D7B
+  - PROJ-A0479F56
+  - PROJ-B781EA5C
+  is_candidate_key: false
+  is_candidate_fk: true
+- name: job_id
+  inferred_type: string
+  null_rate: 0.2282
+  cardinality: 211
+  is_unique: false
+  sample_values:
+  - JOB-5349D80A
+  - JOB-85651125
+  - JOB-C0C11B60
+  - JOB-5545F1A9
+  - JOB-9E273CCF
+  - JOB-3A213EEB
+  - JOB-91079EC4
+  - JOB-88053CC0
+  - JOB-9A84E172
+  - JOB-49E979A2
+  is_candidate_key: false
+  is_candidate_fk: true
+- name: description
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 53
+  is_unique: false
+  sample_values:
+  - Materials materials
+  - Foundation materials
+  - Framing materials
+  - Roofing & Sheathing materials
+  - Windows & Exterior Doors materials
+  - Rough Plumbing materials
+  - "Rough Plumbing \u2014 Hartmann Plumbing & Heating mobilization"
+  - Rough Electrical materials
+  - "Rough Electrical \u2014 Apex Electrical Contractors mobilization"
+  - "HVAC \u2014 Central PA HVAC mobilization"
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: quantity
+  inferred_type: integer
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: false
+  sample_values:
+  - '1'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: unit_cost
+  inferred_type: float
+  null_rate: 0.0
+  cardinality: 705
+  is_unique: false
+  sample_values:
+  - '586.24'
+  - '341.0'
+  - '1352.61'
+  - '4030.54'
+  - '9924.73'
+  - '1862.42'
+  - '1996.1'
+  - '1561.4'
+  - '2542.31'
+  - '475.55'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: line_total
+  inferred_type: float
+  null_rate: 0.0
+  cardinality: 705
+  is_unique: false
+  sample_values:
+  - '586.24'
+  - '341.0'
+  - '1352.61'
+  - '4030.54'
+  - '9924.73'
+  - '1862.42'
+  - '1996.1'
+  - '1561.4'
+  - '2542.31'
+  - '475.55'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: category
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 8
+  is_unique: false
+  sample_values:
+  - material
+  - subcontractor
+  - rent
+  - vehicles
+  - utilities
+  - software
+  - insurance
+  - tools
+  is_candidate_key: false
+  is_candidate_fk: false
+row_count: 745
+grain: one record per unique line_id
+date_range:
+  earliest: null
+  latest: null

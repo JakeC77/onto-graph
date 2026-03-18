@@ -1,0 +1,66 @@
+source_id: d17411f8d40e
+path: C:\Users\Jake0\Documents\GitHub\onto-graph\.claude\worktrees\pedantic-borg\data\ridgeline_builders\data_room\overtime_event.csv
+format: csv
+size_bytes: 269
+sheet_name: null
+columns:
+- name: event_id
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - EVT-018
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: start_date
+  inferred_type: date
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - '2025-07-21'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: duration_weeks
+  inferred_type: integer
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - '6'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: ot_hours_per_week_per_person
+  inferred_type: integer
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - '8'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: affected_employees
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - '[''EMP-002'', ''EMP-004'', ''EMP-005'', ''EMP-006'']'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: description
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - "Crew overtime to cover Vega gap \xE2\u20AC\u201D 6-week period, avg +8 hrs OT/week\
+    \ per remaining journeyman"
+  is_candidate_key: false
+  is_candidate_fk: false
+row_count: 1
+grain: null
+date_range:
+  earliest: '2025-07-21'
+  latest: '2025-07-21'
