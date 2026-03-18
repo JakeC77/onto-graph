@@ -1,0 +1,86 @@
+# Mapping Plan Schema — Phase 2 Output Contract
+# How raw data sources map to ontology properties and relationships.
+
+mapping_plan:
+  metadata:
+    company: string
+    run_id: string
+    created_at: ISO-8601
+    ontology_ref: string                 # Path to ontology.yaml
+
+  entity_mappings:
+    - entity_type: string                # Ontology entity type name
+      system_of_record: string           # source_id of primary source
+      additional_sources: list[string]   # source_ids of supplementary sources
+      merge_key: string                  # Property used to deduplicate across sources
+      conflict_resolution: string        # last_write_wins, source_priority, manual
+      field_mappings:
+        - target_property: string        # Ontology property name
+          source: string                 # source_id
+          source_field: string           # Column/field name in source
+          transformation: string         # none, cast, normalize, lookup, calculate,
+                                         #   concat, split, conditional
+          transformation_spec: string | null  # Details (e.g., "upper()", "lookup from X")
+          null_handling: string          # default, skip, flag
+          default_value: string | null
+          validation:
+            type_check: string           # Expected type after transformation
+            range: string | null         # e.g., "0-100", "> 0"
+            referential: string | null   # FK target: "entity_type.property"
+          notes: string
+
+  relationship_mappings:
+    - relationship_type: string          # Ontology relationship name
+      extraction_method: string          # fk_lookup, junction_table, co_occurrence,
+                                         #   computation, document_parse
+      source: string                     # source_id
+      from_field: string                 # Field identifying the from-entity
+      to_field: string                   # Field identifying the to-entity
+      property_mappings:
+        - target_property: string
+          source_field: string
+          transformation: string
+      confidence: float                  # 0.0 to 1.0
+      notes: string
+
+  statistical_computations:
+    - name: string                       # e.g., workload_capacity
+      description: string                # What this computation represents
+      target_entity_type: string
+      target_property: string
+      inputs:
+        - source: string                 # source_id
+          field: string                  # Column name
+          aggregation: string            # sum, avg, count, max, min, distinct_count
+          window: string | null          # e.g., "30d", "quarterly", "trailing_12m"
+      formula: string                    # Human-readable calculation
+      output_type: string                # float, integer, boolean
+      notes: string
+
+  coverage:
+    properties_mapped: integer
+    properties_gapped: integer
+    coverage_rate: float                 # 0.0 to 1.0
+    gaps:
+      - entity_type: string
+        property: string
+        reason: string                   # why unmapped (no source, ambiguous, etc.)
+        downstream_impact: string        # what this prevents
+
+  source_utilization:
+    - source_id: string
+      consumed: boolean
+      consumed_by: list[string]          # entity_type or relationship_type names
+      exclusion_reason: string | null    # Why not consumed (if applicable)
+
+# ---
+# Usage notes:
+#
+# The mapping plan is the "what goes where" specification. It does NOT
+# describe how to build the pipeline (that's Phase 3). A reviewer should
+# be able to read this and understand: for every field in the ontology,
+# exactly where the data comes from and what happens to it.
+#
+# Statistical computations are for fields that don't exist directly in
+# source data but are derived (e.g., behavioral scores for Simulation).
+# Each spec must be computable from available source fields.

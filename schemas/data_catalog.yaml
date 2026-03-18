@@ -1,0 +1,78 @@
+# Data Catalog Schema — Phase 0 Output Contract
+# Inventory and statistical profile of every source in the data room.
+
+data_catalog:
+  metadata:
+    company: string
+    data_room_path: string | null        # Absolute path to raw data (null if Track A only)
+    run_id: string
+    created_at: ISO-8601
+    total_sources: integer
+    total_size_bytes: integer
+    system_manifest_ref: string | null   # Path to system_manifest.yaml (if hybrid/Track A)
+
+  sources:
+    - source_id: string                  # Stable identifier (hash of relative path)
+      path: string                       # Relative to data room root
+      format: string                     # csv, xlsx, pdf, json, txt, sql, xml, etc.
+      size_bytes: integer
+
+      # Tabular-specific (csv, xlsx, tsv)
+      sheet_name: string | null          # For multi-sheet Excel
+      columns:
+        - name: string
+          inferred_type: string          # string, integer, float, date, boolean, id
+          null_rate: float               # 0.0 to 1.0
+          cardinality: integer           # Count of distinct values
+          is_unique: boolean
+          sample_values: list[string]    # 5-10 representative values
+          is_candidate_key: boolean      # High cardinality + unique
+          is_candidate_fk: boolean       # Matches another source's key
+      row_count: integer | null
+      grain: string | null               # What one row represents (e.g., "one employee")
+      date_range:
+        earliest: date | null
+        latest: date | null
+
+      # Document-specific (pdf, txt, docx)
+      document_type: string | null       # report, memo, contract, org_chart, etc.
+      word_count: integer | null
+      key_terms: list[string]
+      entities_mentioned: list[string]
+
+      # Common
+      candidate_entity_types: list[string]  # What entity types this source contains
+      quality_issues: list[string]          # Specific issues found
+      notes: string
+
+  join_candidates:
+    - source_a: string                   # source_id
+      column_a: string
+      source_b: string                   # source_id
+      column_b: string
+      overlap_rate: float                # Fraction of values in A found in B
+      confidence: float                  # 0.0 to 1.0
+      notes: string
+
+  candidate_entity_types:
+    - name: string                       # Candidate name (e.g., "Employee", "Contract")
+      sources: list[string]              # source_ids that contain this type
+      instance_count_estimate: integer
+      identifier_pattern: string         # How instances are identified
+      notes: string
+
+  gaps:
+    - description: string
+      severity: string                   # critical, significant, minor
+      downstream_impact: string          # What this gap prevents in later phases
+
+# ---
+# Usage notes:
+#
+# The catalog is the foundation for all subsequent phases. Phase 1 uses
+# candidate_entity_types as starting points for ontology discovery. Phase 2
+# uses source profiles for field-level mapping. Phase 3 uses format details
+# for reader configuration.
+#
+# Quality issues and gaps are not failures — they are signals that guide
+# where the agent should invest more effort and where confidence will be lower.

@@ -1,0 +1,90 @@
+# Ontology Schema — Phase 1 Output Contract
+# The discovered entity types, relationships, properties, and domain concepts.
+
+ontology:
+  metadata:
+    company: string
+    run_id: string
+    created_at: ISO-8601
+    entity_type_count: integer
+    relationship_type_count: integer
+    domain_concept_count: integer
+    decision_count: integer
+
+  entity_types:
+    - name: string                       # PascalCase (e.g., Person, Department)
+      description: string                # What this entity type represents
+      identifier:
+        property: string                 # Which property is the unique ID
+        pattern: string                  # e.g., "EMP_XXXX", "numeric"
+      properties:
+        - name: string                   # snake_case
+          type: string                   # string, integer, float, date, boolean, list
+          required: boolean
+          source: string                 # direct, computed, inferred
+          description: string
+          computation_spec: string | null  # For computed/inferred properties
+      lifecycle:
+        states: list[string]             # e.g., [active, terminated, on_leave]
+        state_field: string              # Which property holds the state
+      sources: list[string]              # source_ids from catalog
+      instance_count: integer
+      simulation_mapping:
+        maps_to: string | null           # Simulation node type or null
+        mapping_notes: string
+      evidence:
+        - source: string                 # File path
+          location: string               # Specific: row, column, passage
+          observation: string            # What the data shows
+
+  relationship_types:
+    - name: string                       # snake_case (e.g., reports_to, owns_contract)
+      from_type: string                  # Entity type name
+      to_type: string                    # Entity type name
+      cardinality: string                # 1:1, 1:N, N:1, N:M
+      required: boolean                  # Must every from-instance have this?
+      properties:
+        - name: string
+          type: string
+      discovery_method: string           # explicit_fk, junction_table, co_occurrence,
+                                         #   column_reference, document_analysis, inference
+      confidence: float                  # 0.0 to 1.0
+      sources: list[string]              # source_ids
+      simulation_mapping:
+        maps_to: string | null           # Simulation edge type or null
+        mapping_notes: string
+      evidence:
+        - source: string
+          location: string
+          observation: string
+
+  domain_concepts:
+    - name: string                       # Business-specific term
+      definition: string                 # What it means in this company's context
+      entity_type: string                # Which entity type it belongs to
+      values: list[string] | null        # Enumerated values if applicable
+      source: string                     # Where this concept appears in the data
+      notes: string
+
+  simulation_compatibility:
+    matched_node_types:
+      - ontology_type: string
+        simulation_type: string
+    matched_edge_types:
+      - ontology_type: string
+        simulation_type: string
+    unmapped_ontology_types: list[string]   # Types in ontology not in Simulation
+    missing_simulation_types: list[string]  # Types Simulation expects but not in data
+    extension_recommendations: list[string] # Suggested Simulation extensions
+
+# ---
+# Usage notes:
+#
+# The ontology is discovered from data, not prescribed by templates.
+# Every entity type and relationship has an evidence chain to source data.
+# Domain concepts capture the semantic layer — what company-specific
+# terms mean (e.g., "active contract" may mean different things).
+#
+# The simulation_compatibility section is informational, not normative.
+# The ontology reflects what's in the data. Gaps with Simulation are
+# tracked for separate resolution.

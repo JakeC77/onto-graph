@@ -1,0 +1,32 @@
+# Evidence Chain Schema
+# Shared format for all evidence references across phases.
+# Every ontology decision, entity type, and relationship must
+# chain back to specific source data.
+
+evidence_entry:
+  source: string                         # File path relative to data room root
+  location: string                       # Specific enough to verify:
+                                         #   "row 42, column C"
+                                         #   "sheet 'Q3 Financials', cell D15"
+                                         #   "page 3, paragraph 2"
+                                         #   "line 145"
+  value: string | null                   # The actual data point (if applicable)
+  observation: string                    # What this evidence shows
+  role: string                           # primary, corroborating, contradicting
+  notes: string | null                   # Context needed to interpret
+
+# ---
+# Usage notes:
+#
+# Evidence entries appear in ontology.yaml (per entity type and
+# relationship type), in decision records, and in mapping plans.
+#
+# The location field must be specific enough that someone could
+# open the source file and find exactly what is cited. "employees.csv"
+# is not specific enough. "employees.csv, row 1, column 'department_id'"
+# is specific enough.
+#
+# The role field distinguishes:
+#   primary       — this evidence directly supports the claim
+#   corroborating — independent evidence that agrees
+#   contradicting — evidence that disagrees (must still be recorded)

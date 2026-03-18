@@ -1,0 +1,94 @@
+# Known Structural Patterns
+# Recognition aids for common organizational and data structures.
+# These help identify patterns during Phase 1 ontology discovery.
+# Patterns are descriptive, not prescriptive — always verify with data.
+
+patterns:
+
+  - name: hub_and_spoke_organization
+    description: >
+      Central entity (person, department, or system) connected to many
+      others. High betweenness centrality. Removal creates disconnection.
+    typical_signals:
+      - One entity appears as FK target in 5+ other sources
+      - Entity has both inbound and outbound relationships of different types
+      - Entity appears in management, financial, and operational contexts
+    entity_types_involved: [Person, Department, System]
+    implications:
+      - Single point of failure if the hub entity is removed
+      - High coordination cost flowing through the hub
+      - Information bottleneck
+
+  - name: matrix_organization
+    description: >
+      People have two or more reporting/membership relationships
+      simultaneously (e.g., functional and project-based).
+    typical_signals:
+      - Employee data shows both department AND project/team assignments
+      - Multiple manager or reporting columns
+      - Approval chains don't follow org chart hierarchy
+    entity_types_involved: [Person, Department, Team, Initiative]
+    implications:
+      - Complex relationship modeling (multiple member_of edges)
+      - Authority ambiguity (who approves what?)
+      - Need to model both formal and working relationships
+
+  - name: multi_entity_structure
+    description: >
+      Company operates through multiple legal entities, subsidiaries,
+      or divisions that have separate financial and contractual identities.
+    typical_signals:
+      - Multiple entity codes or company codes in financial data
+      - Intercompany transactions or transfer pricing entries
+      - Contracts held by different legal entities
+      - Separate P&Ls or balance sheets by entity
+    entity_types_involved: [LegalEntity, Account, Contract]
+    implications:
+      - Need LegalEntity as an entity type
+      - Contracts are per-entity, not per-company
+      - Financial consolidation creates complexity
+      - Separation analysis requires entity-level mapping
+
+  - name: shared_services_model
+    description: >
+      Central functions (IT, HR, Finance) serve multiple business units.
+      Services are consumed by all units but owned/funded centrally.
+    typical_signals:
+      - Cost allocation entries spreading shared costs across departments
+      - Central systems used by all business units
+      - Service level agreements between internal functions
+    entity_types_involved: [Department, System, Process, CostCenter]
+    implications:
+      - service_dependency relationships between BUs and shared functions
+      - Cost allocation complexity in financial mapping
+      - Critical for separation analysis (what must be replicated?)
+
+  - name: contract_web
+    description: >
+      Contracts reference each other through master-sub structures,
+      cross-default provisions, or amendment chains.
+    typical_signals:
+      - Contract data has parent/child or master/sub references
+      - Amendment columns or version tracking
+      - Cross-reference fields between contracts
+      - Key-person or change-of-control provisions citing other agreements
+    entity_types_involved: [Contract, Provision, Counterparty]
+    implications:
+      - Contract is not a flat entity — it has internal structure
+      - Provisions may need to be entity types (not just properties)
+      - Amendment chains create temporal complexity
+      - Cross-default creates risk propagation paths
+
+  - name: temporal_layering
+    description: >
+      The same entity type exists at multiple time granularities
+      (monthly financial snapshots + quarterly headcount + annual budgets).
+    typical_signals:
+      - Multiple sources for the same entity type with different date ranges
+      - Different reporting frequencies across data sources
+      - "As of date" or "period" columns with different granularity
+    entity_types_involved: [Period, any entity type with temporal dimension]
+    implications:
+      - Period should be an entity type to enable cross-temporal analysis
+      - Mapping plan must specify grain alignment for each entity type
+      - Snapshot vs. accumulation semantics differ across sources

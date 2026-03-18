@@ -1,0 +1,65 @@
+# Decision Record Schema
+# The atomic unit of ontology judgment. Every non-trivial choice
+# gets a record with evidence, alternatives, and rationale.
+
+decision:
+  # Identity
+  id: string                             # D_{phase}{NNN} (e.g., D_1001, D_2003)
+  phase: string                          # catalog, ontology, mapping, architecture
+  created_at: ISO-8601
+
+  # Classification
+  category: string
+    # Phase 1 categories:
+    #   entity_classification     — is this an entity type or a property?
+    #   relationship_direction    — which way does this relationship go?
+    #   relationship_cardinality  — 1:1, 1:N, N:M?
+    #   property_typing           — what type is this property?
+    #   domain_concept            — what does this term mean here?
+    #
+    # Phase 2 categories:
+    #   source_of_record          — which source is primary?
+    #   conflict_resolution       — how to handle disagreeing sources?
+    #   transformation_choice     — how to transform this field?
+    #   statistical_method        — how to compute a derived field?
+    #
+    # Phase 3 categories:
+    #   pipeline_topology         — what order to process sources?
+    #   upsert_strategy           — merge vs create vs replace?
+    #   incremental_approach      — how to handle re-runs?
+    #   integration_format        — how to export for Simulation?
+
+  # The decision
+  question: string                       # What was the question?
+  decision: string                       # What was decided?
+
+  alternatives_considered:
+    - option: string
+      pros: list[string]
+      cons: list[string]
+
+  rationale: string                      # Why this choice over alternatives
+
+  # Evidence
+  evidence:
+    - source: string                     # File path relative to data room
+      location: string                   # Specific: row, column, passage
+      observation: string                # What the data shows
+      role: string                       # primary, corroborating, contradicting
+
+  # Assessment
+  confidence: string                     # high, medium, low
+  reversibility: string                  # easy, moderate, hard
+  downstream_impact: string              # What changes if this decision is wrong
+
+# ---
+# Usage notes:
+#
+# Decision records are the audit trail for ontology design. A reviewer
+# should be able to read the decisions and understand not just what was
+# chosen but WHY, and what would change if the decision were different.
+#
+# Not every micro-decision needs a record. Use judgment: if the choice
+# is obvious from the data (e.g., "employee_id is a string"), skip it.
+# If there's genuine ambiguity (e.g., "is 'project' an entity or a
+# property of 'initiative'?"), write the record.

@@ -1,0 +1,100 @@
+# System Manifest Schema — Phase 0 Output Contract (Track A)
+# Declared systems, their schema sources, and parsed schema metadata.
+# Produced when the input is system declarations + schema definitions
+# rather than (or in addition to) flat file exports.
+
+system_manifest:
+  metadata:
+    company: string
+    run_id: string
+    created_at: ISO-8601
+    total_systems: integer
+
+  systems:
+    - system_id: string                  # Stable identifier (slugified name)
+      name: string                       # e.g., "QuickBooks Enterprise"
+      purpose: string                    # e.g., "Accounting — GL, AP/AR, job costing, payroll"
+      vendor: string                     # e.g., "Intuit"
+      schema_source: string              # ddl_file, api_docs, research, flat_files
+      schema_path: string | null         # Path to DDL file (relative to data dir)
+      schema_url: string | null          # URL to API docs or schema reference
+      schema_confidence: string          # high (DDL/API spec), medium (research), low (guess)
+
+      # For database systems (populated from DDL or research)
+      tables:
+        - table_name: string
+          description: string | null     # What this table represents
+          columns:
+            - name: string
+              type: string               # SQL type: VARCHAR, INT, TIMESTAMP, DECIMAL, etc.
+              nullable: boolean
+              is_primary_key: boolean
+              is_foreign_key: boolean
+              fk_references: string | null  # "table_name.column_name"
+              is_unique: boolean
+              default_value: string | null
+              description: string | null
+          primary_key: list[string]      # Column names composing the PK
+          foreign_keys:                  # Explicit FK declarations
+            - columns: list[string]      # Local column(s)
+              references_table: string
+              references_columns: list[string]
+              on_delete: string | null   # CASCADE, SET NULL, RESTRICT
+              on_update: string | null
+          indexes: list[string] | null   # Index column names
+          row_count_estimate: string | null  # "hundreds", "thousands", "millions"
+          grain: string | null           # What one row represents
+          candidate_entity_types: list[string]
+
+      # For API-based systems (populated from API docs or research)
+      endpoints:
+        - endpoint: string               # e.g., "/rest/v1.0/projects"
+          method: string                 # GET, POST, PUT, DELETE
+          object_type: string            # What entity this returns (e.g., "Project")
+          description: string | null
+          fields:
+            - name: string
+              type: string               # string, integer, float, boolean, date, object, array
+              required: boolean
+              description: string | null
+              references: string | null  # e.g., "companies.id" — API-level FK
+          pagination: string | null      # offset, cursor, page
+          candidate_entity_types: list[string]
+
+      candidate_entity_types: list[string]  # Aggregate across tables/endpoints
+      notes: string
+
+  # Relationships detected across systems
+  cross_system_relationships:
+    - from_system: string                # system_id
+      from_table: string                 # table_name or endpoint object_type
+      from_field: string                 # column/field name
+      to_system: string                  # system_id
+      to_table: string
+      to_field: string
+      confidence: float                  # 1.0 = declared FK, 0.7 = name match, 0.5 = semantic
+      method: string                     # declared_fk, name_match, semantic_match, research
+      notes: string
+
+  # Systems expected but not declared
+  gaps:
+    - system_type: string                # e.g., "CRM", "HRIS", "ERP"
+      description: string                # Why this is expected
+      severity: string                   # critical, significant, minor
+      downstream_impact: string
+
+# ---
+# Usage notes:
+#
+# The system manifest captures schema metadata at a higher level than
+# the data catalog. Where the data catalog profiles actual files, the
+# system manifest describes the source systems themselves.
+#
+# Both can exist for the same engagement (hybrid mode). The system
+# manifest provides structural truth (declared schemas, FKs); the
+# data catalog provides statistical truth (actual distributions, values).
+#
+# Schema confidence levels:
+#   high   — parsed from DDL or official API spec
+#   medium — derived from playbook knowledge of the system
+#   low    — guessed from system name alone
