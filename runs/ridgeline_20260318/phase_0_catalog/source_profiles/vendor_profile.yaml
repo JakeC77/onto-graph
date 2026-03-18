@@ -1,0 +1,204 @@
+source_id: 580ea3721ca9
+path: C:\Users\Jake0\Documents\GitHub\onto-graph\.claude\worktrees\pedantic-borg\data\ridgeline_builders\data_room\vendor.csv
+format: csv
+size_bytes: 1430
+sheet_name: null
+columns:
+- name: id
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 10
+  is_unique: true
+  sample_values:
+  - VEN-001
+  - VEN-002
+  - VEN-003
+  - VEN-004
+  - VEN-005
+  - VEN-006
+  - VEN-007
+  - VEN-008
+  - VEN-009
+  - VEN-010
+  is_candidate_key: true
+  is_candidate_fk: false
+- name: name
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 10
+  is_unique: true
+  sample_values:
+  - Keystone Supply Co.
+  - Capital Electric Supply
+  - Hartmann Plumbing & Heating
+  - Apex Electrical Contractors
+  - Central PA HVAC
+  - Pro Tile & Stone
+  - Sunshine Equipment Rental
+  - Mid-State Lumber & Building Products
+  - Pinnacle Countertop Studio
+  - Overhead & Recurring
+  is_candidate_key: true
+  is_candidate_fk: false
+- name: type
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 4
+  is_unique: false
+  sample_values:
+  - supplier
+  - subcontractor
+  - equipment_rental
+  - professional_service
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: trade
+  inferred_type: string
+  null_rate: 0.2
+  cardinality: 6
+  is_unique: false
+  sample_values:
+  - general
+  - electrical
+  - plumbing
+  - hvac
+  - tile
+  - countertops
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: contact
+  inferred_type: string
+  null_rate: 0.1
+  cardinality: 9
+  is_unique: false
+  sample_values:
+  - Bob Franks
+  - Marta Doyle
+  - Greg Hartmann
+  - Sam Obi
+  - Donna Frye
+  - Ray Morales
+  - Phil Gatto
+  - Janet Chu
+  - Alicia Stern
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: phone
+  inferred_type: string
+  null_rate: 0.1
+  cardinality: 9
+  is_unique: false
+  sample_values:
+  - 717-555-0210
+  - 717-555-0334
+  - 717-555-0491
+  - 717-555-0567
+  - 717-555-0628
+  - 717-555-0712
+  - 717-555-0834
+  - 717-555-0955
+  - 717-555-1022
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: email
+  inferred_type: string
+  null_rate: 0.1
+  cardinality: 9
+  is_unique: false
+  sample_values:
+  - bob@keystonesupply.com
+  - marta@capelec.com
+  - greg@hartmannph.com
+  - sam@apexelec.com
+  - donna@centralpahvac.com
+  - ray@protilesstone.com
+  - phil@sunshinerent.com
+  - janet@midstatelumber.com
+  - alicia@pinnaclecountertop.com
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: payment_terms
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 3
+  is_unique: false
+  sample_values:
+  - net_30
+  - net_15
+  - due_on_receipt
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: tax_id
+  inferred_type: string
+  null_rate: 0.1
+  cardinality: 9
+  is_unique: false
+  sample_values:
+  - 23-1884420
+  - 23-2001447
+  - 23-3104892
+  - 23-4208731
+  - 23-5312004
+  - 23-6401228
+  - 23-7500119
+  - 23-8602345
+  - 23-9700882
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: w9_on_file
+  inferred_type: integer
+  null_rate: 0.0
+  cardinality: 2
+  is_unique: false
+  sample_values:
+  - 'True'
+  - 'False'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: insurance_expiry
+  inferred_type: date
+  null_rate: 0.5
+  cardinality: 5
+  is_unique: false
+  sample_values:
+  - '2025-06-30'
+  - '2026-01-15'
+  - '2026-09-30'
+  - '2025-12-31'
+  - '2026-03-31'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: rating
+  inferred_type: integer
+  null_rate: 0.1
+  cardinality: 3
+  is_unique: false
+  sample_values:
+  - '5.0'
+  - '4.0'
+  - '3.0'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: credit_limit
+  inferred_type: integer
+  null_rate: 0.9
+  cardinality: 1
+  is_unique: false
+  sample_values:
+  - '25000.0'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: account_opened
+  inferred_type: date
+  null_rate: 0.9
+  cardinality: 1
+  is_unique: false
+  sample_values:
+  - '2024-09-12'
+  is_candidate_key: false
+  is_candidate_fk: false
+row_count: 10
+grain: one record per unique id
+date_range:
+  earliest: '2024-09-12'
+  latest: '2026-09-30'

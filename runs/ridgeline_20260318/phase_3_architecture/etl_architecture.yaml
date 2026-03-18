@@ -1,0 +1,1351 @@
+# ETL Architecture -- Phase 3 Output
+# Ridgeline Builders engagement
+# Generated: 2026-03-18
+
+etl_architecture:
+  metadata:
+    company: Ridgeline Builders
+    run_id: ridgeline_20260318
+    created_at: "2026-03-18"
+    mapping_plan_ref: runs/ridgeline_20260318/phase_2_mapping/mapping_plan.yaml
+    system_manifest_ref: null
+    neo4j_target_version: "5.x"
+
+  # ============================================================================
+  # Neo4j Schema
+  # ============================================================================
+  neo4j_schema:
+    constraints:
+      - type: uniqueness
+        label: Company
+        property: name
+        cypher: "CREATE CONSTRAINT uniq_company_name IF NOT EXISTS FOR (n:Company) REQUIRE n.name IS UNIQUE;"
+
+      - type: uniqueness
+        label: Customer
+        property: id
+        cypher: "CREATE CONSTRAINT uniq_customer_id IF NOT EXISTS FOR (n:Customer) REQUIRE n.id IS UNIQUE;"
+
+      - type: uniqueness
+        label: Vendor
+        property: id
+        cypher: "CREATE CONSTRAINT uniq_vendor_id IF NOT EXISTS FOR (n:Vendor) REQUIRE n.id IS UNIQUE;"
+
+      - type: uniqueness
+        label: Employee
+        property: id
+        cypher: "CREATE CONSTRAINT uniq_employee_id IF NOT EXISTS FOR (n:Employee) REQUIRE n.id IS UNIQUE;"
+
+      - type: uniqueness
+        label: Estimate
+        property: estimate_id
+        cypher: "CREATE CONSTRAINT uniq_estimate_estimate_id IF NOT EXISTS FOR (n:Estimate) REQUIRE n.estimate_id IS UNIQUE;"
+
+      - type: uniqueness
+        label: EstimateLineItem
+        property: line_id
+        cypher: "CREATE CONSTRAINT uniq_estimatelineitem_line_id IF NOT EXISTS FOR (n:EstimateLineItem) REQUIRE n.line_id IS UNIQUE;"
+
+      - type: uniqueness
+        label: Project
+        property: project_id
+        cypher: "CREATE CONSTRAINT uniq_project_project_id IF NOT EXISTS FOR (n:Project) REQUIRE n.project_id IS UNIQUE;"
+
+      - type: uniqueness
+        label: Job
+        property: job_id
+        cypher: "CREATE CONSTRAINT uniq_job_job_id IF NOT EXISTS FOR (n:Job) REQUIRE n.job_id IS UNIQUE;"
+
+      - type: uniqueness
+        label: TimeEntry
+        property: entry_id
+        cypher: "CREATE CONSTRAINT uniq_timeentry_entry_id IF NOT EXISTS FOR (n:TimeEntry) REQUIRE n.entry_id IS UNIQUE;"
+
+      - type: uniqueness
+        label: Bill
+        property: bill_id
+        cypher: "CREATE CONSTRAINT uniq_bill_bill_id IF NOT EXISTS FOR (n:Bill) REQUIRE n.bill_id IS UNIQUE;"
+
+      - type: uniqueness
+        label: BillLineItem
+        property: line_id
+        cypher: "CREATE CONSTRAINT uniq_billlineitem_line_id IF NOT EXISTS FOR (n:BillLineItem) REQUIRE n.line_id IS UNIQUE;"
+
+      - type: uniqueness
+        label: Invoice
+        property: invoice_id
+        cypher: "CREATE CONSTRAINT uniq_invoice_invoice_id IF NOT EXISTS FOR (n:Invoice) REQUIRE n.invoice_id IS UNIQUE;"
+
+      - type: uniqueness
+        label: Payment
+        property: payment_id
+        cypher: "CREATE CONSTRAINT uniq_payment_payment_id IF NOT EXISTS FOR (n:Payment) REQUIRE n.payment_id IS UNIQUE;"
+
+      - type: uniqueness
+        label: NarrativeEvent
+        property: event_id
+        cypher: "CREATE CONSTRAINT uniq_narrativeevent_event_id IF NOT EXISTS FOR (n:NarrativeEvent) REQUIRE n.event_id IS UNIQUE;"
+
+    indexes:
+      - label: Company
+        properties: [owner_name]
+        type: btree
+        cypher: "CREATE INDEX idx_company_owner_name IF NOT EXISTS FOR (n:Company) ON (n.owner_name);"
+
+      - label: Customer
+        properties: [name]
+        type: btree
+        cypher: "CREATE INDEX idx_customer_name IF NOT EXISTS FOR (n:Customer) ON (n.name);"
+
+      - label: Customer
+        properties: [type]
+        type: btree
+        cypher: "CREATE INDEX idx_customer_type IF NOT EXISTS FOR (n:Customer) ON (n.type);"
+
+      - label: Customer
+        properties: [status]
+        type: btree
+        cypher: "CREATE INDEX idx_customer_status IF NOT EXISTS FOR (n:Customer) ON (n.status);"
+
+      - label: Customer
+        properties: [created_at]
+        type: range
+        cypher: "CREATE INDEX idx_customer_created_at IF NOT EXISTS FOR (n:Customer) ON (n.created_at);"
+
+      - label: Vendor
+        properties: [name]
+        type: btree
+        cypher: "CREATE INDEX idx_vendor_name IF NOT EXISTS FOR (n:Vendor) ON (n.name);"
+
+      - label: Vendor
+        properties: [type]
+        type: btree
+        cypher: "CREATE INDEX idx_vendor_type IF NOT EXISTS FOR (n:Vendor) ON (n.type);"
+
+      - label: Vendor
+        properties: [insurance_expiry]
+        type: range
+        cypher: "CREATE INDEX idx_vendor_insurance_expiry IF NOT EXISTS FOR (n:Vendor) ON (n.insurance_expiry);"
+
+      - label: Vendor
+        properties: [account_opened]
+        type: range
+        cypher: "CREATE INDEX idx_vendor_account_opened IF NOT EXISTS FOR (n:Vendor) ON (n.account_opened);"
+
+      - label: Employee
+        properties: [name]
+        type: btree
+        cypher: "CREATE INDEX idx_employee_name IF NOT EXISTS FOR (n:Employee) ON (n.name);"
+
+      - label: Employee
+        properties: [status]
+        type: btree
+        cypher: "CREATE INDEX idx_employee_status IF NOT EXISTS FOR (n:Employee) ON (n.status);"
+
+      - label: Employee
+        properties: [hire_date]
+        type: range
+        cypher: "CREATE INDEX idx_employee_hire_date IF NOT EXISTS FOR (n:Employee) ON (n.hire_date);"
+
+      - label: Employee
+        properties: [termination_date]
+        type: range
+        cypher: "CREATE INDEX idx_employee_termination_date IF NOT EXISTS FOR (n:Employee) ON (n.termination_date);"
+
+      - label: Estimate
+        properties: [archetype]
+        type: btree
+        cypher: "CREATE INDEX idx_estimate_archetype IF NOT EXISTS FOR (n:Estimate) ON (n.archetype);"
+
+      - label: Estimate
+        properties: [status]
+        type: btree
+        cypher: "CREATE INDEX idx_estimate_status IF NOT EXISTS FOR (n:Estimate) ON (n.status);"
+
+      - label: Estimate
+        properties: [created_at]
+        type: range
+        cypher: "CREATE INDEX idx_estimate_created_at IF NOT EXISTS FOR (n:Estimate) ON (n.created_at);"
+
+      - label: Estimate
+        properties: [sent_at]
+        type: range
+        cypher: "CREATE INDEX idx_estimate_sent_at IF NOT EXISTS FOR (n:Estimate) ON (n.sent_at);"
+
+      - label: Estimate
+        properties: [valid_until]
+        type: range
+        cypher: "CREATE INDEX idx_estimate_valid_until IF NOT EXISTS FOR (n:Estimate) ON (n.valid_until);"
+
+      - label: Estimate
+        properties: [accepted_at]
+        type: range
+        cypher: "CREATE INDEX idx_estimate_accepted_at IF NOT EXISTS FOR (n:Estimate) ON (n.accepted_at);"
+
+      - label: Project
+        properties: [name]
+        type: btree
+        cypher: "CREATE INDEX idx_project_name IF NOT EXISTS FOR (n:Project) ON (n.name);"
+
+      - label: Project
+        properties: [archetype]
+        type: btree
+        cypher: "CREATE INDEX idx_project_archetype IF NOT EXISTS FOR (n:Project) ON (n.archetype);"
+
+      - label: Project
+        properties: [type]
+        type: btree
+        cypher: "CREATE INDEX idx_project_type IF NOT EXISTS FOR (n:Project) ON (n.type);"
+
+      - label: Project
+        properties: [status]
+        type: btree
+        cypher: "CREATE INDEX idx_project_status IF NOT EXISTS FOR (n:Project) ON (n.status);"
+
+      - label: Project
+        properties: [start_date]
+        type: range
+        cypher: "CREATE INDEX idx_project_start_date IF NOT EXISTS FOR (n:Project) ON (n.start_date);"
+
+      - label: Project
+        properties: [end_date]
+        type: range
+        cypher: "CREATE INDEX idx_project_end_date IF NOT EXISTS FOR (n:Project) ON (n.end_date);"
+
+      - label: Project
+        properties: [actual_start]
+        type: range
+        cypher: "CREATE INDEX idx_project_actual_start IF NOT EXISTS FOR (n:Project) ON (n.actual_start);"
+
+      - label: Project
+        properties: [actual_end]
+        type: range
+        cypher: "CREATE INDEX idx_project_actual_end IF NOT EXISTS FOR (n:Project) ON (n.actual_end);"
+
+      - label: Project
+        properties: [contract_type]
+        type: btree
+        cypher: "CREATE INDEX idx_project_contract_type IF NOT EXISTS FOR (n:Project) ON (n.contract_type);"
+
+      - label: Job
+        properties: [name]
+        type: btree
+        cypher: "CREATE INDEX idx_job_name IF NOT EXISTS FOR (n:Job) ON (n.name);"
+
+      - label: Job
+        properties: [status]
+        type: btree
+        cypher: "CREATE INDEX idx_job_status IF NOT EXISTS FOR (n:Job) ON (n.status);"
+
+      - label: Job
+        properties: [sub_vendor_type]
+        type: btree
+        cypher: "CREATE INDEX idx_job_sub_vendor_type IF NOT EXISTS FOR (n:Job) ON (n.sub_vendor_type);"
+
+      - label: Job
+        properties: [actual_start]
+        type: range
+        cypher: "CREATE INDEX idx_job_actual_start IF NOT EXISTS FOR (n:Job) ON (n.actual_start);"
+
+      - label: Job
+        properties: [actual_end]
+        type: range
+        cypher: "CREATE INDEX idx_job_actual_end IF NOT EXISTS FOR (n:Job) ON (n.actual_end);"
+
+      - label: TimeEntry
+        properties: [date]
+        type: range
+        cypher: "CREATE INDEX idx_timeentry_date IF NOT EXISTS FOR (n:TimeEntry) ON (n.date);"
+
+      - label: Bill
+        properties: [status]
+        type: btree
+        cypher: "CREATE INDEX idx_bill_status IF NOT EXISTS FOR (n:Bill) ON (n.status);"
+
+      - label: Bill
+        properties: [received_date]
+        type: range
+        cypher: "CREATE INDEX idx_bill_received_date IF NOT EXISTS FOR (n:Bill) ON (n.received_date);"
+
+      - label: Bill
+        properties: [due_date]
+        type: range
+        cypher: "CREATE INDEX idx_bill_due_date IF NOT EXISTS FOR (n:Bill) ON (n.due_date);"
+
+      - label: Bill
+        properties: [paid_date]
+        type: range
+        cypher: "CREATE INDEX idx_bill_paid_date IF NOT EXISTS FOR (n:Bill) ON (n.paid_date);"
+
+      - label: Invoice
+        properties: [type]
+        type: btree
+        cypher: "CREATE INDEX idx_invoice_type IF NOT EXISTS FOR (n:Invoice) ON (n.type);"
+
+      - label: Invoice
+        properties: [status]
+        type: btree
+        cypher: "CREATE INDEX idx_invoice_status IF NOT EXISTS FOR (n:Invoice) ON (n.status);"
+
+      - label: Invoice
+        properties: [issued_date]
+        type: range
+        cypher: "CREATE INDEX idx_invoice_issued_date IF NOT EXISTS FOR (n:Invoice) ON (n.issued_date);"
+
+      - label: Invoice
+        properties: [due_date]
+        type: range
+        cypher: "CREATE INDEX idx_invoice_due_date IF NOT EXISTS FOR (n:Invoice) ON (n.due_date);"
+
+      - label: Payment
+        properties: [received_date]
+        type: range
+        cypher: "CREATE INDEX idx_payment_received_date IF NOT EXISTS FOR (n:Payment) ON (n.received_date);"
+
+      - label: Payment
+        properties: [deposited_date]
+        type: range
+        cypher: "CREATE INDEX idx_payment_deposited_date IF NOT EXISTS FOR (n:Payment) ON (n.deposited_date);"
+
+      - label: NarrativeEvent
+        properties: [event_type]
+        type: btree
+        cypher: "CREATE INDEX idx_narrativeevent_event_type IF NOT EXISTS FOR (n:NarrativeEvent) ON (n.event_type);"
+
+      - label: NarrativeEvent
+        properties: [date]
+        type: range
+        cypher: "CREATE INDEX idx_narrativeevent_date IF NOT EXISTS FOR (n:NarrativeEvent) ON (n.date);"
+
+  # ============================================================================
+  # Pipeline DAG
+  # ============================================================================
+  pipeline_dag:
+    stages:
+      - name: ingest_master_data
+        depends_on: []
+        type: ingest
+        sources:
+          - 381f49880b21   # company.csv
+          - dab846594bbb   # customer.csv
+          - 580ea3721ca9   # vendor.csv
+          - 78b8b8fdb27f   # employee.csv
+        entity_types:
+          - Company
+          - Customer
+          - Vendor
+          - Employee
+        estimated_rows: 29
+
+      - name: ingest_estimates
+        depends_on: [ingest_master_data]
+        type: ingest
+        sources:
+          - ce1c4e604911   # estimate.csv
+          - e03d6c5ed7d7   # estimate_line_item.csv
+        entity_types:
+          - Estimate
+          - EstimateLineItem
+        estimated_rows: 1273
+
+      - name: ingest_projects
+        depends_on: [ingest_master_data, ingest_estimates]
+        type: ingest
+        sources:
+          - 7b95d9ad0f5f   # project.csv
+          - d8e86831c3bc   # job.csv
+        entity_types:
+          - Project
+          - Job
+        estimated_rows: 330
+
+      - name: ingest_financials
+        depends_on: [ingest_projects]
+        type: ingest
+        sources:
+          - 3ec971acc703   # bill.csv
+          - cc08c48ce725   # bill_line_item.csv
+          - d03c595c4b33   # invoice.csv
+          - 491b7ff7ab76   # payment.csv
+        entity_types:
+          - Bill
+          - BillLineItem
+          - Invoice
+          - Payment
+        estimated_rows: 1758
+
+      - name: ingest_execution
+        depends_on: [ingest_projects]
+        type: ingest
+        sources:
+          - a1d7892ddd7d   # time_entry.csv
+        entity_types:
+          - TimeEntry
+        estimated_rows: 1710
+
+      - name: ingest_events
+        depends_on: []
+        type: ingest
+        sources:
+          - fadb29a0034e   # loc_event.csv
+          - d17411f8d40e   # overtime_event.csv
+          - 28104fac72b5   # pricing_change.csv
+        entity_types:
+          - NarrativeEvent
+        estimated_rows: 3
+
+      - name: load_relationships
+        depends_on:
+          - ingest_master_data
+          - ingest_estimates
+          - ingest_projects
+          - ingest_financials
+          - ingest_execution
+          - ingest_events
+        type: load
+        sources: []
+        entity_types: []
+        estimated_rows: 5088
+
+      - name: compute_stats
+        depends_on:
+          - ingest_master_data
+          - ingest_estimates
+          - ingest_projects
+          - ingest_financials
+          - ingest_execution
+        type: transform
+        sources: []
+        entity_types:
+          - Project
+          - Employee
+          - Customer
+          - Vendor
+        estimated_rows: 79
+
+      - name: validate
+        depends_on:
+          - load_relationships
+          - compute_stats
+        type: validate
+        sources: []
+        entity_types: []
+        estimated_rows: 0
+
+  # ============================================================================
+  # Pipeline Specs
+  # ============================================================================
+  pipeline_specs:
+
+    # -- company.csv ---------------------------------------------------------
+    - source_id: 381f49880b21
+      reader:
+        connection_type: file
+        format: csv
+        config:
+          delimiter: ","
+          sheet_name: null
+          encoding: utf-8
+          header_row: 0
+          skip_rows: null
+        system_id: null
+        query: null
+        incremental_field: null
+        endpoint: null
+        method: null
+        pagination_type: null
+        rate_limit_notes: null
+      preprocessing:
+        - step: type_coerce
+          description: "No date or numeric fields require coercion for this source."
+          config: null
+      entity_extractions:
+        - entity_type: Company
+          filter: null
+          id_expression: "row.name"
+      relationship_extractions:
+        - relationship_type: COMPANY_EMPLOYS
+          from_expression: "row.name"
+          to_expression: "row.owner_employee_id"
+      upsert_strategy:
+        mode: merge
+        merge_keys: [name]
+      error_handling:
+        on_parse_error: quarantine
+        on_constraint_violation: skip_row
+        quarantine_path: runs/ridgeline_20260318/quarantine/
+
+    # -- customer.csv --------------------------------------------------------
+    - source_id: dab846594bbb
+      reader:
+        connection_type: file
+        format: csv
+        config:
+          delimiter: ","
+          sheet_name: null
+          encoding: utf-8
+          header_row: 0
+          skip_rows: null
+        system_id: null
+        query: null
+        incremental_field: null
+        endpoint: null
+        method: null
+        pagination_type: null
+        rate_limit_notes: null
+      preprocessing:
+        - step: type_coerce
+          description: "Cast created_at to ISO-8601 date. Cast credit_limit to float. Cast tax_exempt to boolean."
+          config:
+            fields:
+              - name: created_at
+                target_type: date
+              - name: credit_limit
+                target_type: float
+              - name: tax_exempt
+                target_type: boolean
+        - step: normalize
+          description: "Normalize status enum to lowercase (active, inactive)."
+          config:
+            fields:
+              - name: status
+                method: lowercase
+      entity_extractions:
+        - entity_type: Customer
+          filter: null
+          id_expression: "row.id"
+      relationship_extractions: []
+      upsert_strategy:
+        mode: merge
+        merge_keys: [id]
+      error_handling:
+        on_parse_error: quarantine
+        on_constraint_violation: skip_row
+        quarantine_path: runs/ridgeline_20260318/quarantine/
+
+    # -- vendor.csv ----------------------------------------------------------
+    - source_id: 580ea3721ca9
+      reader:
+        connection_type: file
+        format: csv
+        config:
+          delimiter: ","
+          sheet_name: null
+          encoding: utf-8
+          header_row: 0
+          skip_rows: null
+        system_id: null
+        query: null
+        incremental_field: null
+        endpoint: null
+        method: null
+        pagination_type: null
+        rate_limit_notes: null
+      preprocessing:
+        - step: type_coerce
+          description: "Cast insurance_expiry and account_opened to ISO-8601 date. Cast credit_limit to float. Cast rating to integer. Cast w9_on_file to boolean."
+          config:
+            fields:
+              - name: insurance_expiry
+                target_type: date
+              - name: account_opened
+                target_type: date
+              - name: credit_limit
+                target_type: float
+              - name: rating
+                target_type: integer
+              - name: w9_on_file
+                target_type: boolean
+        - step: normalize
+          description: "Normalize type and payment_terms enums to lowercase."
+          config:
+            fields:
+              - name: type
+                method: lowercase
+              - name: payment_terms
+                method: lowercase
+      entity_extractions:
+        - entity_type: Vendor
+          filter: null
+          id_expression: "row.id"
+      relationship_extractions: []
+      upsert_strategy:
+        mode: merge
+        merge_keys: [id]
+      error_handling:
+        on_parse_error: quarantine
+        on_constraint_violation: skip_row
+        quarantine_path: runs/ridgeline_20260318/quarantine/
+
+    # -- employee.csv --------------------------------------------------------
+    - source_id: 78b8b8fdb27f
+      reader:
+        connection_type: file
+        format: csv
+        config:
+          delimiter: ","
+          sheet_name: null
+          encoding: utf-8
+          header_row: 0
+          skip_rows: null
+        system_id: null
+        query: null
+        incremental_field: null
+        endpoint: null
+        method: null
+        pagination_type: null
+        rate_limit_notes: null
+      preprocessing:
+        - step: type_coerce
+          description: "Cast hire_date and termination_date to ISO-8601 date. Cast base_rate, burden_rate, bill_rate to float."
+          config:
+            fields:
+              - name: hire_date
+                target_type: date
+              - name: termination_date
+                target_type: date
+              - name: base_rate
+                target_type: float
+              - name: burden_rate
+                target_type: float
+              - name: bill_rate
+                target_type: float
+        - step: normalize
+          description: "Normalize status enum to lowercase (active, terminated)."
+          config:
+            fields:
+              - name: status
+                method: lowercase
+      entity_extractions:
+        - entity_type: Employee
+          filter: null
+          id_expression: "row.id"
+      relationship_extractions: []
+      upsert_strategy:
+        mode: merge
+        merge_keys: [id]
+      error_handling:
+        on_parse_error: quarantine
+        on_constraint_violation: skip_row
+        quarantine_path: runs/ridgeline_20260318/quarantine/
+
+    # -- estimate.csv --------------------------------------------------------
+    - source_id: ce1c4e604911
+      reader:
+        connection_type: file
+        format: csv
+        config:
+          delimiter: ","
+          sheet_name: null
+          encoding: utf-8
+          header_row: 0
+          skip_rows: null
+        system_id: null
+        query: null
+        incremental_field: null
+        endpoint: null
+        method: null
+        pagination_type: null
+        rate_limit_notes: null
+      preprocessing:
+        - step: type_coerce
+          description: "Cast created_at, sent_at, valid_until, accepted_at to ISO-8601 date. Cast total, cost_estimate, markup_pct, tax_amount to float. Cast version to integer."
+          config:
+            fields:
+              - name: created_at
+                target_type: date
+              - name: sent_at
+                target_type: date
+              - name: valid_until
+                target_type: date
+              - name: accepted_at
+                target_type: date
+              - name: total
+                target_type: float
+              - name: cost_estimate
+                target_type: float
+              - name: markup_pct
+                target_type: float
+              - name: tax_amount
+                target_type: float
+              - name: version
+                target_type: integer
+        - step: normalize
+          description: "Normalize status and archetype enums to lowercase."
+          config:
+            fields:
+              - name: status
+                method: lowercase
+              - name: archetype
+                method: lowercase
+      entity_extractions:
+        - entity_type: Estimate
+          filter: null
+          id_expression: "row.estimate_id"
+      relationship_extractions:
+        - relationship_type: CUSTOMER_HAS_ESTIMATE
+          from_expression: "row.customer_id"
+          to_expression: "row.estimate_id"
+        - relationship_type: ESTIMATE_BECOMES_PROJECT
+          from_expression: "row.estimate_id"
+          to_expression: "row.project_id"
+      upsert_strategy:
+        mode: merge
+        merge_keys: [estimate_id]
+      error_handling:
+        on_parse_error: quarantine
+        on_constraint_violation: skip_row
+        quarantine_path: runs/ridgeline_20260318/quarantine/
+
+    # -- estimate_line_item.csv ----------------------------------------------
+    - source_id: e03d6c5ed7d7
+      reader:
+        connection_type: file
+        format: csv
+        config:
+          delimiter: ","
+          sheet_name: null
+          encoding: utf-8
+          header_row: 0
+          skip_rows: null
+        system_id: null
+        query: null
+        incremental_field: null
+        endpoint: null
+        method: null
+        pagination_type: null
+        rate_limit_notes: null
+      preprocessing:
+        - step: type_coerce
+          description: "Cast quantity to float. Cast unit_cost, unit_price, line_total to float."
+          config:
+            fields:
+              - name: quantity
+                target_type: float
+              - name: unit_cost
+                target_type: float
+              - name: unit_price
+                target_type: float
+              - name: line_total
+                target_type: float
+        - step: normalize
+          description: "Normalize category enum to lowercase."
+          config:
+            fields:
+              - name: category
+                method: lowercase
+      entity_extractions:
+        - entity_type: EstimateLineItem
+          filter: null
+          id_expression: "row.line_id"
+      relationship_extractions:
+        - relationship_type: ESTIMATE_HAS_LINE_ITEM
+          from_expression: "row.estimate_id"
+          to_expression: "row.line_id"
+        - relationship_type: ESTIMATE_LINE_ITEM_MAPS_TO_JOB
+          from_expression: "row.line_id"
+          to_expression: "row.cost_code"
+      upsert_strategy:
+        mode: merge
+        merge_keys: [line_id]
+      error_handling:
+        on_parse_error: quarantine
+        on_constraint_violation: skip_row
+        quarantine_path: runs/ridgeline_20260318/quarantine/
+
+    # -- project.csv ---------------------------------------------------------
+    - source_id: 7b95d9ad0f5f
+      reader:
+        connection_type: file
+        format: csv
+        config:
+          delimiter: ","
+          sheet_name: null
+          encoding: utf-8
+          header_row: 0
+          skip_rows: null
+        system_id: null
+        query: null
+        incremental_field: null
+        endpoint: null
+        method: null
+        pagination_type: null
+        rate_limit_notes: null
+      preprocessing:
+        - step: type_coerce
+          description: "Cast start_date, end_date, actual_start, actual_end to ISO-8601 date. Cast contract_amount, markup_pct, retention_pct to float. Cast retention_released, permit_required to boolean."
+          config:
+            fields:
+              - name: start_date
+                target_type: date
+              - name: end_date
+                target_type: date
+              - name: actual_start
+                target_type: date
+              - name: actual_end
+                target_type: date
+              - name: contract_amount
+                target_type: float
+              - name: markup_pct
+                target_type: float
+              - name: retention_pct
+                target_type: float
+              - name: retention_released
+                target_type: boolean
+              - name: permit_required
+                target_type: boolean
+        - step: normalize
+          description: "Normalize status, archetype, type, contract_type enums to lowercase."
+          config:
+            fields:
+              - name: status
+                method: lowercase
+              - name: archetype
+                method: lowercase
+              - name: type
+                method: lowercase
+              - name: contract_type
+                method: lowercase
+      entity_extractions:
+        - entity_type: Project
+          filter: null
+          id_expression: "row.project_id"
+      relationship_extractions:
+        - relationship_type: CUSTOMER_HAS_PROJECT
+          from_expression: "row.customer_id"
+          to_expression: "row.project_id"
+        - relationship_type: ESTIMATE_BECOMES_PROJECT
+          from_expression: "row.estimate_id"
+          to_expression: "row.project_id"
+      upsert_strategy:
+        mode: merge
+        merge_keys: [project_id]
+      error_handling:
+        on_parse_error: quarantine
+        on_constraint_violation: skip_row
+        quarantine_path: runs/ridgeline_20260318/quarantine/
+
+    # -- job.csv -------------------------------------------------------------
+    - source_id: d8e86831c3bc
+      reader:
+        connection_type: file
+        format: csv
+        config:
+          delimiter: ","
+          sheet_name: null
+          encoding: utf-8
+          header_row: 0
+          skip_rows: null
+        system_id: null
+        query: null
+        incremental_field: null
+        endpoint: null
+        method: null
+        pagination_type: null
+        rate_limit_notes: null
+      preprocessing:
+        - step: type_coerce
+          description: "Cast actual_start, actual_end to ISO-8601 date. Cast budgeted_labor_hours, budgeted_labor_cost, budgeted_material_cost, budgeted_sub_cost, budgeted_equipment_cost, budgeted_other_cost to float. Cast sort_order to integer."
+          config:
+            fields:
+              - name: actual_start
+                target_type: date
+              - name: actual_end
+                target_type: date
+              - name: budgeted_labor_hours
+                target_type: float
+              - name: budgeted_labor_cost
+                target_type: float
+              - name: budgeted_material_cost
+                target_type: float
+              - name: budgeted_sub_cost
+                target_type: float
+              - name: budgeted_equipment_cost
+                target_type: float
+              - name: budgeted_other_cost
+                target_type: float
+              - name: sort_order
+                target_type: integer
+        - step: normalize
+          description: "Normalize status enum to lowercase."
+          config:
+            fields:
+              - name: status
+                method: lowercase
+      entity_extractions:
+        - entity_type: Job
+          filter: null
+          id_expression: "row.job_id"
+      relationship_extractions:
+        - relationship_type: PROJECT_HAS_JOB
+          from_expression: "row.project_id"
+          to_expression: "row.job_id"
+      upsert_strategy:
+        mode: merge
+        merge_keys: [job_id]
+      error_handling:
+        on_parse_error: quarantine
+        on_constraint_violation: skip_row
+        quarantine_path: runs/ridgeline_20260318/quarantine/
+
+    # -- time_entry.csv ------------------------------------------------------
+    - source_id: a1d7892ddd7d
+      reader:
+        connection_type: file
+        format: csv
+        config:
+          delimiter: ","
+          sheet_name: null
+          encoding: utf-8
+          header_row: 0
+          skip_rows: null
+        system_id: null
+        query: null
+        incremental_field: null
+        endpoint: null
+        method: null
+        pagination_type: null
+        rate_limit_notes: null
+      preprocessing:
+        - step: type_coerce
+          description: "Cast date to ISO-8601 date. Cast hours_regular, hours_overtime, cost to float."
+          config:
+            fields:
+              - name: date
+                target_type: date
+              - name: hours_regular
+                target_type: float
+              - name: hours_overtime
+                target_type: float
+              - name: cost
+                target_type: float
+      entity_extractions:
+        - entity_type: TimeEntry
+          filter: null
+          id_expression: "row.entry_id"
+      relationship_extractions:
+        - relationship_type: JOB_HAS_TIME_ENTRY
+          from_expression: "row.job_id"
+          to_expression: "row.entry_id"
+        - relationship_type: EMPLOYEE_LOGS_TIME
+          from_expression: "row.employee_id"
+          to_expression: "row.entry_id"
+      upsert_strategy:
+        mode: merge
+        merge_keys: [entry_id]
+      error_handling:
+        on_parse_error: quarantine
+        on_constraint_violation: skip_row
+        quarantine_path: runs/ridgeline_20260318/quarantine/
+
+    # -- bill.csv ------------------------------------------------------------
+    - source_id: 3ec971acc703
+      reader:
+        connection_type: file
+        format: csv
+        config:
+          delimiter: ","
+          sheet_name: null
+          encoding: utf-8
+          header_row: 0
+          skip_rows: null
+        system_id: null
+        query: null
+        incremental_field: null
+        endpoint: null
+        method: null
+        pagination_type: null
+        rate_limit_notes: null
+      preprocessing:
+        - step: type_coerce
+          description: "Cast received_date, due_date, paid_date to ISO-8601 date. Cast total to float."
+          config:
+            fields:
+              - name: received_date
+                target_type: date
+              - name: due_date
+                target_type: date
+              - name: paid_date
+                target_type: date
+              - name: total
+                target_type: float
+        - step: normalize
+          description: "Normalize status and category enums to lowercase."
+          config:
+            fields:
+              - name: status
+                method: lowercase
+              - name: category
+                method: lowercase
+      entity_extractions:
+        - entity_type: Bill
+          filter: null
+          id_expression: "row.bill_id"
+      relationship_extractions:
+        - relationship_type: VENDOR_HAS_BILL
+          from_expression: "row.vendor_id"
+          to_expression: "row.bill_id"
+        - relationship_type: PROJECT_HAS_BILL
+          from_expression: "row.project_id"
+          to_expression: "row.bill_id"
+        - relationship_type: JOB_HAS_BILL
+          from_expression: "row.job_id"
+          to_expression: "row.bill_id"
+      upsert_strategy:
+        mode: merge
+        merge_keys: [bill_id]
+      error_handling:
+        on_parse_error: quarantine
+        on_constraint_violation: skip_row
+        quarantine_path: runs/ridgeline_20260318/quarantine/
+
+    # -- bill_line_item.csv --------------------------------------------------
+    - source_id: cc08c48ce725
+      reader:
+        connection_type: file
+        format: csv
+        config:
+          delimiter: ","
+          sheet_name: null
+          encoding: utf-8
+          header_row: 0
+          skip_rows: null
+        system_id: null
+        query: null
+        incremental_field: null
+        endpoint: null
+        method: null
+        pagination_type: null
+        rate_limit_notes: null
+      preprocessing:
+        - step: type_coerce
+          description: "Cast quantity, unit_cost, line_total to float."
+          config:
+            fields:
+              - name: quantity
+                target_type: float
+              - name: unit_cost
+                target_type: float
+              - name: line_total
+                target_type: float
+        - step: normalize
+          description: "Normalize category enum to lowercase."
+          config:
+            fields:
+              - name: category
+                method: lowercase
+      entity_extractions:
+        - entity_type: BillLineItem
+          filter: null
+          id_expression: "row.line_id"
+      relationship_extractions: []
+      upsert_strategy:
+        mode: merge
+        merge_keys: [line_id]
+      error_handling:
+        on_parse_error: quarantine
+        on_constraint_violation: skip_row
+        quarantine_path: runs/ridgeline_20260318/quarantine/
+
+    # -- invoice.csv ---------------------------------------------------------
+    - source_id: d03c595c4b33
+      reader:
+        connection_type: file
+        format: csv
+        config:
+          delimiter: ","
+          sheet_name: null
+          encoding: utf-8
+          header_row: 0
+          skip_rows: null
+        system_id: null
+        query: null
+        incremental_field: null
+        endpoint: null
+        method: null
+        pagination_type: null
+        rate_limit_notes: null
+      preprocessing:
+        - step: type_coerce
+          description: "Cast issued_date, due_date to ISO-8601 date. Cast subtotal, retention_held, tax, total_due to float."
+          config:
+            fields:
+              - name: issued_date
+                target_type: date
+              - name: due_date
+                target_type: date
+              - name: subtotal
+                target_type: float
+              - name: retention_held
+                target_type: float
+              - name: tax
+                target_type: float
+              - name: total_due
+                target_type: float
+        - step: normalize
+          description: "Normalize type and status enums to lowercase."
+          config:
+            fields:
+              - name: type
+                method: lowercase
+              - name: status
+                method: lowercase
+      entity_extractions:
+        - entity_type: Invoice
+          filter: null
+          id_expression: "row.invoice_id"
+      relationship_extractions:
+        - relationship_type: PROJECT_HAS_INVOICE
+          from_expression: "row.project_id"
+          to_expression: "row.invoice_id"
+      upsert_strategy:
+        mode: merge
+        merge_keys: [invoice_id]
+      error_handling:
+        on_parse_error: quarantine
+        on_constraint_violation: skip_row
+        quarantine_path: runs/ridgeline_20260318/quarantine/
+
+    # -- payment.csv ---------------------------------------------------------
+    - source_id: 491b7ff7ab76
+      reader:
+        connection_type: file
+        format: csv
+        config:
+          delimiter: ","
+          sheet_name: null
+          encoding: utf-8
+          header_row: 0
+          skip_rows: null
+        system_id: null
+        query: null
+        incremental_field: null
+        endpoint: null
+        method: null
+        pagination_type: null
+        rate_limit_notes: null
+      preprocessing:
+        - step: type_coerce
+          description: "Cast received_date, deposited_date to ISO-8601 date. Cast amount to float."
+          config:
+            fields:
+              - name: received_date
+                target_type: date
+              - name: deposited_date
+                target_type: date
+              - name: amount
+                target_type: float
+      entity_extractions:
+        - entity_type: Payment
+          filter: null
+          id_expression: "row.payment_id"
+      relationship_extractions:
+        - relationship_type: INVOICE_HAS_PAYMENT
+          from_expression: "row.invoice_id"
+          to_expression: "row.payment_id"
+      upsert_strategy:
+        mode: merge
+        merge_keys: [payment_id]
+      error_handling:
+        on_parse_error: quarantine
+        on_constraint_violation: skip_row
+        quarantine_path: runs/ridgeline_20260318/quarantine/
+
+    # -- loc_event.csv -------------------------------------------------------
+    - source_id: fadb29a0034e
+      reader:
+        connection_type: file
+        format: csv
+        config:
+          delimiter: ","
+          sheet_name: null
+          encoding: utf-8
+          header_row: 0
+          skip_rows: null
+        system_id: null
+        query: null
+        incremental_field: null
+        endpoint: null
+        method: null
+        pagination_type: null
+        rate_limit_notes: null
+      preprocessing:
+        - step: type_coerce
+          description: "Cast date to ISO-8601 date. Cast amount to float."
+          config:
+            fields:
+              - name: date
+                target_type: date
+              - name: amount
+                target_type: float
+        - step: type_coerce
+          description: "Derive event_type as literal 'loc_draw' for all rows in this source."
+          config:
+            derived_fields:
+              - name: event_type
+                value: "loc_draw"
+      entity_extractions:
+        - entity_type: NarrativeEvent
+          filter: null
+          id_expression: "row.event_id"
+      relationship_extractions: []
+      upsert_strategy:
+        mode: merge
+        merge_keys: [event_id]
+      error_handling:
+        on_parse_error: quarantine
+        on_constraint_violation: skip_row
+        quarantine_path: runs/ridgeline_20260318/quarantine/
+
+    # -- overtime_event.csv --------------------------------------------------
+    - source_id: d17411f8d40e
+      reader:
+        connection_type: file
+        format: csv
+        config:
+          delimiter: ","
+          sheet_name: null
+          encoding: utf-8
+          header_row: 0
+          skip_rows: null
+        system_id: null
+        query: null
+        incremental_field: null
+        endpoint: null
+        method: null
+        pagination_type: null
+        rate_limit_notes: null
+      preprocessing:
+        - step: type_coerce
+          description: "Cast start_date to ISO-8601 date (mapped to NarrativeEvent.date). Cast duration_weeks and ot_hours_per_week_per_person to integer."
+          config:
+            fields:
+              - name: start_date
+                target_type: date
+              - name: duration_weeks
+                target_type: integer
+              - name: ot_hours_per_week_per_person
+                target_type: integer
+            derived_fields:
+              - name: event_type
+                value: "overtime_mandate"
+        - step: type_coerce
+          description: "JSON-encode event_metadata from duration_weeks, ot_hours_per_week_per_person, affected_employees."
+          config:
+            derived_fields:
+              - name: event_metadata
+                expression: "json_encode({duration_weeks, ot_hours_per_week_per_person, affected_employees})"
+      entity_extractions:
+        - entity_type: NarrativeEvent
+          filter: null
+          id_expression: "row.event_id"
+      relationship_extractions: []
+      upsert_strategy:
+        mode: merge
+        merge_keys: [event_id]
+      error_handling:
+        on_parse_error: quarantine
+        on_constraint_violation: skip_row
+        quarantine_path: runs/ridgeline_20260318/quarantine/
+
+    # -- pricing_change.csv --------------------------------------------------
+    - source_id: 28104fac72b5
+      reader:
+        connection_type: file
+        format: csv
+        config:
+          delimiter: ","
+          sheet_name: null
+          encoding: utf-8
+          header_row: 0
+          skip_rows: null
+        system_id: null
+        query: null
+        incremental_field: null
+        endpoint: null
+        method: null
+        pagination_type: null
+        rate_limit_notes: null
+      preprocessing:
+        - step: type_coerce
+          description: "Cast effective_date to ISO-8601 date (mapped to NarrativeEvent.date). Cast old_bill_rate, new_bill_rate to float."
+          config:
+            fields:
+              - name: effective_date
+                target_type: date
+              - name: old_bill_rate
+                target_type: float
+              - name: new_bill_rate
+                target_type: float
+            derived_fields:
+              - name: event_type
+                value: "pricing_change"
+        - step: type_coerce
+          description: "Map notes column to description. JSON-encode event_metadata from applies_to, old_bill_rate, new_bill_rate."
+          config:
+            field_renames:
+              - from: notes
+                to: description
+            derived_fields:
+              - name: event_metadata
+                expression: "json_encode({applies_to, old_bill_rate, new_bill_rate})"
+      entity_extractions:
+        - entity_type: NarrativeEvent
+          filter: null
+          id_expression: "row.event_id"
+      relationship_extractions: []
+      upsert_strategy:
+        mode: merge
+        merge_keys: [event_id]
+      error_handling:
+        on_parse_error: quarantine
+        on_constraint_violation: skip_row
+        quarantine_path: runs/ridgeline_20260318/quarantine/
+
+  # ============================================================================
+  # Incremental Strategy
+  # ============================================================================
+  incremental_strategy:
+    detection_method: full_scan
+    timestamp_fields: null
+    notes: >-
+      Full scan with MERGE ensures idempotency. For production with live
+      connectors, switch to timestamp-based incremental using updated_at
+      fields from source systems. The generated CSV data has no updated_at
+      or modified_at columns, so full scan is the only viable approach for MVP.
+
+  # ============================================================================
+  # Simulation Integration
+  # ============================================================================
+  simulation_integration:
+    export_format: neo4j_direct
+    sdg_csv_mapping:
+      - simulation_csv: employees.csv
+        neo4j_query: "MATCH (e:Employee) RETURN e.id AS id, e.name AS name, e.role AS role, e.trade AS trade, e.status AS status, e.hire_date AS hire_date"
+
+      - simulation_csv: initiatives.csv
+        neo4j_query: "MATCH (p:Project) RETURN p.project_id AS id, p.name AS name, p.archetype AS archetype, p.status AS status, p.start_date AS start_date, p.end_date AS end_date"
+
+      - simulation_csv: customers.csv
+        neo4j_query: "MATCH (c:Customer) RETURN c.id AS id, c.name AS name, c.type AS type, c.email AS email, c.status AS status"
+
+    constraint_profile_queries:
+      - profile_field: headcount
+        neo4j_query: "MATCH (e:Employee) WHERE e.status = 'active' RETURN count(e) AS headcount"
+
+      - profile_field: active_projects
+        neo4j_query: "MATCH (p:Project) WHERE p.status IN ['in_progress', 'active'] RETURN count(p) AS active_projects"
+
+      - profile_field: total_contract_value
+        neo4j_query: "MATCH (p:Project) RETURN sum(p.contract_amount) AS total_contract_value"
+
+    notes: >-
+      Simulation integration is limited. This dataset covers operational
+      construction data (projects, estimates, bills, time tracking), not the
+      organizational behavior data Simulation expects (departments, performance
+      reviews, OKRs, engagement surveys). Most Simulation entity types
+      (Department, Initiative, PerformanceReview, EngagementSurvey) have no
+      source data in the Ridgeline dataset. Employee maps partially (no
+      department assignment, no manager hierarchy). Project maps loosely to
+      Initiative but lacks strategic context. See ontology
+      simulation_compatibility section for the full gap analysis.

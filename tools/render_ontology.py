@@ -22,7 +22,7 @@ import yaml
 
 
 def load_yaml(path: str) -> dict:
-    with open(path) as f:
+    with open(path, encoding="utf-8") as f:
         return yaml.safe_load(f) or {}
 
 
@@ -215,7 +215,7 @@ def main():
     doc = render(args.ontology_path, args.verbose)
 
     if args.output:
-        with open(args.output, "w") as f:
+        with open(args.output, "w", encoding="utf-8") as f:
             f.write(doc)
         if args.verbose:
             print(f"Wrote: {args.output}", file=sys.stderr)

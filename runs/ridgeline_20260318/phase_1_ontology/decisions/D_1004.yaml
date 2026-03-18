@@ -1,0 +1,101 @@
+# Decision Record D_1004
+# EstimateLineItem to Job mapping via cost_code
+
+decision:
+  id: D_1004
+  phase: ontology
+  created_at: "2026-03-18"
+
+  category: relationship_direction
+
+  question: >-
+    How should the linkage between EstimateLineItem.cost_code and Job.code
+    be modeled? Is this a direct FK relationship, a semantic join, or a
+    derived relationship?
+
+  decision: >-
+    Model as an estimate_line_item_maps_to_job relationship (N:1 from
+    EstimateLineItem to Job) based on the cost_code/code semantic join.
+    This is the bridge between pre-construction estimates and
+    execution-phase cost tracking.
+
+  alternatives_considered:
+    - option: >-
+        Model as a direct relationship (estimate_line_item_maps_to_job)
+      pros:
+        - 100% overlap between estimate_line_item.cost_code and job.code
+        - Enables budget-to-actual comparison at the cost-code level
+        - Critical for job costing — the core financial control mechanism
+        - Makes the estimate-to-execution pipeline explicit in the graph
+      cons:
+        - Not a true FK (cost_code is a semantic identifier, not a surrogate key)
+        - Many-to-many at the value level (same cost_code appears across estimates and projects)
+        - Requires scoping to the same project to be meaningful
+
+    - option: >-
+        Model as a shared domain concept (cost_code vocabulary) without
+        a direct relationship
+      pros:
+        - Acknowledges that cost_code is a classification, not a FK
+        - Simpler graph without cross-entity-type edges
+      cons:
+        - Loses the explicit budget-to-actual link
+        - Forces downstream consumers to manually join on cost_code
+        - Misses the most important analytical relationship in the dataset
+
+    - option: >-
+        Model as a computed relationship through Project (EstimateLineItem
+        → Estimate → Project → Job, filtered by matching cost_code)
+      pros:
+        - Uses existing FK chain to scope the relationship correctly
+        - More rigorous than a direct semantic join
+      cons:
+        - Multi-hop traversal is expensive and obscures the relationship
+        - The cost_code match is the meaningful signal, not the FK chain
+        - Over-engineers what is a straightforward semantic link
+
+  rationale: >-
+    The cost_code vocabulary is shared between estimates and jobs with 100%
+    overlap across 56 distinct codes. This is the primary mechanism for
+    budget-to-actual comparison in construction job costing. While not a
+    traditional FK (cost codes are semantic identifiers), the match is exact
+    and intentional — the same cost code vocabulary is used in both
+    pre-construction (estimate) and execution (job) phases. Modeling this
+    as an explicit relationship makes the budget-to-actual bridge visible
+    in the graph. The relationship is N:1 from EstimateLineItem to Job
+    when scoped to the same project (each estimate line maps to one job
+    within the project).
+
+  evidence:
+    - source: estimate_line_item.csv
+      location: "cost_code column, 56 distinct values"
+      observation: >-
+        1173 estimate line items using 56 distinct cost codes (e.g.,
+        01-LABOR, 02-MATERIALS, 01-DEMO, 03-FRAMING). Same vocabulary
+        as job.code.
+      role: primary
+
+    - source: job.csv
+      location: "code column, 56 distinct values"
+      observation: >-
+        279 jobs using 56 distinct cost codes. 100% overlap with
+        estimate_line_item.cost_code values. Every cost code in estimates
+        appears in jobs.
+      role: primary
+
+    - source: data_catalog.yaml
+      location: "join_candidates section, estimate_line_item cost_code to job code"
+      observation: >-
+        Phase 0 join detection found 100% overlap between
+        estimate_line_item.cost_code and job.code. Flagged as a
+        budget-vs-actual bridge.
+      role: corroborating
+
+  confidence: high
+  reversibility: easy
+  downstream_impact: >-
+    If reversed, the explicit relationship would be removed from the
+    ontology. Budget-to-actual comparison would require ad-hoc joins in
+    queries or ETL. The analytical value of the graph for job costing
+    would be significantly reduced. The mapping plan (Phase 2) would need
+    to handle cost_code alignment differently.

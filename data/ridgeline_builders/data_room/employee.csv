@@ -1,0 +1,6 @@
+id,name,role,trade,base_rate,burden_rate,bill_rate,status,hire_date,termination_date
+EMP-001,Mike Torres,owner,general,0,0,135,active,2024-01-01,
+EMP-002,Derek Haas,foreman,general,32.0,42.24,95,active,2024-01-01,
+EMP-003,Carlos Vega,journeyman,general,26.0,34.32,85,terminated,2024-01-01,2025-07-18
+EMP-004,Tom Ridley,journeyman,general,25.0,33.0,85,active,2024-01-01,
+EMP-005,Jordan Mills,journeyman,general,17.0,22.44,65,active,2024-01-01,

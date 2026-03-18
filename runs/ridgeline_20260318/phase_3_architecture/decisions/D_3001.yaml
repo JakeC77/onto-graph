@@ -1,0 +1,81 @@
+# Decision Record D_3001
+# Phase 3: ETL Architecture
+
+decision:
+  id: D_3001
+  phase: architecture
+  created_at: "2026-03-18"
+
+  category: upsert_strategy
+
+  question: >-
+    What upsert strategy should be used when loading entities into Neo4j?
+    Options include MERGE (match-or-create with property update), CREATE
+    (always insert new), or REPLACE (delete and recreate).
+
+  decision: >-
+    Use MERGE for all entity types, keyed on the primary identifier field
+    (e.g., id, estimate_id, project_id). MERGE matches on the key and
+    updates properties if the node exists, or creates it if not.
+
+  alternatives_considered:
+    - option: "CREATE (always insert new nodes)"
+      pros:
+        - Simpler logic, no matching overhead
+        - Slightly faster on first load
+      cons:
+        - Creates duplicates on re-run
+        - Requires manual cleanup or pre-truncation
+        - Not idempotent
+
+    - option: "REPLACE (delete all, then create)"
+      pros:
+        - Clean state on every run
+        - No risk of stale property values
+      cons:
+        - Destroys relationships on delete, requiring full relationship reload
+        - Not incremental-friendly
+        - Longer pipeline runtime for large graphs
+        - Risk of data loss if pipeline fails mid-run
+
+    - option: "MERGE on primary key (chosen)"
+      pros:
+        - Idempotent -- safe for re-runs
+        - No duplicates
+        - Preserves existing relationships during property updates
+        - Compatible with future incremental loading
+      cons:
+        - Slightly more overhead than CREATE on first load
+        - Requires well-defined merge keys (all entities have them)
+
+  rationale: >-
+    MERGE is the standard idempotent loading pattern for Neo4j. Every entity
+    in the Ridgeline ontology has a well-defined primary key (id, estimate_id,
+    project_id, etc.), making MERGE straightforward. The generated dataset is
+    static CSV files that will be reloaded during development, so idempotency
+    is essential. MERGE also positions the pipeline for future incremental
+    loading when live system connectors replace CSV exports.
+
+  evidence:
+    - source: data_catalog.yaml
+      location: All source definitions
+      observation: >-
+        Every source file has a candidate key column with 100% uniqueness
+        (is_unique: true). Company uses name, all others use dedicated ID
+        columns (CUST-NNN, VEN-NNN, EMP-NNN, etc.).
+      role: primary
+
+    - source: mapping_plan.yaml
+      location: entity_mappings[*].merge_key
+      observation: >-
+        Every entity mapping defines a merge_key that corresponds to the
+        source primary key. No ambiguity in merge key selection.
+      role: corroborating
+
+  confidence: high
+  reversibility: easy
+  downstream_impact: >-
+    If this decision were wrong (e.g., CREATE was needed), the pipeline
+    would produce duplicates on re-run. Switching from MERGE to another
+    strategy requires only changing the Cypher template, not the data
+    model or mapping plan.

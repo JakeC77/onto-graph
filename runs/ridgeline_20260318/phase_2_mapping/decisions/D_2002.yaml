@@ -1,0 +1,116 @@
+# Decision Record D_2002
+# Statistical computation window choices
+
+decision:
+  id: D_2002
+  phase: mapping
+  created_at: "2026-03-18"
+
+  category: statistical_method
+
+  question: >-
+    What time window should be used for periodic statistical computations
+    such as employee utilization and vendor spend?
+
+  decision: >-
+    Use trailing_12m (trailing 12 months) as the default window for all
+    periodic statistical computations: employee_utilization and vendor_spend.
+    Project-level computations (project_gross_margin, project_total_costs,
+    project_cost_variance) and lifetime computations (customer_lifetime_value)
+    are computed over the full project or customer lifetime respectively and
+    do not require windowing.
+
+  alternatives_considered:
+    - option: "quarterly (trailing 3 months)"
+      pros:
+        - More responsive to recent changes
+        - Detects seasonal patterns
+        - Aligns with quarterly financial reporting
+      cons:
+        - Too volatile for a small GC with lumpy project schedules
+        - A quiet quarter between projects would show artificially low utilization
+        - Small sample sizes with only 4-5 employees
+
+    - option: "trailing_6m (trailing 6 months)"
+      pros:
+        - Balances responsiveness with stability
+        - Less affected by project gaps than quarterly
+      cons:
+        - Still susceptible to project scheduling lumpiness
+        - Does not capture full annual cycle for a seasonal business
+
+    - option: "all_time (entire dataset)"
+      pros:
+        - Maximum sample size
+        - Simple to compute
+      cons:
+        - Masks trends and changes over time
+        - Historical performance may not reflect current operations
+        - Pricing change (EVT-014) and employee departure (EMP-003) would
+          be blended with pre-event data
+
+    - option: "calendar_year"
+      pros:
+        - Aligns with tax year and annual reviews
+        - Natural boundary for business analysis
+      cons:
+        - Partial-year data at start and end creates edge effects
+        - Not rolling, so recent trends are delayed until year-end
+
+  rationale: >-
+    A trailing 12-month window best aligns with the typical builder business
+    cycle. Ridgeline Builders operates in central Pennsylvania where
+    construction is seasonal (slower winter months). A 12-month window
+    captures a full seasonal cycle, smoothing out project scheduling lumpiness
+    that a quarterly or 6-month window would exaggerate. The dataset spans
+    approximately 2 years (2024-02 to 2026-01), so a 12-month window provides
+    sufficient data points while remaining responsive to operational changes
+    such as the EMP-003 departure (2025-07-18) and the pricing change
+    (EVT-014, effective 2025-04-01). For annual employee reviews and vendor
+    negotiations, a 12-month retrospective is the standard business practice
+    in construction. The BOH agent can always compute shorter windows
+    on-demand if needed.
+
+  evidence:
+    - source: time_entry.csv
+      location: "date column, all 1710 rows"
+      observation: >-
+        Time entries span 2024-02-12 to 2026-01-02 (~23 months). Daily
+        granularity. 4 employees logging time across 51 projects. Distribution
+        shows seasonal construction patterns with variation by month.
+      role: primary
+
+    - source: bill.csv
+      location: "received_date column, all 745 rows"
+      observation: >-
+        Bills span 2024-01-01 to 2026-02-05 (~25 months). 745 bills across
+        9 vendors. Monthly spend varies significantly due to project
+        scheduling. A 12-month window captures enough bills per vendor
+        to be statistically meaningful.
+      role: primary
+
+    - source: employee.csv
+      location: "status and termination_date columns"
+      observation: >-
+        EMP-003 terminated 2025-07-18. A trailing 12-month window computed
+        after this date would correctly exclude this employee from active
+        utilization calculations. Quarterly window would show abrupt
+        utilization changes that are more noise than signal.
+      role: corroborating
+
+    - source: pricing_change.csv
+      location: "effective_date column"
+      observation: >-
+        Pricing change EVT-014 effective 2025-04-01. A trailing 12-month
+        window computed in early 2026 would include mostly post-change
+        data, correctly reflecting current pricing reality.
+      role: corroborating
+
+  confidence: high
+  reversibility: easy
+  downstream_impact: >-
+    Changing the window affects computed utilization rates and spend totals.
+    The BOH agent could support multiple window options simultaneously.
+    The trailing_12m is the default for dashboards and alerts, but the
+    ETL pipeline should support parameterized windows so the agent can
+    compute quarterly or YTD views on request.

@@ -1,0 +1,56 @@
+source_id: fadb29a0034e
+path: C:\Users\Jake0\Documents\GitHub\onto-graph\.claude\worktrees\pedantic-borg\data\ridgeline_builders\data_room\loc_event.csv
+format: csv
+size_bytes: 136
+sheet_name: null
+columns:
+- name: event_id
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - EVT-003
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: date
+  inferred_type: date
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - '2024-04-11'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: amount
+  inferred_type: integer
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - '22000'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: type
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - draw
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: description
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: true
+  sample_values:
+  - Line of credit draw to cover payroll during Johnson payment delay
+  is_candidate_key: false
+  is_candidate_fk: false
+row_count: 1
+grain: null
+date_range:
+  earliest: '2024-04-11'
+  latest: '2024-04-11'

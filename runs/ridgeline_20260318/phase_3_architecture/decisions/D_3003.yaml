@@ -1,0 +1,87 @@
+# Decision Record D_3003
+# Phase 3: ETL Architecture
+
+decision:
+  id: D_3003
+  phase: architecture
+  created_at: "2026-03-18"
+
+  category: integration_format
+
+  question: >-
+    How should the Neo4j graph export data for Simulation consumption?
+    Options include generating SDG-compatible CSV files, direct Neo4j
+    Cypher queries, or a dedicated API layer.
+
+  decision: >-
+    Use neo4j_direct -- Simulation reads from Neo4j via Cypher queries.
+    No intermediate CSV materialization step. Provide example queries
+    for the three entity types that partially map to Simulation types
+    (Employee, Project/Initiative, Customer).
+
+  alternatives_considered:
+    - option: "SDG-compatible CSV export"
+      pros:
+        - Decouples Simulation from Neo4j availability
+        - Matches existing SDG file format exactly
+        - Can be versioned and audited as files
+      cons:
+        - Adds a materialization step (query -> CSV -> file system)
+        - CSV files go stale immediately after generation
+        - Extra pipeline stage to maintain
+        - Premature optimization when Simulation is not yet consuming this data
+
+    - option: "Direct Neo4j Cypher queries (chosen)"
+      pros:
+        - Simplest architecture for MVP
+        - Always returns current data
+        - No intermediate storage to manage
+        - Easy to iterate on query shapes
+      cons:
+        - Requires Neo4j to be running when Simulation reads
+        - Query performance depends on graph size (negligible at current scale)
+
+    - option: "Dedicated REST API layer"
+      pros:
+        - Clean contract between graph and Simulation
+        - Can add caching, pagination, auth
+      cons:
+        - Significant engineering overhead for MVP
+        - Another service to deploy and maintain
+        - Premature given current data volume and usage patterns
+
+  rationale: >-
+    Simulation is not yet consuming data from the Ridgeline graph. Building
+    a CSV export pipeline or API layer adds complexity without a consumer.
+    Direct Cypher queries are the simplest path to validate the integration
+    mapping. The three partial matches (Employee -> Person, Project ->
+    Initiative, Customer -> CustomerContract) can be tested with simple
+    MATCH-RETURN queries. When Simulation is ready to consume, the queries
+    documented in simulation_integration.sdg_csv_mapping can be wrapped
+    in a CSV export step or API endpoint with minimal effort.
+
+  evidence:
+    - source: ontology.yaml
+      location: simulation_compatibility section
+      observation: >-
+        Only 3 of the Simulation entity types have partial matches in the
+        Ridgeline ontology. Most Simulation types (Department, Initiative
+        detail, PerformanceReview, EngagementSurvey) have no source data.
+        Full SDG export would produce mostly empty CSV files.
+      role: primary
+
+    - source: data_catalog.yaml
+      location: metadata.total_sources
+      observation: >-
+        18 source files totaling 3.1 MB. The graph will contain under
+        5,100 nodes. Performance is not a concern for direct queries at
+        this scale.
+      role: corroborating
+
+  confidence: high
+  reversibility: easy
+  downstream_impact: >-
+    If SDG CSV export is later needed, the Cypher queries in
+    simulation_integration.sdg_csv_mapping are already defined and can
+    be wrapped in a CSV-writing pipeline stage. No ontology or mapping
+    changes required. The switch is purely an infrastructure decision.

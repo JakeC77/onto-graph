@@ -1,0 +1,89 @@
+# Decision Record D_1001
+# Vendor: single type vs. split Supplier/Subcontractor
+
+decision:
+  id: D_1001
+  phase: ontology
+  created_at: "2026-03-18"
+
+  category: entity_classification
+
+  question: >-
+    Should vendors be modeled as a single Vendor entity type, or split into
+    separate Supplier and Subcontractor entity types (and potentially
+    EquipmentRental and ProfessionalService)?
+
+  decision: >-
+    Keep as a single Vendor entity type with a vendor_type property to
+    distinguish supplier, subcontractor, equipment_rental, and
+    professional_service roles.
+
+  alternatives_considered:
+    - option: >-
+        Single Vendor type with vendor_type discriminator property
+      pros:
+        - Same source file (vendor.csv) with identical schema for all vendor types
+        - Same ID pattern (VEN-xxx) across all types
+        - Avoids entity type proliferation for 10 records
+        - Simpler graph model with fewer node types
+        - vendor_type property enables filtering and analytics without structural complexity
+      cons:
+        - Loses type-level enforcement of role-specific constraints
+        - Insurance tracking is relevant for subcontractors but not suppliers (50% null rate partly reflects this)
+
+    - option: >-
+        Separate Supplier and Subcontractor entity types (and optionally
+        EquipmentRental and ProfessionalService)
+      pros:
+        - Cleaner semantic modeling — suppliers and subcontractors have different business relationships
+        - Subcontractors could map to Simulation Person if they are individuals
+        - Type-specific properties could be enforced (e.g., insurance_expiry required for subcontractors)
+      cons:
+        - Same underlying schema — splitting would duplicate 12 of 14 properties
+        - Only 10 records total — splitting creates 4 entity types with 1-4 instances each
+        - VEN-010 (Overhead & Recurring) does not fit cleanly into any split category
+        - Adds complexity to the graph and ETL pipeline for minimal benefit
+
+  rationale: >-
+    The vendor.csv source has a single, uniform schema for all vendor types.
+    All 14 properties apply to all vendors (with varying null rates). The
+    type column already captures the distinction with 4 values. Splitting
+    into separate entity types would create 4 types with 1-4 instances each,
+    duplicating properties and adding graph complexity without meaningful
+    semantic benefit. The vendor_type property preserves the distinction
+    for analytics and filtering.
+
+  evidence:
+    - source: vendor.csv
+      location: "type column, all 10 rows"
+      observation: >-
+        4 distinct vendor types: supplier (4), subcontractor (4),
+        equipment_rental (1), professional_service (1). All share the same
+        schema with 14 columns.
+      role: primary
+
+    - source: vendor.csv
+      location: "insurance_expiry column"
+      observation: >-
+        50% null rate. All 5 non-null values belong to subcontractors and
+        equipment rental vendors. Suppliers do not have insurance tracking.
+        This is the strongest argument for splitting, but it is a null-rate
+        difference, not a schema difference.
+      role: corroborating
+
+    - source: bill.csv
+      location: "vendor_id column"
+      observation: >-
+        9 of 10 vendors appear in bills regardless of type. The billing
+        relationship is identical across vendor types, supporting a single
+        entity type.
+      role: corroborating
+
+  confidence: high
+  reversibility: easy
+  downstream_impact: >-
+    If reversed, the Vendor entity would split into 2-4 entity types. The
+    mapping plan would need separate source-to-entity mappings per type.
+    The ETL pipeline would need to route vendor.csv rows to different node
+    types based on the type column. Graph queries involving vendors would
+    need to union across multiple types. Impact is moderate but reversible.

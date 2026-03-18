@@ -1,0 +1,82 @@
+# Decision Record D_2001
+# Single-source conflict resolution strategy
+
+decision:
+  id: D_2001
+  phase: mapping
+  created_at: "2026-03-18"
+
+  category: conflict_resolution
+
+  question: >-
+    How should conflicts be resolved when multiple sources provide data for
+    the same ontology property?
+
+  decision: >-
+    Not applicable for this engagement. All 14 entity types are sourced from
+    a single system (builder-data generator). Each entity type has exactly one
+    source CSV file as system of record. No multi-source conflicts exist.
+    conflict_resolution is set to "not_applicable" for all entity mappings.
+
+  alternatives_considered:
+    - option: "source_priority with accounting system authoritative for financials"
+      pros:
+        - Standard approach for multi-system engagements
+        - Accounting data is typically the most reliable for financial fields
+        - Clear hierarchy prevents ambiguity
+      cons:
+        - Not needed for single-system engagement
+        - Introduces unnecessary complexity
+
+    - option: "last_write_wins with timestamp comparison"
+      pros:
+        - Simple to implement
+        - Works well when sources update at different frequencies
+      cons:
+        - Can silently overwrite correct data with stale data
+        - Requires reliable timestamps on all sources
+        - Not needed for single-system engagement
+
+    - option: "manual review for all conflicts"
+      pros:
+        - Maximum accuracy
+        - Human judgment on ambiguous cases
+      cons:
+        - Does not scale
+        - Not needed when no conflicts exist
+
+  rationale: >-
+    Ridgeline Builders is a single-system engagement. All data originates from
+    one builder-data generator and is exported as CSV files. There are no
+    competing sources for any entity type or property. The NarrativeEvent
+    entity draws from three CSV files (loc_event, overtime_event, pricing_change),
+    but each file contributes distinct events with non-overlapping event_ids,
+    so no field-level conflict arises. For future multi-system engagements
+    (e.g., separate accounting system, CRM, and project management tool),
+    the recommended approach would be source_priority with the accounting
+    system as authoritative for financial data (amounts, dates, payment
+    statuses) and the operational system (project management) as authoritative
+    for schedule and scope data.
+
+  evidence:
+    - source: data_catalog.yaml
+      location: "sources section, all 18 entries"
+      observation: >-
+        All 16 CSV sources originate from the same builder-data generator.
+        data.json and builder.db are alternate formats of the same data.
+        No external systems contribute data.
+      role: primary
+
+    - source: engagement_brief.md
+      location: "systems table"
+      observation: >-
+        Single system listed. No multi-system integration required.
+      role: corroborating
+
+  confidence: high
+  reversibility: easy
+  downstream_impact: >-
+    If this engagement later integrates an external accounting system (e.g.,
+    QuickBooks), this decision would need to be revisited with source_priority
+    rules for financial fields. Current mapping would need conflict_resolution
+    changed from "not_applicable" to "source_priority" with explicit precedence.

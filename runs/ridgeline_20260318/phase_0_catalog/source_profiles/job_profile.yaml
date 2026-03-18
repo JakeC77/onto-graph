@@ -1,0 +1,259 @@
+source_id: d8e86831c3bc
+path: C:\Users\Jake0\Documents\GitHub\onto-graph\.claude\worktrees\pedantic-borg\data\ridgeline_builders\data_room\job.csv
+format: csv
+size_bytes: 35558
+sheet_name: null
+columns:
+- name: job_id
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 279
+  is_unique: true
+  sample_values:
+  - JOB-10476A34
+  - JOB-5349D80A
+  - JOB-80A1D221
+  - JOB-85651125
+  - JOB-C0C11B60
+  - JOB-5545F1A9
+  - JOB-9E273CCF
+  - JOB-3A213EEB
+  - JOB-91079EC4
+  - JOB-88053CC0
+  is_candidate_key: true
+  is_candidate_fk: false
+- name: project_id
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 51
+  is_unique: false
+  sample_values:
+  - PROJ-30C2FC8F
+  - PROJ-0B34E038
+  - PROJ-B719F4A7
+  - PROJ-548ABFA2
+  - PROJ-2BD4EB76
+  - PROJ-B7191EAB
+  - PROJ-8BF7C356
+  - PROJ-0A179D7B
+  - PROJ-A0479F56
+  - PROJ-B781EA5C
+  is_candidate_key: false
+  is_candidate_fk: true
+- name: code
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 56
+  is_unique: false
+  sample_values:
+  - 01-LABOR
+  - 02-MATERIALS
+  - 01-DEMO
+  - 02-FOUNDATION
+  - 03-FRAMING
+  - 04-ROOFING
+  - 05-WINDOWS-DOORS
+  - 06-ROUGH-PLUMB
+  - 07-ROUGH-ELEC
+  - 08-HVAC
+  is_candidate_key: false
+  is_candidate_fk: true
+- name: name
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 42
+  is_unique: false
+  sample_values:
+  - Labor
+  - Materials
+  - Demo & Prep
+  - Foundation
+  - Framing
+  - Roofing & Sheathing
+  - Windows & Exterior Doors
+  - Rough Plumbing
+  - Rough Electrical
+  - HVAC
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: budgeted_labor_hours
+  inferred_type: float
+  null_rate: 0.0
+  cardinality: 142
+  is_unique: false
+  sample_values:
+  - '43.3'
+  - '0.0'
+  - '63.9'
+  - '127.8'
+  - '223.6'
+  - '95.8'
+  - '47.9'
+  - '111.8'
+  - '79.9'
+  - '31.9'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: budgeted_labor_cost
+  inferred_type: float
+  null_rate: 0.0
+  cardinality: 156
+  is_unique: false
+  sample_values:
+  - '1514.88'
+  - '0.0'
+  - '2236.09'
+  - '4472.19'
+  - '7826.33'
+  - '3354.14'
+  - '1677.07'
+  - '3913.16'
+  - '2795.12'
+  - '1118.05'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: budgeted_material_cost
+  inferred_type: float
+  null_rate: 0.0
+  cardinality: 147
+  is_unique: false
+  sample_values:
+  - '0.0'
+  - '1009.92'
+  - '5590.23'
+  - '8944.37'
+  - '3354.14'
+  - '4472.19'
+  - '1118.05'
+  - '1677.07'
+  - '2236.09'
+  - '918.96'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: budgeted_sub_cost
+  inferred_type: float
+  null_rate: 0.0
+  cardinality: 62
+  is_unique: false
+  sample_values:
+  - '0.0'
+  - '3913.16'
+  - '4472.19'
+  - '5031.21'
+  - '3308.26'
+  - '1470.34'
+  - '3675.85'
+  - '5151.74'
+  - '2289.66'
+  - '5724.15'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: budgeted_equipment_cost
+  inferred_type: integer
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: false
+  sample_values:
+  - '0.0'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: budgeted_other_cost
+  inferred_type: integer
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: false
+  sample_values:
+  - '0.0'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: status
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: false
+  sample_values:
+  - complete
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: sort_order
+  inferred_type: integer
+  null_rate: 0.0
+  cardinality: 19
+  is_unique: false
+  sample_values:
+  - '0'
+  - '1'
+  - '2'
+  - '3'
+  - '4'
+  - '5'
+  - '6'
+  - '7'
+  - '8'
+  - '9'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: sub_vendor_type
+  inferred_type: string
+  null_rate: 0.7706
+  cardinality: 5
+  is_unique: false
+  sample_values:
+  - plumbing
+  - electrical
+  - hvac
+  - tile
+  - countertops
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: equipment_needed
+  inferred_type: integer
+  null_rate: 0.0
+  cardinality: 2
+  is_unique: false
+  sample_values:
+  - 'False'
+  - 'True'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: actual_start
+  inferred_type: date
+  null_rate: 0.0
+  cardinality: 234
+  is_unique: false
+  sample_values:
+  - '2024-02-11'
+  - '2024-02-17'
+  - '2024-02-18'
+  - '2024-02-20'
+  - '2024-02-29'
+  - '2024-03-15'
+  - '2024-03-21'
+  - '2024-03-27'
+  - '2024-03-31'
+  - '2024-04-05'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: actual_end
+  inferred_type: date
+  null_rate: 0.0
+  cardinality: 226
+  is_unique: false
+  sample_values:
+  - '2024-02-17'
+  - '2024-02-21'
+  - '2024-02-20'
+  - '2024-02-29'
+  - '2024-03-15'
+  - '2024-03-21'
+  - '2024-03-27'
+  - '2024-03-31'
+  - '2024-04-05'
+  - '2024-04-09'
+  is_candidate_key: false
+  is_candidate_fk: false
+row_count: 279
+grain: one record per unique job_id
+date_range:
+  earliest: '2024-02-11'
+  latest: '2026-01-04'

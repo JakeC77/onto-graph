@@ -1,0 +1,166 @@
+source_id: e03d6c5ed7d7
+path: C:\Users\Jake0\Documents\GitHub\onto-graph\.claude\worktrees\pedantic-borg\data\ridgeline_builders\data_room\estimate_line_item.csv
+format: csv
+size_bytes: 122477
+sheet_name: null
+columns:
+- name: line_id
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 1173
+  is_unique: true
+  sample_values:
+  - ELI-74BF9B68
+  - ELI-46DE18CA
+  - ELI-872314BC
+  - ELI-C7A28D98
+  - ELI-EC6EDAF6
+  - ELI-33290F37
+  - ELI-23C3A0B8
+  - ELI-3B0129DE
+  - ELI-AC662359
+  - ELI-663540DF
+  is_candidate_key: true
+  is_candidate_fk: false
+- name: estimate_id
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 100
+  is_unique: false
+  sample_values:
+  - EST-4F32A47F
+  - EST-FB854CDC
+  - EST-264E571D
+  - EST-C4827EA8
+  - EST-389AD75B
+  - EST-CC815282
+  - EST-490BF9A8
+  - EST-D6185D74
+  - EST-69221ADF
+  - EST-141237EC
+  is_candidate_key: false
+  is_candidate_fk: true
+- name: cost_code
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 56
+  is_unique: false
+  sample_values:
+  - 01-LABOR
+  - 02-MATERIALS
+  - 01-DEMO
+  - 02-FOUNDATION
+  - 03-FRAMING
+  - 04-ROOFING
+  - 05-WINDOWS-DOORS
+  - 06-ROUGH-PLUMB
+  - 07-ROUGH-ELEC
+  - 08-HVAC
+  is_candidate_key: false
+  is_candidate_fk: true
+- name: description
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 76
+  is_unique: false
+  sample_values:
+  - "Labor \u2014 Labor"
+  - "Materials \u2014 Materials"
+  - "Demo & Prep \u2014 Labor"
+  - "Foundation \u2014 Labor"
+  - "Foundation \u2014 Materials"
+  - "Framing \u2014 Labor"
+  - "Framing \u2014 Materials"
+  - "Roofing & Sheathing \u2014 Labor"
+  - "Roofing & Sheathing \u2014 Materials"
+  - "Windows & Exterior Doors \u2014 Labor"
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: quantity
+  inferred_type: integer
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: false
+  sample_values:
+  - '1'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: unit
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: false
+  sample_values:
+  - ls
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: unit_cost
+  inferred_type: float
+  null_rate: 0.0
+  cardinality: 625
+  is_unique: false
+  sample_values:
+  - '1514.88'
+  - '1009.92'
+  - '2236.09'
+  - '4472.19'
+  - '5590.23'
+  - '7826.33'
+  - '8944.37'
+  - '3354.14'
+  - '1118.05'
+  - '3913.16'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: unit_price
+  inferred_type: float
+  null_rate: 0.0
+  cardinality: 625
+  is_unique: false
+  sample_values:
+  - '2895.16'
+  - '1930.11'
+  - '3216.3'
+  - '6432.6'
+  - '8040.75'
+  - '11257.05'
+  - '12865.2'
+  - '4824.45'
+  - '1608.15'
+  - '5628.53'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: line_total
+  inferred_type: float
+  null_rate: 0.0
+  cardinality: 625
+  is_unique: false
+  sample_values:
+  - '2895.16'
+  - '1930.11'
+  - '3216.3'
+  - '6432.6'
+  - '8040.75'
+  - '11257.05'
+  - '12865.2'
+  - '4824.45'
+  - '1608.15'
+  - '5628.53'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: category
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 3
+  is_unique: false
+  sample_values:
+  - labor
+  - material
+  - subcontractor
+  is_candidate_key: false
+  is_candidate_fk: false
+row_count: 1173
+grain: one record per unique line_id
+date_range:
+  earliest: null
+  latest: null

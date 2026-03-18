@@ -1,0 +1,210 @@
+source_id: d03c595c4b33
+path: C:\Users\Jake0\Documents\GitHub\onto-graph\.claude\worktrees\pedantic-borg\data\ridgeline_builders\data_room\invoice.csv
+format: csv
+size_bytes: 14506
+sheet_name: null
+columns:
+- name: invoice_id
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 134
+  is_unique: true
+  sample_values:
+  - INV-04F11446
+  - INV-82E5205D
+  - INV-6968A92C
+  - INV-1F3C4A4B
+  - INV-E9566F73
+  - INV-40FC6396
+  - INV-5EAA81C5
+  - INV-D0ED102C
+  - INV-4F2855E7
+  - INV-F8672946
+  is_candidate_key: true
+  is_candidate_fk: false
+- name: invoice_number
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 134
+  is_unique: true
+  sample_values:
+  - INV-0001
+  - INV-0002
+  - INV-0003
+  - INV-0004
+  - INV-0005
+  - INV-0006
+  - INV-0007
+  - INV-0008
+  - INV-0009
+  - INV-0010
+  is_candidate_key: true
+  is_candidate_fk: false
+- name: project_id
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 51
+  is_unique: false
+  sample_values:
+  - PROJ-30C2FC8F
+  - PROJ-0B34E038
+  - PROJ-B719F4A7
+  - PROJ-548ABFA2
+  - PROJ-2BD4EB76
+  - PROJ-B7191EAB
+  - PROJ-8BF7C356
+  - PROJ-0A179D7B
+  - PROJ-A0479F56
+  - PROJ-B781EA5C
+  is_candidate_key: false
+  is_candidate_fk: true
+- name: customer_id
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 13
+  is_unique: false
+  sample_values:
+  - CUST-011
+  - CUST-006
+  - CUST-007
+  - CUST-001
+  - CUST-013
+  - CUST-004
+  - CUST-009
+  - CUST-008
+  - CUST-003
+  - CUST-010
+  is_candidate_key: false
+  is_candidate_fk: true
+- name: type
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 3
+  is_unique: false
+  sample_values:
+  - final
+  - retention
+  - progress
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: status
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: false
+  sample_values:
+  - paid
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: issued_date
+  inferred_type: date
+  null_rate: 0.0
+  cardinality: 123
+  is_unique: false
+  sample_values:
+  - '2024-02-21'
+  - '2024-05-08'
+  - '2024-03-13'
+  - '2024-04-07'
+  - '2024-05-02'
+  - '2024-06-02'
+  - '2024-05-07'
+  - '2024-05-19'
+  - '2024-07-11'
+  - '2024-05-03'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: due_date
+  inferred_type: date
+  null_rate: 0.0
+  cardinality: 123
+  is_unique: false
+  sample_values:
+  - '2024-03-22'
+  - '2024-06-07'
+  - '2024-03-18'
+  - '2024-04-12'
+  - '2024-05-07'
+  - '2024-06-06'
+  - '2024-06-18'
+  - '2024-08-10'
+  - '2024-06-02'
+  - '2024-06-22'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: subtotal
+  inferred_type: float
+  null_rate: 0.0
+  cardinality: 71
+  is_unique: false
+  sample_values:
+  - '4825.27'
+  - '0.0'
+  - '26802.5'
+  - '12589.65'
+  - '15387.34'
+  - '18622.37'
+  - '22760.68'
+  - '3926.28'
+  - '3628.62'
+  - '3399.95'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: retention_held
+  inferred_type: float
+  null_rate: 0.0
+  cardinality: 71
+  is_unique: false
+  sample_values:
+  - '241.26'
+  - '0.0'
+  - '1340.13'
+  - '629.48'
+  - '769.37'
+  - '931.12'
+  - '1138.03'
+  - '196.31'
+  - '181.43'
+  - '170.0'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: tax
+  inferred_type: integer
+  null_rate: 0.0
+  cardinality: 1
+  is_unique: false
+  sample_values:
+  - '0.0'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: total_due
+  inferred_type: float
+  null_rate: 0.0
+  cardinality: 121
+  is_unique: false
+  sample_values:
+  - '4584.01'
+  - '241.26'
+  - '25462.37'
+  - '4020.39'
+  - '11960.17'
+  - '14617.97'
+  - '1398.85'
+  - '17691.25'
+  - '21622.65'
+  - '2069.15'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: notes
+  inferred_type: unknown
+  null_rate: 1.0
+  cardinality: 0
+  is_unique: false
+  sample_values: []
+  is_candidate_key: false
+  is_candidate_fk: false
+row_count: 134
+grain: one invoice
+date_range:
+  earliest: '2024-02-21'
+  latest: '2026-04-20'

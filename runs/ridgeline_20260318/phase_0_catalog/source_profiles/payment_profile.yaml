@@ -1,0 +1,166 @@
+source_id: 491b7ff7ab76
+path: C:\Users\Jake0\Documents\GitHub\onto-graph\.claude\worktrees\pedantic-borg\data\ridgeline_builders\data_room\payment.csv
+format: csv
+size_bytes: 12300
+sheet_name: null
+columns:
+- name: payment_id
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 134
+  is_unique: true
+  sample_values:
+  - PAY-07250858
+  - PAY-8FE758A0
+  - PAY-55934A28
+  - PAY-4675B88B
+  - PAY-26E67AC6
+  - PAY-C3EAFA7A
+  - PAY-09503991
+  - PAY-9A74197D
+  - PAY-8446FA36
+  - PAY-01B12F75
+  is_candidate_key: true
+  is_candidate_fk: false
+- name: invoice_id
+  inferred_type: id
+  null_rate: 0.0
+  cardinality: 134
+  is_unique: true
+  sample_values:
+  - INV-04F11446
+  - INV-82E5205D
+  - INV-6968A92C
+  - INV-1F3C4A4B
+  - INV-E9566F73
+  - INV-40FC6396
+  - INV-5EAA81C5
+  - INV-D0ED102C
+  - INV-4F2855E7
+  - INV-F8672946
+  is_candidate_key: true
+  is_candidate_fk: false
+- name: project_id
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 51
+  is_unique: false
+  sample_values:
+  - PROJ-30C2FC8F
+  - PROJ-0B34E038
+  - PROJ-B719F4A7
+  - PROJ-548ABFA2
+  - PROJ-2BD4EB76
+  - PROJ-B7191EAB
+  - PROJ-8BF7C356
+  - PROJ-0A179D7B
+  - PROJ-A0479F56
+  - PROJ-B781EA5C
+  is_candidate_key: false
+  is_candidate_fk: true
+- name: customer_id
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 13
+  is_unique: false
+  sample_values:
+  - CUST-011
+  - CUST-006
+  - CUST-007
+  - CUST-001
+  - CUST-013
+  - CUST-004
+  - CUST-009
+  - CUST-008
+  - CUST-003
+  - CUST-010
+  is_candidate_key: false
+  is_candidate_fk: true
+- name: amount
+  inferred_type: float
+  null_rate: 0.0
+  cardinality: 121
+  is_unique: false
+  sample_values:
+  - '4584.01'
+  - '241.26'
+  - '25462.37'
+  - '4020.39'
+  - '11960.17'
+  - '14617.97'
+  - '1398.85'
+  - '17691.25'
+  - '21622.65'
+  - '2069.15'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: method
+  inferred_type: string
+  null_rate: 0.0
+  cardinality: 3
+  is_unique: false
+  sample_values:
+  - ach
+  - check
+  - credit_card
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: reference
+  inferred_type: integer
+  null_rate: 0.0
+  cardinality: 134
+  is_unique: true
+  sample_values:
+  - '3917'
+  - '8629'
+  - '4352'
+  - '8252'
+  - '5585'
+  - '3469'
+  - '3887'
+  - '3770'
+  - '9332'
+  - '5078'
+  is_candidate_key: true
+  is_candidate_fk: false
+- name: received_date
+  inferred_type: date
+  null_rate: 0.0
+  cardinality: 120
+  is_unique: false
+  sample_values:
+  - '2024-03-22'
+  - '2024-06-03'
+  - '2024-03-16'
+  - '2024-04-10'
+  - '2024-05-07'
+  - '2024-06-23'
+  - '2024-06-10'
+  - '2024-06-22'
+  - '2024-08-11'
+  - '2024-06-02'
+  is_candidate_key: false
+  is_candidate_fk: false
+- name: deposited_date
+  inferred_type: date
+  null_rate: 0.0
+  cardinality: 125
+  is_unique: false
+  sample_values:
+  - '2024-03-22'
+  - '2024-06-05'
+  - '2024-03-17'
+  - '2024-04-11'
+  - '2024-05-08'
+  - '2024-06-24'
+  - '2024-06-10'
+  - '2024-06-23'
+  - '2024-08-12'
+  - '2024-06-03'
+  is_candidate_key: false
+  is_candidate_fk: false
+row_count: 134
+grain: one transaction
+date_range:
+  earliest: '2024-03-16'
+  latest: '2026-04-22'

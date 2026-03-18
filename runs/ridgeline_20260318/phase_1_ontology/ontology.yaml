@@ -1,0 +1,2031 @@
+# Ontology — Phase 1 Output
+# Ridgeline Builders engagement
+# Generated: 2026-03-18
+
+ontology:
+  metadata:
+    company: Ridgeline Builders
+    run_id: ridgeline_20260318
+    created_at: "2026-03-18"
+    entity_type_count: 14
+    relationship_type_count: 14
+    domain_concept_count: 10
+    decision_count: 4
+
+  # ════════════════════════════════════════════════════════════════════════
+  # Entity Types
+  # ════════════════════════════════════════════════════════════════════════
+  entity_types:
+
+    # ── Company ──────────────────────────────────────────────────────────
+    - name: Company
+      description: >-
+        The general contracting firm itself. Singleton record representing
+        Ridgeline Builders, a small residential and light commercial general
+        contractor in central Pennsylvania.
+      identifier:
+        property: name
+        pattern: "Single record — identified by company name"
+      properties:
+        - name: name
+          type: string
+          required: true
+          source: direct
+          description: Legal business name
+          computation_spec: null
+        - name: trade
+          type: string
+          required: true
+          source: direct
+          description: Primary trade classification
+          computation_spec: null
+        - name: region
+          type: string
+          required: true
+          source: direct
+          description: Geographic operating region
+          computation_spec: null
+        - name: owner_name
+          type: string
+          required: true
+          source: direct
+          description: Name of the company owner
+          computation_spec: null
+        - name: owner_employee_id
+          type: string
+          required: true
+          source: direct
+          description: FK to Employee entity for the owner
+          computation_spec: null
+        - name: address
+          type: string
+          required: true
+          source: direct
+          description: Business mailing address
+          computation_spec: null
+        - name: phone
+          type: string
+          required: true
+          source: direct
+          description: Business phone number
+          computation_spec: null
+        - name: email
+          type: string
+          required: true
+          source: direct
+          description: Business email address
+          computation_spec: null
+        - name: license_number
+          type: string
+          required: true
+          source: direct
+          description: State home improvement contractor license number
+          computation_spec: null
+      lifecycle:
+        states: []
+        state_field: null
+      sources:
+        - 381f49880b21
+      instance_count: 1
+      simulation_mapping:
+        maps_to: null
+        mapping_notes: >-
+          No direct Simulation node type for the company entity itself.
+          Company metadata may be stored as graph-level properties or a
+          singleton Organization node if Simulation is extended.
+      evidence:
+        - source: company.csv
+          location: "row 1, all columns"
+          observation: >-
+            Single-row file with company name, trade, region, owner info,
+            address, phone, email, and license number. owner_employee_id
+            links to EMP-001 in employee.csv.
+
+    # ── Customer ─────────────────────────────────────────────────────────
+    - name: Customer
+      description: >-
+        Property owners or businesses that commission construction work from
+        Ridgeline Builders. Mix of residential homeowners and commercial
+        tenants in central Pennsylvania.
+      identifier:
+        property: id
+        pattern: "CUST-NNN sequential (CUST-001 through CUST-013)"
+      properties:
+        - name: id
+          type: string
+          required: true
+          source: direct
+          description: Unique customer identifier
+          computation_spec: null
+        - name: name
+          type: string
+          required: true
+          source: direct
+          description: Customer name (individual or couple)
+          computation_spec: null
+        - name: email
+          type: string
+          required: true
+          source: direct
+          description: Customer email address
+          computation_spec: null
+        - name: phone
+          type: string
+          required: true
+          source: direct
+          description: Customer phone number
+          computation_spec: null
+        - name: address
+          type: string
+          required: true
+          source: direct
+          description: Customer property or mailing address
+          computation_spec: null
+        - name: payment_terms
+          type: string
+          required: true
+          source: direct
+          description: Negotiated payment terms (net_15, net_30, net_45, due_on_receipt)
+          computation_spec: null
+        - name: source
+          type: string
+          required: true
+          source: direct
+          description: How the customer was acquired (referral, repeat, google, yard_sign, direct_outreach)
+          computation_spec: null
+        - name: type
+          type: string
+          required: true
+          source: direct
+          description: Customer classification — residential or commercial
+          computation_spec: null
+        - name: tax_exempt
+          type: boolean
+          required: true
+          source: direct
+          description: Whether the customer is tax-exempt
+          computation_spec: null
+        - name: credit_limit
+          type: float
+          required: true
+          source: direct
+          description: Customer credit limit (0 for all in current data)
+          computation_spec: null
+        - name: status
+          type: string
+          required: true
+          source: direct
+          description: Customer status (active)
+          computation_spec: null
+        - name: created_at
+          type: date
+          required: true
+          source: direct
+          description: Date the customer record was created
+          computation_spec: null
+        - name: notes
+          type: string
+          required: false
+          source: direct
+          description: Free-text notes about the customer (92.3% null)
+          computation_spec: null
+      lifecycle:
+        states:
+          - active
+        state_field: status
+      sources:
+        - dab846594bbb
+      instance_count: 13
+      simulation_mapping:
+        maps_to: Customer
+        mapping_notes: >-
+          Direct match to Simulation Customer node. Customer properties map
+          naturally. payment_terms and source are domain-specific extensions.
+      evidence:
+        - source: customer.csv
+          location: "all 13 rows"
+          observation: >-
+            13 distinct customers with CUST-xxx IDs. 2 types (residential,
+            commercial). 5 acquisition sources. All created 2024-01-01 (bulk
+            import). Referenced by estimate, project, invoice, and payment
+            via customer_id FK.
+
+    # ── Vendor ───────────────────────────────────────────────────────────
+    - name: Vendor
+      description: >-
+        External parties that provide materials, subcontract labor, equipment
+        rental, or professional services to Ridgeline Builders. Kept as a
+        single type with vendor_type property to distinguish roles. See
+        decision D_1001.
+      identifier:
+        property: id
+        pattern: "VEN-NNN sequential (VEN-001 through VEN-010)"
+      properties:
+        - name: id
+          type: string
+          required: true
+          source: direct
+          description: Unique vendor identifier
+          computation_spec: null
+        - name: name
+          type: string
+          required: true
+          source: direct
+          description: Vendor business name
+          computation_spec: null
+        - name: type
+          type: string
+          required: true
+          source: direct
+          description: Vendor role classification (supplier, subcontractor, equipment_rental, professional_service)
+          computation_spec: null
+        - name: trade
+          type: string
+          required: false
+          source: direct
+          description: Trade specialty (general, electrical, plumbing, hvac, tile, countertops). 20% null.
+          computation_spec: null
+        - name: contact
+          type: string
+          required: false
+          source: direct
+          description: Primary contact person name. 10% null.
+          computation_spec: null
+        - name: phone
+          type: string
+          required: false
+          source: direct
+          description: Vendor phone number. 10% null.
+          computation_spec: null
+        - name: email
+          type: string
+          required: false
+          source: direct
+          description: Vendor email address. 10% null.
+          computation_spec: null
+        - name: payment_terms
+          type: string
+          required: true
+          source: direct
+          description: Payment terms (net_30, net_15, due_on_receipt)
+          computation_spec: null
+        - name: tax_id
+          type: string
+          required: false
+          source: direct
+          description: Federal tax ID (EIN). 10% null.
+          computation_spec: null
+        - name: w9_on_file
+          type: boolean
+          required: true
+          source: direct
+          description: Whether a W-9 form is on file
+          computation_spec: null
+        - name: insurance_expiry
+          type: date
+          required: false
+          source: direct
+          description: Insurance certificate expiration date. 50% null (suppliers without insurance tracking).
+          computation_spec: null
+        - name: rating
+          type: float
+          required: false
+          source: direct
+          description: Vendor quality rating (3.0-5.0 scale). 10% null.
+          computation_spec: null
+        - name: credit_limit
+          type: float
+          required: false
+          source: direct
+          description: Vendor credit limit. 90% null.
+          computation_spec: null
+        - name: account_opened
+          type: date
+          required: false
+          source: direct
+          description: Date vendor account was opened. 90% null.
+          computation_spec: null
+      lifecycle:
+        states: []
+        state_field: null
+      sources:
+        - 580ea3721ca9
+      instance_count: 10
+      simulation_mapping:
+        maps_to: null
+        mapping_notes: >-
+          No direct Simulation node type for Vendor. Subcontractors could map
+          to Person if individual, but vendors are businesses. Recommend
+          Simulation extension for Vendor/Counterparty node type.
+      evidence:
+        - source: vendor.csv
+          location: "all 10 rows, type column"
+          observation: >-
+            10 vendors with 4 distinct types: supplier (4), subcontractor (4),
+            equipment_rental (1), professional_service (1). VEN-010 is synthetic
+            Overhead & Recurring vendor. Same schema for all vendor types
+            supports single entity type decision (D_1001).
+
+    # ── Employee ─────────────────────────────────────────────────────────
+    - name: Employee
+      description: >-
+        W-2 employees of Ridgeline Builders. Includes the owner, field crew
+        (foreman, journeymen), and potentially office staff. The data shows
+        5 employees with a reference to EMP-006 in narrative events.
+      identifier:
+        property: id
+        pattern: "EMP-NNN sequential (EMP-001 through EMP-005)"
+      properties:
+        - name: id
+          type: string
+          required: true
+          source: direct
+          description: Unique employee identifier
+          computation_spec: null
+        - name: name
+          type: string
+          required: true
+          source: direct
+          description: Employee full name
+          computation_spec: null
+        - name: role
+          type: string
+          required: true
+          source: direct
+          description: Job role (owner, foreman, journeyman)
+          computation_spec: null
+        - name: trade
+          type: string
+          required: true
+          source: direct
+          description: Trade classification (all general in current data)
+          computation_spec: null
+        - name: base_rate
+          type: float
+          required: true
+          source: direct
+          description: Hourly base pay rate. Owner has 0.0 (does not draw hourly wage).
+          computation_spec: null
+        - name: burden_rate
+          type: float
+          required: true
+          source: direct
+          description: Fully burdened hourly cost (base + taxes, insurance, benefits)
+          computation_spec: null
+        - name: bill_rate
+          type: float
+          required: true
+          source: direct
+          description: Hourly rate charged to customers for this employee
+          computation_spec: null
+        - name: status
+          type: string
+          required: true
+          source: direct
+          description: Employment status (active, terminated)
+          computation_spec: null
+        - name: hire_date
+          type: date
+          required: true
+          source: direct
+          description: Date of hire
+          computation_spec: null
+        - name: termination_date
+          type: date
+          required: false
+          source: direct
+          description: Date of termination. 80% null (only terminated employees).
+          computation_spec: null
+      lifecycle:
+        states:
+          - active
+          - terminated
+        state_field: status
+      sources:
+        - 78b8b8fdb27f
+      instance_count: 5
+      simulation_mapping:
+        maps_to: Person
+        mapping_notes: >-
+          Direct match to Simulation Person node. Employee name, role,
+          and status map naturally. Rate properties are domain-specific
+          extensions. Missing reports_to relationship (flat org structure).
+      evidence:
+        - source: employee.csv
+          location: "all 5 rows, role and status columns"
+          observation: >-
+            5 employees: 1 owner (EMP-001, base_rate=0), 1 foreman (EMP-002),
+            3 journeymen (EMP-003 through EMP-005). EMP-003 terminated
+            2025-07-18. Overtime event references EMP-006 not in file.
+
+    # ── Estimate ─────────────────────────────────────────────────────────
+    - name: Estimate
+      description: >-
+        Proposals sent to customers for construction work. Each estimate has
+        a project archetype, line items, and a won/lost lifecycle. Accepted
+        estimates convert into Projects.
+      identifier:
+        property: estimate_id
+        pattern: "EST-XXXXXXXX UUID (e.g., EST-4F32A47F) with sequential EST-NNNN number"
+      properties:
+        - name: estimate_id
+          type: string
+          required: true
+          source: direct
+          description: Unique estimate identifier (UUID-based)
+          computation_spec: null
+        - name: estimate_number
+          type: string
+          required: true
+          source: direct
+          description: Sequential human-readable estimate number (EST-0001)
+          computation_spec: null
+        - name: version
+          type: integer
+          required: true
+          source: direct
+          description: Estimate version (all version 1 in current data)
+          computation_spec: null
+        - name: customer_id
+          type: string
+          required: true
+          source: direct
+          description: FK to Customer entity
+          computation_spec: null
+        - name: archetype
+          type: string
+          required: true
+          source: direct
+          description: Project archetype classification (7 types)
+          computation_spec: null
+        - name: status
+          type: string
+          required: true
+          source: direct
+          description: Estimate lifecycle status (accepted, expired, declined, sent)
+          computation_spec: null
+        - name: scope_description
+          type: string
+          required: true
+          source: direct
+          description: Description of work scope
+          computation_spec: null
+        - name: exclusions
+          type: string
+          required: true
+          source: direct
+          description: Work excluded from the estimate
+          computation_spec: null
+        - name: assumptions
+          type: string
+          required: true
+          source: direct
+          description: Assumptions underlying the estimate
+          computation_spec: null
+        - name: total
+          type: float
+          required: true
+          source: direct
+          description: Total estimate price to customer
+          computation_spec: null
+        - name: cost_estimate
+          type: float
+          required: true
+          source: direct
+          description: Estimated cost to Ridgeline (before markup)
+          computation_spec: null
+        - name: markup_pct
+          type: float
+          required: true
+          source: direct
+          description: Markup percentage over estimated cost
+          computation_spec: null
+        - name: tax_amount
+          type: float
+          required: true
+          source: direct
+          description: Tax amount (0.0 in all current data)
+          computation_spec: null
+        - name: created_at
+          type: date
+          required: true
+          source: direct
+          description: Date the estimate was created
+          computation_spec: null
+        - name: sent_at
+          type: date
+          required: true
+          source: direct
+          description: Date the estimate was sent to the customer
+          computation_spec: null
+        - name: valid_until
+          type: date
+          required: true
+          source: direct
+          description: Expiration date of the estimate
+          computation_spec: null
+        - name: accepted_at
+          type: date
+          required: false
+          source: direct
+          description: Date the estimate was accepted. 49% null (non-accepted estimates).
+          computation_spec: null
+        - name: project_id
+          type: string
+          required: false
+          source: direct
+          description: FK to Project entity. 49% null (only accepted estimates have projects).
+          computation_spec: null
+      lifecycle:
+        states:
+          - sent
+          - accepted
+          - declined
+          - expired
+        state_field: status
+      sources:
+        - ce1c4e604911
+      instance_count: 100
+      simulation_mapping:
+        maps_to: null
+        mapping_notes: >-
+          No direct Simulation type for Estimate. Could map to a pre-Initiative
+          proposal concept if Simulation is extended. The estimate-to-project
+          conversion is a key business lifecycle transition.
+      evidence:
+        - source: estimate.csv
+          location: "all 100 rows, status and project_id columns"
+          observation: >-
+            100 estimates: 51 accepted (with project_id), 49 not converted
+            (expired, declined, or still sent). 7 archetypes. customer_id FK
+            links to all 13 customers. Date range 2024-01-02 to 2026-01-24.
+
+    # ── EstimateLineItem ─────────────────────────────────────────────────
+    - name: EstimateLineItem
+      description: >-
+        Individual cost-code-level line items within an estimate. Each line
+        represents a specific scope of work (demolition, framing, electrical,
+        etc.) with estimated cost and price.
+      identifier:
+        property: line_id
+        pattern: "ELI-XXXXXXXX UUID (e.g., ELI-74BF9B68)"
+      properties:
+        - name: line_id
+          type: string
+          required: true
+          source: direct
+          description: Unique line item identifier
+          computation_spec: null
+        - name: estimate_id
+          type: string
+          required: true
+          source: direct
+          description: FK to parent Estimate entity
+          computation_spec: null
+        - name: cost_code
+          type: string
+          required: true
+          source: direct
+          description: Cost code identifier (e.g., 01-LABOR, 03-FRAMING). Links to Job.code.
+          computation_spec: null
+        - name: description
+          type: string
+          required: true
+          source: direct
+          description: Human-readable description of the line item
+          computation_spec: null
+        - name: quantity
+          type: integer
+          required: true
+          source: direct
+          description: Quantity (always 1 in current data — lump sum)
+          computation_spec: null
+        - name: unit
+          type: string
+          required: true
+          source: direct
+          description: Unit of measure (always ls/lump sum in current data)
+          computation_spec: null
+        - name: unit_cost
+          type: float
+          required: true
+          source: direct
+          description: Estimated cost per unit to Ridgeline
+          computation_spec: null
+        - name: unit_price
+          type: float
+          required: true
+          source: direct
+          description: Price per unit charged to customer
+          computation_spec: null
+        - name: line_total
+          type: float
+          required: true
+          source: direct
+          description: Total line item price (quantity * unit_price)
+          computation_spec: null
+        - name: category
+          type: string
+          required: true
+          source: direct
+          description: Cost category (labor, material, subcontractor)
+          computation_spec: null
+      lifecycle:
+        states: []
+        state_field: null
+      sources:
+        - e03d6c5ed7d7
+      instance_count: 1173
+      simulation_mapping:
+        maps_to: null
+        mapping_notes: >-
+          No Simulation equivalent. Detail-level data supporting estimate
+          pricing and budget-to-actual tracking through cost_code linkage
+          to Job entities.
+      evidence:
+        - source: estimate_line_item.csv
+          location: "all 1173 rows, cost_code column"
+          observation: >-
+            1173 line items across 100 estimates (~11.7 per estimate). 56
+            distinct cost codes. cost_code values match job.code with 100%
+            overlap, enabling budget-to-actual comparison. All lump-sum
+            pricing (quantity=1, unit=ls).
+
+    # ── Project ──────────────────────────────────────────────────────────
+    - name: Project
+      description: >-
+        Active construction projects created from accepted estimates. The
+        central hub entity linking jobs, bills, invoices, payments, and time
+        entries. Each project has a type, archetype, site address, contract
+        amount, and date range.
+      identifier:
+        property: project_id
+        pattern: "PROJ-XXXXXXXX UUID (e.g., PROJ-30C2FC8F)"
+      properties:
+        - name: project_id
+          type: string
+          required: true
+          source: direct
+          description: Unique project identifier
+          computation_spec: null
+        - name: estimate_id
+          type: string
+          required: true
+          source: direct
+          description: FK to the originating Estimate
+          computation_spec: null
+        - name: customer_id
+          type: string
+          required: true
+          source: direct
+          description: FK to Customer entity
+          computation_spec: null
+        - name: name
+          type: string
+          required: true
+          source: direct
+          description: Project name (typically CustomerLastName — ArchetypeDescription)
+          computation_spec: null
+        - name: archetype
+          type: string
+          required: true
+          source: direct
+          description: Project archetype (7 types matching estimate archetypes)
+          computation_spec: null
+        - name: type
+          type: string
+          required: true
+          source: direct
+          description: Project type classification (repair, renovation, addition, new_construction, tenant_improvement)
+          computation_spec: null
+        - name: trade
+          type: string
+          required: true
+          source: direct
+          description: Trade classification (all general in current data)
+          computation_spec: null
+        - name: status
+          type: string
+          required: true
+          source: direct
+          description: Project status (all complete in historical data)
+          computation_spec: null
+        - name: site_address
+          type: string
+          required: true
+          source: direct
+          description: Physical address of the construction site
+          computation_spec: null
+        - name: start_date
+          type: date
+          required: true
+          source: direct
+          description: Planned start date
+          computation_spec: null
+        - name: end_date
+          type: date
+          required: true
+          source: direct
+          description: Planned end date
+          computation_spec: null
+        - name: actual_start
+          type: date
+          required: true
+          source: direct
+          description: Actual start date
+          computation_spec: null
+        - name: actual_end
+          type: date
+          required: true
+          source: direct
+          description: Actual end date
+          computation_spec: null
+        - name: contract_amount
+          type: float
+          required: true
+          source: direct
+          description: Total contract value
+          computation_spec: null
+        - name: contract_type
+          type: string
+          required: true
+          source: direct
+          description: Contract type (all fixed_price in current data)
+          computation_spec: null
+        - name: markup_pct
+          type: float
+          required: true
+          source: direct
+          description: Markup percentage on estimated cost
+          computation_spec: null
+        - name: retention_pct
+          type: float
+          required: true
+          source: direct
+          description: Retention percentage held (5% or 10%)
+          computation_spec: null
+        - name: retention_released
+          type: boolean
+          required: true
+          source: direct
+          description: Whether retention has been released
+          computation_spec: null
+        - name: permit_required
+          type: boolean
+          required: true
+          source: direct
+          description: Whether a building permit is required
+          computation_spec: null
+        - name: permit_number
+          type: string
+          required: false
+          source: direct
+          description: Building permit number. 70.6% null (not all projects need permits).
+          computation_spec: null
+      lifecycle:
+        states:
+          - complete
+        state_field: status
+      sources:
+        - 7b95d9ad0f5f
+      instance_count: 51
+      simulation_mapping:
+        maps_to: Initiative
+        mapping_notes: >-
+          Maps to Simulation Initiative node. Project name, dates, and status
+          translate directly. Contract financials and construction-specific
+          fields (permit, retention, archetype) are domain extensions.
+      evidence:
+        - source: project.csv
+          location: "all 51 rows, project_id and estimate_id columns"
+          observation: >-
+            51 projects with PROJ-xxx UUIDs. All complete (historical data).
+            Each linked to exactly one estimate via estimate_id. 7 archetypes
+            matching estimate archetypes. Date range 2024-02-11 to 2026-01-04.
+            Central hub — referenced by job, bill, invoice, payment, time_entry.
+
+    # ── Job ──────────────────────────────────────────────────────────────
+    - name: Job
+      description: >-
+        Cost codes within a project representing distinct scopes of work
+        (demolition, framing, electrical, plumbing, etc.). Each job tracks
+        budgeted costs by category and actual dates. Jobs are the cost
+        allocation unit for time entries and bills.
+      identifier:
+        property: job_id
+        pattern: "JOB-XXXXXXXX UUID (e.g., JOB-10476A34)"
+      properties:
+        - name: job_id
+          type: string
+          required: true
+          source: direct
+          description: Unique job identifier
+          computation_spec: null
+        - name: project_id
+          type: string
+          required: true
+          source: direct
+          description: FK to parent Project entity
+          computation_spec: null
+        - name: code
+          type: string
+          required: true
+          source: direct
+          description: Cost code (e.g., 01-DEMO, 03-FRAMING). Links to EstimateLineItem.cost_code.
+          computation_spec: null
+        - name: name
+          type: string
+          required: true
+          source: direct
+          description: Human-readable name of the cost code
+          computation_spec: null
+        - name: budgeted_labor_hours
+          type: float
+          required: true
+          source: direct
+          description: Budgeted labor hours for this job
+          computation_spec: null
+        - name: budgeted_labor_cost
+          type: float
+          required: true
+          source: direct
+          description: Budgeted labor cost
+          computation_spec: null
+        - name: budgeted_material_cost
+          type: float
+          required: true
+          source: direct
+          description: Budgeted material cost
+          computation_spec: null
+        - name: budgeted_sub_cost
+          type: float
+          required: true
+          source: direct
+          description: Budgeted subcontractor cost
+          computation_spec: null
+        - name: budgeted_equipment_cost
+          type: float
+          required: true
+          source: direct
+          description: Budgeted equipment cost (always 0.0 in current data)
+          computation_spec: null
+        - name: budgeted_other_cost
+          type: float
+          required: true
+          source: direct
+          description: Budgeted other cost (always 0.0 in current data)
+          computation_spec: null
+        - name: status
+          type: string
+          required: true
+          source: direct
+          description: Job status (all complete in historical data)
+          computation_spec: null
+        - name: sort_order
+          type: integer
+          required: true
+          source: direct
+          description: Display sort order within the project
+          computation_spec: null
+        - name: sub_vendor_type
+          type: string
+          required: false
+          source: direct
+          description: Trade specialty for subcontractor jobs (plumbing, electrical, hvac, tile, countertops). 77% null.
+          computation_spec: null
+        - name: equipment_needed
+          type: boolean
+          required: true
+          source: direct
+          description: Whether the job requires equipment rental
+          computation_spec: null
+        - name: actual_start
+          type: date
+          required: true
+          source: direct
+          description: Actual start date of the job
+          computation_spec: null
+        - name: actual_end
+          type: date
+          required: true
+          source: direct
+          description: Actual end date of the job
+          computation_spec: null
+      lifecycle:
+        states:
+          - complete
+        state_field: status
+      sources:
+        - d8e86831c3bc
+      instance_count: 279
+      simulation_mapping:
+        maps_to: null
+        mapping_notes: >-
+          No direct Simulation equivalent. Jobs are sub-units of Initiative
+          (Project). Could map to a Task or WorkPackage concept if Simulation
+          is extended for construction cost tracking.
+      evidence:
+        - source: job.csv
+          location: "all 279 rows, project_id and code columns"
+          observation: >-
+            279 jobs across 51 projects (~5.5 per project). 56 distinct cost
+            codes. job.code matches estimate_line_item.cost_code with 100%
+            overlap. Links to time_entry and bill for actual cost tracking.
+
+    # ── TimeEntry ────────────────────────────────────────────────────────
+    - name: TimeEntry
+      description: >-
+        Daily time records for crew members working on specific jobs. Tracks
+        regular and overtime hours separately with computed labor cost.
+      identifier:
+        property: entry_id
+        pattern: "TE-XXXXXXXX UUID (e.g., TE-65D1FA0D)"
+      properties:
+        - name: entry_id
+          type: string
+          required: true
+          source: direct
+          description: Unique time entry identifier
+          computation_spec: null
+        - name: employee_id
+          type: string
+          required: true
+          source: direct
+          description: FK to Employee entity
+          computation_spec: null
+        - name: project_id
+          type: string
+          required: true
+          source: direct
+          description: FK to Project entity
+          computation_spec: null
+        - name: job_id
+          type: string
+          required: true
+          source: direct
+          description: FK to Job entity
+          computation_spec: null
+        - name: date
+          type: date
+          required: true
+          source: direct
+          description: Date of the time entry
+          computation_spec: null
+        - name: hours_regular
+          type: float
+          required: true
+          source: direct
+          description: Regular hours worked
+          computation_spec: null
+        - name: hours_overtime
+          type: float
+          required: true
+          source: direct
+          description: Overtime hours worked
+          computation_spec: null
+        - name: cost
+          type: float
+          required: true
+          source: computed
+          description: Computed labor cost for this entry
+          computation_spec: "hours_regular * burden_rate + hours_overtime * burden_rate * 1.5"
+        - name: notes
+          type: string
+          required: true
+          source: direct
+          description: Description of work performed
+          computation_spec: null
+      lifecycle:
+        states: []
+        state_field: null
+      sources:
+        - a1d7892ddd7d
+      instance_count: 1710
+      simulation_mapping:
+        maps_to: null
+        mapping_notes: >-
+          No direct Simulation equivalent. Time entries are operational detail
+          supporting labor cost tracking. Could inform Person-Initiative
+          participation edges in Simulation.
+      evidence:
+        - source: time_entry.csv
+          location: "all 1710 rows, employee_id column"
+          observation: >-
+            1710 time entries across 4 employees (EMP-001/owner does not log
+            time). Linked to project and job via FK. Date range 2024-02-12
+            to 2026-01-02. Tracks regular and OT hours separately.
+
+    # ── Bill ─────────────────────────────────────────────────────────────
+    - name: Bill
+      description: >-
+        Vendor invoices received by Ridgeline Builders. Includes both
+        project-related bills (materials, subcontractors) and overhead bills
+        (rent, utilities, insurance). All historical bills are paid.
+      identifier:
+        property: bill_id
+        pattern: "BILL-XXXXXXXX UUID (e.g., BILL-B7EBAB84)"
+      properties:
+        - name: bill_id
+          type: string
+          required: true
+          source: direct
+          description: Unique bill identifier
+          computation_spec: null
+        - name: vendor_id
+          type: string
+          required: true
+          source: direct
+          description: FK to Vendor entity
+          computation_spec: null
+        - name: project_id
+          type: string
+          required: false
+          source: direct
+          description: FK to Project entity. 22.8% null for overhead bills.
+          computation_spec: null
+        - name: job_id
+          type: string
+          required: false
+          source: direct
+          description: FK to Job entity. 22.8% null for overhead bills.
+          computation_spec: null
+        - name: vendor_invoice_number
+          type: string
+          required: true
+          source: direct
+          description: Vendor's own invoice number
+          computation_spec: null
+        - name: status
+          type: string
+          required: true
+          source: direct
+          description: Bill payment status (all paid in historical data)
+          computation_spec: null
+        - name: received_date
+          type: date
+          required: true
+          source: direct
+          description: Date the bill was received
+          computation_spec: null
+        - name: due_date
+          type: date
+          required: true
+          source: direct
+          description: Payment due date
+          computation_spec: null
+        - name: total
+          type: float
+          required: true
+          source: direct
+          description: Total bill amount
+          computation_spec: null
+        - name: paid_date
+          type: date
+          required: true
+          source: direct
+          description: Date the bill was paid
+          computation_spec: null
+        - name: payment_method
+          type: string
+          required: true
+          source: direct
+          description: Payment method (check, ach)
+          computation_spec: null
+        - name: check_number
+          type: integer
+          required: false
+          source: direct
+          description: Check number for check payments. 24.2% null (ACH payments).
+          computation_spec: null
+        - name: category
+          type: string
+          required: true
+          source: direct
+          description: Spend category (material, subcontractor, rent, vehicles, utilities, software, insurance, tools)
+          computation_spec: null
+      lifecycle:
+        states:
+          - paid
+        state_field: status
+      sources:
+        - 3ec971acc703
+      instance_count: 745
+      simulation_mapping:
+        maps_to: VendorContract
+        mapping_notes: >-
+          Partial match to Simulation VendorContract. Each bill represents a
+          discrete vendor transaction rather than an ongoing contract. May
+          require adaptation — bills are transactional, contracts are relational.
+      evidence:
+        - source: bill.csv
+          location: "all 745 rows, vendor_id and project_id columns"
+          observation: >-
+            745 bills from 9 distinct vendors. 77.2% project-related, 22.8%
+            overhead (null project_id and job_id). 8 spend categories. All
+            paid. Date range 2024-01-01 to 2026-02-05.
+
+    # ── BillLineItem ─────────────────────────────────────────────────────
+    - name: BillLineItem
+      description: >-
+        Line-item detail on vendor bills. In current data there is a 1:1
+        relationship with bills (single line item per bill), but the separate
+        entity preserves the project/job-level cost allocation granularity.
+        See decision D_1003.
+      identifier:
+        property: line_id
+        pattern: "BLI-XXXXXXXX UUID (e.g., BLI-8F3D1502)"
+      properties:
+        - name: line_id
+          type: string
+          required: true
+          source: direct
+          description: Unique line item identifier
+          computation_spec: null
+        - name: bill_id
+          type: string
+          required: true
+          source: direct
+          description: FK to parent Bill entity
+          computation_spec: null
+        - name: project_id
+          type: string
+          required: false
+          source: direct
+          description: FK to Project entity. 22.8% null for overhead bills.
+          computation_spec: null
+        - name: job_id
+          type: string
+          required: false
+          source: direct
+          description: FK to Job entity. 22.8% null for overhead bills.
+          computation_spec: null
+        - name: description
+          type: string
+          required: true
+          source: direct
+          description: Description of the billed item or service
+          computation_spec: null
+        - name: quantity
+          type: integer
+          required: true
+          source: direct
+          description: Quantity (always 1 in current data — lump sum)
+          computation_spec: null
+        - name: unit_cost
+          type: float
+          required: true
+          source: direct
+          description: Cost per unit
+          computation_spec: null
+        - name: line_total
+          type: float
+          required: true
+          source: direct
+          description: Total line item amount (quantity * unit_cost)
+          computation_spec: null
+        - name: category
+          type: string
+          required: true
+          source: direct
+          description: Spend category matching bill header
+          computation_spec: null
+      lifecycle:
+        states: []
+        state_field: null
+      sources:
+        - cc08c48ce725
+      instance_count: 745
+      simulation_mapping:
+        maps_to: null
+        mapping_notes: >-
+          No Simulation equivalent. Detail-level cost allocation data
+          supporting job costing analysis.
+      evidence:
+        - source: bill_line_item.csv
+          location: "all 745 rows, bill_id column"
+          observation: >-
+            745 line items with 1:1 bill_id mapping. Carries project_id and
+            job_id for cost allocation. Note: vendor_id is on the bill header,
+            not on the line item directly. See D_1003 for entity separation
+            rationale.
+
+    # ── Invoice ──────────────────────────────────────────────────────────
+    - name: Invoice
+      description: >-
+        Customer-facing invoices issued by Ridgeline Builders for project
+        work. Supports progress billing, final invoices, and retention
+        release invoices.
+      identifier:
+        property: invoice_id
+        pattern: "INV-XXXXXXXX UUID (e.g., INV-04F11446) with sequential INV-NNNN number"
+      properties:
+        - name: invoice_id
+          type: string
+          required: true
+          source: direct
+          description: Unique invoice identifier (UUID-based)
+          computation_spec: null
+        - name: invoice_number
+          type: string
+          required: true
+          source: direct
+          description: Sequential human-readable invoice number (INV-0001)
+          computation_spec: null
+        - name: project_id
+          type: string
+          required: true
+          source: direct
+          description: FK to Project entity
+          computation_spec: null
+        - name: customer_id
+          type: string
+          required: true
+          source: direct
+          description: FK to Customer entity
+          computation_spec: null
+        - name: type
+          type: string
+          required: true
+          source: direct
+          description: Invoice type (progress, final, retention)
+          computation_spec: null
+        - name: status
+          type: string
+          required: true
+          source: direct
+          description: Invoice status (all paid in historical data)
+          computation_spec: null
+        - name: issued_date
+          type: date
+          required: true
+          source: direct
+          description: Date the invoice was issued
+          computation_spec: null
+        - name: due_date
+          type: date
+          required: true
+          source: direct
+          description: Payment due date
+          computation_spec: null
+        - name: subtotal
+          type: float
+          required: true
+          source: direct
+          description: Invoice subtotal before retention and tax
+          computation_spec: null
+        - name: retention_held
+          type: float
+          required: true
+          source: direct
+          description: Amount of retention withheld from this invoice
+          computation_spec: null
+        - name: tax
+          type: float
+          required: true
+          source: direct
+          description: Tax amount (0.0 in all current data)
+          computation_spec: null
+        - name: total_due
+          type: float
+          required: true
+          source: direct
+          description: Net amount due (subtotal - retention_held + tax)
+          computation_spec: null
+      lifecycle:
+        states:
+          - paid
+        state_field: status
+      sources:
+        - d03c595c4b33
+      instance_count: 134
+      simulation_mapping:
+        maps_to: CustomerContract
+        mapping_notes: >-
+          Partial match to Simulation CustomerContract. Invoices are
+          transactional artifacts within a project, not the contract itself.
+          The Project entity is a closer match to CustomerContract. Invoices
+          are the billing mechanism.
+      evidence:
+        - source: invoice.csv
+          location: "all 134 rows, type column"
+          observation: >-
+            134 invoices across 51 projects (~2.6 per project). 3 types:
+            progress, final, retention. All paid. Retention mechanics present
+            (retention_held column). Date range 2024-02-21 to 2026-04-20.
+
+    # ── Payment ──────────────────────────────────────────────────────────
+    - name: Payment
+      description: >-
+        Customer payments received against invoices. 1:1 relationship with
+        invoices in current data (every invoice is fully paid with one
+        payment).
+      identifier:
+        property: payment_id
+        pattern: "PAY-XXXXXXXX UUID (e.g., PAY-07250858)"
+      properties:
+        - name: payment_id
+          type: string
+          required: true
+          source: direct
+          description: Unique payment identifier
+          computation_spec: null
+        - name: invoice_id
+          type: string
+          required: true
+          source: direct
+          description: FK to Invoice entity
+          computation_spec: null
+        - name: project_id
+          type: string
+          required: true
+          source: direct
+          description: FK to Project entity
+          computation_spec: null
+        - name: customer_id
+          type: string
+          required: true
+          source: direct
+          description: FK to Customer entity
+          computation_spec: null
+        - name: amount
+          type: float
+          required: true
+          source: direct
+          description: Payment amount
+          computation_spec: null
+        - name: method
+          type: string
+          required: true
+          source: direct
+          description: Payment method (ach, check, credit_card)
+          computation_spec: null
+        - name: reference
+          type: string
+          required: true
+          source: direct
+          description: Payment reference number (check number, transaction ID)
+          computation_spec: null
+        - name: received_date
+          type: date
+          required: true
+          source: direct
+          description: Date the payment was received
+          computation_spec: null
+        - name: deposited_date
+          type: date
+          required: true
+          source: direct
+          description: Date the payment was deposited
+          computation_spec: null
+      lifecycle:
+        states: []
+        state_field: null
+      sources:
+        - 491b7ff7ab76
+      instance_count: 134
+      simulation_mapping:
+        maps_to: null
+        mapping_notes: >-
+          No direct Simulation equivalent. Payments are transactional detail
+          supporting cash flow analysis. Could contribute to CustomerContract
+          financial attributes.
+      evidence:
+        - source: payment.csv
+          location: "all 134 rows, invoice_id column"
+          observation: >-
+            134 payments, 1:1 with invoices. 3 payment methods: ACH, check,
+            credit card. All invoices fully paid. Date range 2024-03-16 to
+            2026-04-22.
+
+    # ── NarrativeEvent ───────────────────────────────────────────────────
+    - name: NarrativeEvent
+      description: >-
+        Business events that affect operations but are not captured in
+        transactional data. Includes line-of-credit draws, overtime mandates,
+        and pricing changes. Modeled as a single flexible type with
+        event_type discriminator. See decision D_1002.
+      identifier:
+        property: event_id
+        pattern: "EVT-NNN sequential (EVT-003, EVT-014, EVT-018)"
+      properties:
+        - name: event_id
+          type: string
+          required: true
+          source: direct
+          description: Unique event identifier
+          computation_spec: null
+        - name: event_type
+          type: string
+          required: true
+          source: inferred
+          description: Type of narrative event (loc_draw, overtime_mandate, pricing_change). Inferred from source file.
+          computation_spec: "Derived from source filename (loc_event, overtime_event, pricing_change)"
+        - name: date
+          type: date
+          required: true
+          source: direct
+          description: Event date or effective date (mapped from date, start_date, or effective_date depending on source)
+          computation_spec: null
+        - name: description
+          type: string
+          required: true
+          source: direct
+          description: Human-readable description of the event
+          computation_spec: null
+        - name: amount
+          type: float
+          required: false
+          source: direct
+          description: Monetary amount associated with the event (loc_draw only)
+          computation_spec: null
+        - name: event_metadata
+          type: string
+          required: false
+          source: inferred
+          description: JSON-encoded event-specific fields that vary by event_type
+          computation_spec: "Aggregated from type-specific columns (duration_weeks, affected_employees, old_bill_rate, new_bill_rate, etc.)"
+      lifecycle:
+        states: []
+        state_field: null
+      sources:
+        - fadb29a0034e
+        - d17411f8d40e
+        - 28104fac72b5
+      instance_count: 3
+      simulation_mapping:
+        maps_to: null
+        mapping_notes: >-
+          No Simulation equivalent. Narrative events are scenario-modeling
+          inputs for simulation. They represent exogenous shocks or policy
+          changes. Simulation extension may define a Scenario or Event node.
+      evidence:
+        - source: loc_event.csv
+          location: "row 1"
+          observation: >-
+            EVT-003: $22,000 LOC draw on 2024-04-11 to cover payroll during
+            Johnson payment delay.
+        - source: overtime_event.csv
+          location: "row 1"
+          observation: >-
+            EVT-018: 6-week overtime mandate starting 2025-07-21, 8 OT
+            hours/week/person for EMP-002, EMP-004, EMP-005, EMP-006.
+            Crew overtime to cover Vega (EMP-003) departure gap.
+        - source: pricing_change.csv
+          location: "row 1"
+          observation: >-
+            EVT-014: Repair service bill rate increase from $85 to $110
+            effective 2025-04-01. Burden + overhead was not covered at $85.
+
+  # ════════════════════════════════════════════════════════════════════════
+  # Relationship Types
+  # ════════════════════════════════════════════════════════════════════════
+  relationship_types:
+
+    - name: customer_has_estimate
+      from_type: Customer
+      to_type: Estimate
+      cardinality: "1:N"
+      required: false
+      properties: []
+      discovery_method: explicit_fk
+      confidence: 1.0
+      sources:
+        - dab846594bbb
+        - ce1c4e604911
+      simulation_mapping:
+        maps_to: null
+        mapping_notes: No Simulation edge equivalent for customer-to-estimate.
+      evidence:
+        - source: estimate.csv
+          location: "customer_id column, all 100 rows"
+          observation: >-
+            All 100 estimate.customer_id values found in customer.id.
+            13 customers across 100 estimates. 100% overlap rate.
+
+    - name: customer_has_project
+      from_type: Customer
+      to_type: Project
+      cardinality: "1:N"
+      required: false
+      properties: []
+      discovery_method: explicit_fk
+      confidence: 1.0
+      sources:
+        - dab846594bbb
+        - 7b95d9ad0f5f
+      simulation_mapping:
+        maps_to: null
+        mapping_notes: >-
+          Could map to Customer-Initiative ownership edge if Simulation
+          supports it.
+      evidence:
+        - source: project.csv
+          location: "customer_id column, all 51 rows"
+          observation: >-
+            All 51 project.customer_id values found in customer.id.
+            13 customers across 51 projects. 100% overlap rate.
+
+    - name: estimate_becomes_project
+      from_type: Estimate
+      to_type: Project
+      cardinality: "1:1"
+      required: false
+      properties: []
+      discovery_method: explicit_fk
+      confidence: 1.0
+      sources:
+        - ce1c4e604911
+        - 7b95d9ad0f5f
+      simulation_mapping:
+        maps_to: null
+        mapping_notes: >-
+          Lifecycle transition from proposal to active work. No direct
+          Simulation edge equivalent.
+      evidence:
+        - source: project.csv
+          location: "estimate_id column, all 51 rows"
+          observation: >-
+            All 51 project.estimate_id values match estimate.estimate_id.
+            1:1 mapping. Only accepted estimates (51 of 100) have projects.
+        - source: estimate.csv
+          location: "project_id column"
+          observation: >-
+            49% of estimates have null project_id (not accepted). 51% link
+            to a project. Confirms the conversion lifecycle.
+
+    - name: estimate_has_line_item
+      from_type: Estimate
+      to_type: EstimateLineItem
+      cardinality: "1:N"
+      required: true
+      properties: []
+      discovery_method: explicit_fk
+      confidence: 1.0
+      sources:
+        - ce1c4e604911
+        - e03d6c5ed7d7
+      simulation_mapping:
+        maps_to: null
+        mapping_notes: Detail-level relationship, no Simulation equivalent.
+      evidence:
+        - source: estimate_line_item.csv
+          location: "estimate_id column, all 1173 rows"
+          observation: >-
+            All 1173 estimate_line_item.estimate_id values found in
+            estimate.estimate_id. 100 estimates, ~11.7 lines each.
+
+    - name: project_has_job
+      from_type: Project
+      to_type: Job
+      cardinality: "1:N"
+      required: true
+      properties: []
+      discovery_method: explicit_fk
+      confidence: 1.0
+      sources:
+        - 7b95d9ad0f5f
+        - d8e86831c3bc
+      simulation_mapping:
+        maps_to: null
+        mapping_notes: >-
+          Could map to Initiative-Task decomposition if Simulation is
+          extended with work breakdown structure.
+      evidence:
+        - source: job.csv
+          location: "project_id column, all 279 rows"
+          observation: >-
+            All 279 job.project_id values found in project.project_id.
+            51 projects, ~5.5 jobs each. 100% overlap.
+
+    - name: project_has_invoice
+      from_type: Project
+      to_type: Invoice
+      cardinality: "1:N"
+      required: false
+      properties: []
+      discovery_method: explicit_fk
+      confidence: 1.0
+      sources:
+        - 7b95d9ad0f5f
+        - d03c595c4b33
+      simulation_mapping:
+        maps_to: null
+        mapping_notes: Financial relationship, no direct Simulation edge.
+      evidence:
+        - source: invoice.csv
+          location: "project_id column, all 134 rows"
+          observation: >-
+            All 134 invoice.project_id values found in project.project_id.
+            51 projects, ~2.6 invoices each. 100% overlap.
+
+    - name: project_has_bill
+      from_type: Project
+      to_type: Bill
+      cardinality: "1:N"
+      required: false
+      properties: []
+      discovery_method: explicit_fk
+      confidence: 1.0
+      sources:
+        - 7b95d9ad0f5f
+        - 3ec971acc703
+      simulation_mapping:
+        maps_to: null
+        mapping_notes: Cost-side relationship, no direct Simulation edge.
+      evidence:
+        - source: bill.csv
+          location: "project_id column, non-null rows"
+          observation: >-
+            All non-null bill.project_id values (77.2% of 745 bills) found
+            in project.project_id. 22.8% are overhead bills without project
+            association. 100% overlap on non-null values.
+
+    - name: job_has_time_entry
+      from_type: Job
+      to_type: TimeEntry
+      cardinality: "1:N"
+      required: false
+      properties: []
+      discovery_method: explicit_fk
+      confidence: 0.792
+      sources:
+        - d8e86831c3bc
+        - a1d7892ddd7d
+      simulation_mapping:
+        maps_to: null
+        mapping_notes: Labor tracking, no Simulation edge equivalent.
+      evidence:
+        - source: time_entry.csv
+          location: "job_id column, all 1710 rows"
+          observation: >-
+            196 of 279 jobs have time entries (70.3%). 79.2% overlap rate.
+            Jobs without time entries may be material-only or subcontractor
+            cost codes that do not require crew labor.
+
+    - name: job_has_bill
+      from_type: Job
+      to_type: Bill
+      cardinality: "1:N"
+      required: false
+      properties: []
+      discovery_method: explicit_fk
+      confidence: 0.829
+      sources:
+        - d8e86831c3bc
+        - 3ec971acc703
+      simulation_mapping:
+        maps_to: null
+        mapping_notes: Cost allocation relationship, no Simulation edge equivalent.
+      evidence:
+        - source: bill.csv
+          location: "job_id column, non-null rows"
+          observation: >-
+            82.9% overlap between bill.job_id and job.job_id. Some bills
+            reference overhead or jobs not in the job table. Bills link to
+            jobs for job-level cost tracking.
+
+    - name: employee_logs_time
+      from_type: Employee
+      to_type: TimeEntry
+      cardinality: "1:N"
+      required: false
+      properties: []
+      discovery_method: explicit_fk
+      confidence: 0.86
+      sources:
+        - 78b8b8fdb27f
+        - a1d7892ddd7d
+      simulation_mapping:
+        maps_to: null
+        mapping_notes: >-
+          Could inform Person-Initiative participation edges in Simulation
+          through aggregation of time entries per employee per project.
+      evidence:
+        - source: time_entry.csv
+          location: "employee_id column, all 1710 rows"
+          observation: >-
+            4 of 5 employees have time entries (86% overlap). EMP-001
+            (owner) does not log time. 4 distinct employee_ids in 1710
+            time entries.
+
+    - name: vendor_has_bill
+      from_type: Vendor
+      to_type: Bill
+      cardinality: "1:N"
+      required: false
+      properties: []
+      discovery_method: explicit_fk
+      confidence: 0.93
+      sources:
+        - 580ea3721ca9
+        - 3ec971acc703
+      simulation_mapping:
+        maps_to: null
+        mapping_notes: Vendor-to-bill transactional link. No Simulation edge.
+      evidence:
+        - source: bill.csv
+          location: "vendor_id column, all 745 rows"
+          observation: >-
+            9 of 10 vendors appear in bills (93% overlap). VEN-007
+            (Sunshine Equipment Rental) has no bills in the dataset.
+
+    - name: invoice_has_payment
+      from_type: Invoice
+      to_type: Payment
+      cardinality: "1:1"
+      required: true
+      properties: []
+      discovery_method: explicit_fk
+      confidence: 1.0
+      sources:
+        - d03c595c4b33
+        - 491b7ff7ab76
+      simulation_mapping:
+        maps_to: null
+        mapping_notes: Financial settlement link. No direct Simulation edge.
+      evidence:
+        - source: payment.csv
+          location: "invoice_id column, all 134 rows"
+          observation: >-
+            Exact 1:1 match — 134 invoices, 134 payments. Every invoice
+            has exactly one payment. 100% overlap.
+
+    - name: company_employs
+      from_type: Company
+      to_type: Employee
+      cardinality: "1:N"
+      required: false
+      properties: []
+      discovery_method: explicit_fk
+      confidence: 0.44
+      sources:
+        - 381f49880b21
+        - 78b8b8fdb27f
+      simulation_mapping:
+        maps_to: null
+        mapping_notes: >-
+          Implicit employment relationship. Could map to Organization-Person
+          membership in Simulation.
+      evidence:
+        - source: company.csv
+          location: "owner_employee_id column"
+          observation: >-
+            company.owner_employee_id = EMP-001 links to employee.id. Low
+            confidence (0.44) due to single-value join on singleton table.
+            Relationship is logically certain but statistically weak.
+
+    - name: estimate_line_item_maps_to_job
+      from_type: EstimateLineItem
+      to_type: Job
+      cardinality: "N:1"
+      required: false
+      properties: []
+      discovery_method: explicit_fk
+      confidence: 1.0
+      sources:
+        - e03d6c5ed7d7
+        - d8e86831c3bc
+      simulation_mapping:
+        maps_to: null
+        mapping_notes: >-
+          Budget-to-actual bridge. Critical for construction job costing
+          but no Simulation equivalent.
+      evidence:
+        - source: estimate_line_item.csv
+          location: "cost_code column, all 1173 rows"
+          observation: >-
+            estimate_line_item.cost_code matches job.code with 100% overlap.
+            56 distinct cost codes. This is a semantic join (same cost code
+            vocabulary) rather than a direct FK, but the match is exact.
+            See decision D_1004.
+
+    # Note: bill_line_item → bill relationship (bill_has_line_item) is
+    # modeled implicitly through BillLineItem.bill_id FK. The 1:1
+    # cardinality in current data makes this a degenerate parent-child.
+
+  # ════════════════════════════════════════════════════════════════════════
+  # Domain Concepts
+  # ════════════════════════════════════════════════════════════════════════
+  domain_concepts:
+
+    - name: project_archetype
+      definition: >-
+        A classification of construction projects by the nature and scale
+        of work. Archetypes drive estimate templates, cost code selections,
+        and expected margin profiles.
+      entity_type: Project
+      values:
+        - repair_service
+        - bathroom_remodel
+        - kitchen_remodel
+        - deck_addition
+        - room_addition
+        - new_construction
+        - tenant_improvement
+      source: project.csv archetype column; estimate.csv archetype column
+      notes: >-
+        7 archetypes appear in both estimate and project data. They represent
+        the full range of work Ridgeline undertakes, from small repairs to
+        new construction and commercial tenant improvements.
+
+    - name: project_type
+      definition: >-
+        A higher-level grouping of project archetypes into construction
+        work categories. Derived from archetype but at a coarser grain.
+      entity_type: Project
+      values:
+        - repair
+        - renovation
+        - addition
+        - new_construction
+        - tenant_improvement
+      source: project.csv type column
+      notes: >-
+        5 types map to 7 archetypes. repair_service maps to repair.
+        bathroom_remodel and kitchen_remodel map to renovation. deck_addition
+        and room_addition map to addition.
+
+    - name: vendor_type
+      definition: >-
+        The role a vendor plays in Ridgeline's supply chain. Determines
+        the nature of the business relationship and billing patterns.
+      entity_type: Vendor
+      values:
+        - supplier
+        - subcontractor
+        - equipment_rental
+        - professional_service
+      source: vendor.csv type column
+      notes: >-
+        4 vendor types. Suppliers provide materials. Subcontractors perform
+        trade-specific work (plumbing, electrical, hvac, tile, countertops).
+        Equipment rental provides machinery. Professional services include
+        surveying, engineering, etc. See decision D_1001.
+
+    - name: employee_role
+      definition: >-
+        The job function of an employee within Ridgeline Builders. Determines
+        pay rates, bill rates, and crew hierarchy.
+      entity_type: Employee
+      values:
+        - owner
+        - foreman
+        - journeyman
+        - apprentice
+        - office_admin
+      source: employee.csv role column
+      notes: >-
+        Current data shows 3 of 5 values (owner, foreman, journeyman).
+        Apprentice and office_admin are expected roles based on the
+        engagement brief (5-9 employees, small GC) but not present in
+        the 5-employee dataset.
+
+    - name: estimate_status
+      definition: >-
+        The lifecycle state of an estimate, tracking it from creation
+        through customer decision.
+      entity_type: Estimate
+      values:
+        - sent
+        - accepted
+        - declined
+        - expired
+      source: estimate.csv status column
+      notes: >-
+        4 statuses. Accepted estimates generate projects. Declined and
+        expired are terminal states. Sent estimates may still be pending
+        customer decision.
+
+    - name: payment_terms
+      definition: >-
+        The agreed timeframe for payment between Ridgeline and its
+        customers or vendors. Applied at the customer and vendor level.
+      entity_type: Customer
+      values:
+        - net_15
+        - net_30
+        - net_45
+        - due_on_receipt
+      source: customer.csv payment_terms column; vendor.csv payment_terms column
+      notes: >-
+        Same vocabulary used for both customer and vendor payment terms.
+        net_30 is most common. Vendor terms are limited to net_30, net_15,
+        and due_on_receipt (no net_45).
+
+    - name: customer_type
+      definition: >-
+        Classification of customers by the type of property or business
+        relationship. Affects project scope, permitting, and billing patterns.
+      entity_type: Customer
+      values:
+        - residential
+        - commercial
+      source: customer.csv type column
+      notes: >-
+        2 types. Residential customers are homeowners. Commercial customers
+        are businesses commissioning tenant improvements or similar work.
+
+    - name: customer_source
+      definition: >-
+        The acquisition channel through which a customer was obtained.
+        Tracks marketing effectiveness and referral network strength.
+      entity_type: Customer
+      values:
+        - referral
+        - repeat
+        - google
+        - yard_sign
+        - direct_outreach
+      source: customer.csv source column
+      notes: >-
+        5 acquisition sources. Referral and repeat indicate relationship-driven
+        business development. Google and yard_sign are marketing channels.
+        Direct outreach suggests proactive sales effort.
+
+    - name: contract_type
+      definition: >-
+        The pricing structure of the construction contract between Ridgeline
+        and the customer.
+      entity_type: Project
+      values:
+        - fixed_price
+      source: project.csv contract_type column
+      notes: >-
+        All 51 projects use fixed_price contracts. No time-and-materials
+        or cost-plus contracts in the dataset. This is typical for
+        residential general contractors.
+
+    - name: bill_category
+      definition: >-
+        Classification of vendor bills by the type of expense. Used for
+        cost analysis and job costing.
+      entity_type: Bill
+      values:
+        - material
+        - subcontractor
+        - equipment
+        - rent
+        - vehicles
+        - utilities
+        - software
+        - insurance
+        - tools
+      source: bill.csv category column; bill_line_item.csv category column
+      notes: >-
+        8 categories in the data. material and subcontractor are project-related.
+        rent, vehicles, utilities, software, insurance, tools are overhead
+        categories appearing on non-project bills (22.8% of bills).
+
+  # ════════════════════════════════════════════════════════════════════════
+  # Simulation Compatibility
+  # ════════════════════════════════════════════════════════════════════════
+  simulation_compatibility:
+    matched_node_types:
+      - ontology_type: Employee
+        simulation_type: Person
+      - ontology_type: Customer
+        simulation_type: Customer
+      - ontology_type: Project
+        simulation_type: Initiative
+
+    matched_edge_types: []
+
+    unmapped_ontology_types:
+      - Company
+      - Vendor
+      - Estimate
+      - EstimateLineItem
+      - Job
+      - TimeEntry
+      - Bill
+      - BillLineItem
+      - Invoice
+      - Payment
+      - NarrativeEvent
+
+    missing_simulation_types:
+      - Department
+      - System
+      - Process
+      - Covenant
+
+    extension_recommendations:
+      - >-
+        Add Vendor/Counterparty node type to Simulation for supplier and
+        subcontractor relationships. Construction businesses depend heavily
+        on vendor networks.
+      - >-
+        Add VendorContract or Bill node to capture cost-side transactions.
+        Current Simulation contract types may not cover vendor billing.
+      - >-
+        Add Task or WorkPackage node for Job-level cost tracking within
+        Initiatives. Construction projects have natural work breakdown
+        structures.
+      - >-
+        Add reports_to and communicates edges if organizational hierarchy
+        or communication data becomes available. Current data has a flat
+        crew structure with no explicit reporting lines.
+      - >-
+        Add Scenario or Event node for NarrativeEvent simulation modeling.
+        These events represent exogenous shocks (LOC draws, overtime
+        mandates, pricing changes) that affect business outcomes.
