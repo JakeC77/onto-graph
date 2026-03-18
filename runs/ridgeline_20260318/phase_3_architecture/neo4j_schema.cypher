@@ -1,6 +1,6 @@
 // Neo4j Schema generated from ontology
 // Source: runs/ridgeline_20260318/phase_1_ontology/ontology.yaml
-// Generated: 2026-03-18T22:33:48.431751Z
+// Generated: 2026-03-18T23:25:52.014491Z
 // Entity types: 14
 // Relationship types: 14
 

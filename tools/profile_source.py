@@ -17,7 +17,6 @@ Examples:
 """
 
 import argparse
-import hashlib
 import os
 import sys
 from datetime import datetime
@@ -95,9 +94,16 @@ def profile_dataframe(
     df: "pd.DataFrame", file_path: str, sheet_name: str | None = None
 ) -> dict:
     """Profile a single DataFrame and return the profile dict."""
-    source_id = hashlib.md5(
-        f"{file_path}:{sheet_name or ''}".encode()
-    ).hexdigest()[:12]
+    # Use slugified filename as source_id (readable, stable, unique per file)
+    stem = Path(file_path).stem.lower()
+    # Replace non-alphanumeric chars with underscores, collapse runs
+    slug = "".join(c if c.isalnum() or c == "_" else "_" for c in stem)
+    slug = "_".join(part for part in slug.split("_") if part)
+    if sheet_name:
+        sheet_slug = "".join(c if c.isalnum() or c == "_" else "_" for c in sheet_name.lower())
+        sheet_slug = "_".join(part for part in sheet_slug.split("_") if part)
+        slug = f"{slug}__{sheet_slug}"
+    source_id = slug
 
     columns = []
     for col in df.columns:
