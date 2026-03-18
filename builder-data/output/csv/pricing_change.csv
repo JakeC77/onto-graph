@@ -1,0 +1,2 @@
+event_id,effective_date,applies_to,old_bill_rate,new_bill_rate,notes
+EVT-014,2025-04-01,repair_service,85,110,Realized burden + overhead wasn't covered at $85. Service jobs should be highest-margin work.

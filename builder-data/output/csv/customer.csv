@@ -1,0 +1,14 @@
+id,name,email,phone,address,payment_terms,source,notes,type,tax_exempt,credit_limit,status,created_at
+CUST-001,Mark & Lisa Johnson,mjohnson@gmail.com,717-555-2201,"2214 Fairview Lane, Camp Hill, PA 17011",net_30,referral,"Good clients, slow payer â€” typically 45 days",residential,False,0,active,2024-01-01
+CUST-002,Patricia Morrison,pmorrison@hotmail.com,717-555-3318,"8 Glenbrook Drive, Carlisle, PA 17013",due_on_receipt,repeat,,residential,False,0,active,2024-01-01
+CUST-003,David & Renee Park,dpark@verizon.net,717-555-4402,"641 Overlook Drive, Mechanicsburg, PA 17055",net_15,google,,residential,False,0,active,2024-01-01
+CUST-004,Tony & Angela Russo,trusso@comcast.net,717-555-5519,"1103 Orchard View Rd, New Cumberland, PA 17070",net_30,referral,,residential,False,0,active,2024-01-01
+CUST-005,James & Carol Sutton,jsutton@gmail.com,717-555-6624,"3350 Farmview Circle, Enola, PA 17025",net_30,yard_sign,,residential,False,0,active,2024-01-01
+CUST-006,Helen Nakamura,hnakamura@yahoo.com,717-555-7703,"88 Birchwood Ct, Lemoyne, PA 17043",due_on_receipt,repeat,,residential,False,0,active,2024-01-01
+CUST-007,William & Donna Hartley,bhartley@outlook.com,717-555-8811,"515 Highpoint Drive, Hampden Township, PA 17050",net_30,referral,,residential,False,0,active,2024-01-01
+CUST-008,Kevin & Pam Foster,kfoster@gmail.com,717-555-9920,"2900 Ridge Rd, Dillsburg, PA 17019",net_30,google,,residential,False,0,active,2024-01-01
+CUST-009,Sandra Okafor,sokafor@gmail.com,717-555-1034,"74 Cypress Court, Harrisburg, PA 17112",net_15,referral,,residential,False,0,active,2024-01-01
+CUST-010,Brian & Tara Weiss,bweiss@comcast.net,717-555-2247,"1801 Rolling Hills Dr, York, PA 17402",net_30,repeat,,residential,False,0,active,2024-01-01
+CUST-011,Keystone Properties LLC,jgrant@keystoneprop.com,717-555-3301,"200 Commerce Dr, Suite 400, Harrisburg, PA 17109",net_30,direct_outreach,,commercial,False,0,active,2024-01-01
+CUST-012,Blue Ridge Medical Group,facilities@blueridgemedical.com,717-555-4415,"5500 Devonshire Rd, Harrisburg, PA 17112",net_45,referral,,commercial,False,0,active,2024-01-01
+CUST-013,Valley Ventures Group,pm@valleyventures.com,717-555-5529,"1000 Enterprise Blvd, Carlisle, PA 17015",net_30,direct_outreach,,commercial,False,0,active,2024-01-01
