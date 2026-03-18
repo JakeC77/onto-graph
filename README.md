@@ -8,16 +8,6 @@ company's data. Given a raw data room (any structure, any format), it produces:
 3. **Mapping Plan** — how raw sources map to the ontology, including computed fields
 4. **ETL Architecture** — pipeline design for Neo4j graph population
 
-## Where It Fits
-
-```
-Data Room → Ontograph → Neo4j → Simulation / Basin
-```
-
-Ontograph is the bridge between raw company data and the typed graph that Basin's
-constraint-tension engine operates on. DayZero produces diagnostic findings;
-Ontograph produces the structural blueprint for representing the company as a graph.
-
 ## Quick Start
 
 1. Create an engagement brief: `data/{company}/engagement_brief.md`
