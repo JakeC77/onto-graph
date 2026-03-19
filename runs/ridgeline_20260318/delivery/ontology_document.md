@@ -34,7 +34,7 @@ The general contracting firm itself. Singleton record representing Ridgeline Bui
 
 - **Identifier:** `name` (Single record — identified by company name)
 - **Instance count:** 1
-- **Sources:** 381f49880b21
+- **Sources:** company
 
 | Property | Type | Required | Source | Description |
 |----------|------|----------|--------|-------------|
@@ -54,7 +54,7 @@ Property owners or businesses that commission construction work from Ridgeline B
 
 - **Identifier:** `id` (CUST-NNN sequential (CUST-001 through CUST-013))
 - **Instance count:** 13
-- **Sources:** dab846594bbb
+- **Sources:** customer
 - **Lifecycle states:** active
 
 | Property | Type | Required | Source | Description |
@@ -79,7 +79,7 @@ External parties that provide materials, subcontract labor, equipment rental, or
 
 - **Identifier:** `id` (VEN-NNN sequential (VEN-001 through VEN-010))
 - **Instance count:** 10
-- **Sources:** 580ea3721ca9
+- **Sources:** vendor
 
 | Property | Type | Required | Source | Description |
 |----------|------|----------|--------|-------------|
@@ -104,7 +104,7 @@ W-2 employees of Ridgeline Builders. Includes the owner, field crew (foreman, jo
 
 - **Identifier:** `id` (EMP-NNN sequential (EMP-001 through EMP-005))
 - **Instance count:** 5
-- **Sources:** 78b8b8fdb27f
+- **Sources:** employee
 - **Lifecycle states:** active, terminated
 
 | Property | Type | Required | Source | Description |
@@ -126,7 +126,7 @@ Proposals sent to customers for construction work. Each estimate has a project a
 
 - **Identifier:** `estimate_id` (EST-XXXXXXXX UUID (e.g., EST-4F32A47F) with sequential EST-NNNN number)
 - **Instance count:** 100
-- **Sources:** ce1c4e604911
+- **Sources:** estimate
 - **Lifecycle states:** sent, accepted, declined, expired
 
 | Property | Type | Required | Source | Description |
@@ -156,7 +156,7 @@ Individual cost-code-level line items within an estimate. Each line represents a
 
 - **Identifier:** `line_id` (ELI-XXXXXXXX UUID (e.g., ELI-74BF9B68))
 - **Instance count:** 1173
-- **Sources:** e03d6c5ed7d7
+- **Sources:** estimate_line_item
 
 | Property | Type | Required | Source | Description |
 |----------|------|----------|--------|-------------|
@@ -177,7 +177,7 @@ Active construction projects created from accepted estimates. The central hub en
 
 - **Identifier:** `project_id` (PROJ-XXXXXXXX UUID (e.g., PROJ-30C2FC8F))
 - **Instance count:** 51
-- **Sources:** 7b95d9ad0f5f
+- **Sources:** project
 - **Lifecycle states:** complete
 
 | Property | Type | Required | Source | Description |
@@ -209,7 +209,7 @@ Cost codes within a project representing distinct scopes of work (demolition, fr
 
 - **Identifier:** `job_id` (JOB-XXXXXXXX UUID (e.g., JOB-10476A34))
 - **Instance count:** 279
-- **Sources:** d8e86831c3bc
+- **Sources:** job
 - **Lifecycle states:** complete
 
 | Property | Type | Required | Source | Description |
@@ -237,7 +237,7 @@ Daily time records for crew members working on specific jobs. Tracks regular and
 
 - **Identifier:** `entry_id` (TE-XXXXXXXX UUID (e.g., TE-65D1FA0D))
 - **Instance count:** 1710
-- **Sources:** a1d7892ddd7d
+- **Sources:** time_entry
 
 | Property | Type | Required | Source | Description |
 |----------|------|----------|--------|-------------|
@@ -257,7 +257,7 @@ Vendor invoices received by Ridgeline Builders. Includes both project-related bi
 
 - **Identifier:** `bill_id` (BILL-XXXXXXXX UUID (e.g., BILL-B7EBAB84))
 - **Instance count:** 745
-- **Sources:** 3ec971acc703
+- **Sources:** bill
 - **Lifecycle states:** paid
 
 | Property | Type | Required | Source | Description |
@@ -282,7 +282,7 @@ Line-item detail on vendor bills. In current data there is a 1:1 relationship wi
 
 - **Identifier:** `line_id` (BLI-XXXXXXXX UUID (e.g., BLI-8F3D1502))
 - **Instance count:** 745
-- **Sources:** cc08c48ce725
+- **Sources:** bill_line_item
 
 | Property | Type | Required | Source | Description |
 |----------|------|----------|--------|-------------|
@@ -302,7 +302,7 @@ Customer-facing invoices issued by Ridgeline Builders for project work. Supports
 
 - **Identifier:** `invoice_id` (INV-XXXXXXXX UUID (e.g., INV-04F11446) with sequential INV-NNNN number)
 - **Instance count:** 134
-- **Sources:** d03c595c4b33
+- **Sources:** invoice
 - **Lifecycle states:** paid
 
 | Property | Type | Required | Source | Description |
@@ -326,7 +326,7 @@ Customer payments received against invoices. 1:1 relationship with invoices in c
 
 - **Identifier:** `payment_id` (PAY-XXXXXXXX UUID (e.g., PAY-07250858))
 - **Instance count:** 134
-- **Sources:** 491b7ff7ab76
+- **Sources:** payment
 
 | Property | Type | Required | Source | Description |
 |----------|------|----------|--------|-------------|
@@ -346,7 +346,7 @@ Business events that affect operations but are not captured in transactional dat
 
 - **Identifier:** `event_id` (EVT-NNN sequential (EVT-003, EVT-014, EVT-018))
 - **Instance count:** 3
-- **Sources:** fadb29a0034e, d17411f8d40e, 28104fac72b5
+- **Sources:** loc_event, overtime_event, pricing_change
 
 | Property | Type | Required | Source | Description |
 |----------|------|----------|--------|-------------|

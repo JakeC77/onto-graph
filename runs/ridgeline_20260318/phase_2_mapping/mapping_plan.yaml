@@ -16,13 +16,13 @@ mapping_plan:
 
     # ── Company ──────────────────────────────────────────────────────────
     - entity_type: Company
-      system_of_record: 381f49880b21
+      system_of_record: company
       additional_sources: []
       merge_key: name
       conflict_resolution: not_applicable
       field_mappings:
         - target_property: name
-          source: 381f49880b21
+          source: company
           source_field: name
           transformation: none
           transformation_spec: null
@@ -35,7 +35,7 @@ mapping_plan:
           notes: Direct copy. Singleton record identifier.
 
         - target_property: trade
-          source: 381f49880b21
+          source: company
           source_field: trade
           transformation: none
           transformation_spec: null
@@ -48,7 +48,7 @@ mapping_plan:
           notes: Direct copy. Single value "general".
 
         - target_property: region
-          source: 381f49880b21
+          source: company
           source_field: region
           transformation: none
           transformation_spec: null
@@ -61,7 +61,7 @@ mapping_plan:
           notes: Direct copy. Single value "mid-atlantic".
 
         - target_property: owner_name
-          source: 381f49880b21
+          source: company
           source_field: owner_name
           transformation: none
           transformation_spec: null
@@ -74,7 +74,7 @@ mapping_plan:
           notes: Direct copy.
 
         - target_property: owner_employee_id
-          source: 381f49880b21
+          source: company
           source_field: owner_employee_id
           transformation: none
           transformation_spec: null
@@ -87,7 +87,7 @@ mapping_plan:
           notes: FK to Employee entity. Links to EMP-001.
 
         - target_property: address
-          source: 381f49880b21
+          source: company
           source_field: address
           transformation: none
           transformation_spec: null
@@ -100,7 +100,7 @@ mapping_plan:
           notes: Direct copy.
 
         - target_property: phone
-          source: 381f49880b21
+          source: company
           source_field: phone
           transformation: none
           transformation_spec: null
@@ -113,7 +113,7 @@ mapping_plan:
           notes: Direct copy.
 
         - target_property: email
-          source: 381f49880b21
+          source: company
           source_field: email
           transformation: none
           transformation_spec: null
@@ -126,7 +126,7 @@ mapping_plan:
           notes: Direct copy.
 
         - target_property: license_number
-          source: 381f49880b21
+          source: company
           source_field: license_number
           transformation: none
           transformation_spec: null
@@ -140,13 +140,13 @@ mapping_plan:
 
     # ── Customer ─────────────────────────────────────────────────────────
     - entity_type: Customer
-      system_of_record: dab846594bbb
+      system_of_record: customer
       additional_sources: []
       merge_key: id
       conflict_resolution: not_applicable
       field_mappings:
         - target_property: id
-          source: dab846594bbb
+          source: customer
           source_field: id
           transformation: none
           transformation_spec: null
@@ -159,7 +159,7 @@ mapping_plan:
           notes: Primary key. CUST-NNN pattern.
 
         - target_property: name
-          source: dab846594bbb
+          source: customer
           source_field: name
           transformation: none
           transformation_spec: null
@@ -172,7 +172,7 @@ mapping_plan:
           notes: Direct copy.
 
         - target_property: email
-          source: dab846594bbb
+          source: customer
           source_field: email
           transformation: none
           transformation_spec: null
@@ -185,7 +185,7 @@ mapping_plan:
           notes: Direct copy.
 
         - target_property: phone
-          source: dab846594bbb
+          source: customer
           source_field: phone
           transformation: none
           transformation_spec: null
@@ -198,7 +198,7 @@ mapping_plan:
           notes: Direct copy.
 
         - target_property: address
-          source: dab846594bbb
+          source: customer
           source_field: address
           transformation: none
           transformation_spec: null
@@ -211,7 +211,7 @@ mapping_plan:
           notes: Direct copy.
 
         - target_property: payment_terms
-          source: dab846594bbb
+          source: customer
           source_field: payment_terms
           transformation: normalize
           transformation_spec: "Validate against enum [net_15, net_30, net_45, due_on_receipt]"
@@ -224,7 +224,7 @@ mapping_plan:
           notes: Already clean enum values in source. Validation ensures consistency.
 
         - target_property: source
-          source: dab846594bbb
+          source: customer
           source_field: source
           transformation: normalize
           transformation_spec: "Validate against enum [referral, repeat, google, yard_sign, direct_outreach]"
@@ -237,7 +237,7 @@ mapping_plan:
           notes: Acquisition channel. Already clean enum values.
 
         - target_property: type
-          source: dab846594bbb
+          source: customer
           source_field: type
           transformation: normalize
           transformation_spec: "Validate against enum [residential, commercial]"
@@ -250,7 +250,7 @@ mapping_plan:
           notes: Customer classification. Already clean enum values.
 
         - target_property: tax_exempt
-          source: dab846594bbb
+          source: customer
           source_field: tax_exempt
           transformation: cast
           transformation_spec: "Cast string 'True'/'False' to boolean"
@@ -263,7 +263,7 @@ mapping_plan:
           notes: Source stores as string "False". Cast to boolean.
 
         - target_property: credit_limit
-          source: dab846594bbb
+          source: customer
           source_field: credit_limit
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -276,7 +276,7 @@ mapping_plan:
           notes: All values are 0 in current data. Cast from string to float.
 
         - target_property: status
-          source: dab846594bbb
+          source: customer
           source_field: status
           transformation: none
           transformation_spec: null
@@ -289,7 +289,7 @@ mapping_plan:
           notes: All values "active" in current data.
 
         - target_property: created_at
-          source: dab846594bbb
+          source: customer
           source_field: created_at
           transformation: cast
           transformation_spec: "Cast string to ISO-8601 date (YYYY-MM-DD)"
@@ -302,7 +302,7 @@ mapping_plan:
           notes: Already in ISO-8601 format. Validate date parsing.
 
         - target_property: notes
-          source: dab846594bbb
+          source: customer
           source_field: notes
           transformation: none
           transformation_spec: null
@@ -316,13 +316,13 @@ mapping_plan:
 
     # ── Vendor ───────────────────────────────────────────────────────────
     - entity_type: Vendor
-      system_of_record: 580ea3721ca9
+      system_of_record: vendor
       additional_sources: []
       merge_key: id
       conflict_resolution: not_applicable
       field_mappings:
         - target_property: id
-          source: 580ea3721ca9
+          source: vendor
           source_field: id
           transformation: none
           transformation_spec: null
@@ -335,7 +335,7 @@ mapping_plan:
           notes: Primary key. VEN-NNN pattern.
 
         - target_property: name
-          source: 580ea3721ca9
+          source: vendor
           source_field: name
           transformation: none
           transformation_spec: null
@@ -348,7 +348,7 @@ mapping_plan:
           notes: Direct copy.
 
         - target_property: type
-          source: 580ea3721ca9
+          source: vendor
           source_field: type
           transformation: normalize
           transformation_spec: "Validate against enum [supplier, subcontractor, equipment_rental, professional_service]"
@@ -361,7 +361,7 @@ mapping_plan:
           notes: Vendor role classification. Already clean. Enum validation needed per guidance.
 
         - target_property: trade
-          source: 580ea3721ca9
+          source: vendor
           source_field: trade
           transformation: none
           transformation_spec: null
@@ -374,7 +374,7 @@ mapping_plan:
           notes: 20% null. Trade specialty for subcontractors.
 
         - target_property: contact
-          source: 580ea3721ca9
+          source: vendor
           source_field: contact
           transformation: none
           transformation_spec: null
@@ -387,7 +387,7 @@ mapping_plan:
           notes: 10% null. Primary contact person name.
 
         - target_property: phone
-          source: 580ea3721ca9
+          source: vendor
           source_field: phone
           transformation: none
           transformation_spec: null
@@ -400,7 +400,7 @@ mapping_plan:
           notes: 10% null.
 
         - target_property: email
-          source: 580ea3721ca9
+          source: vendor
           source_field: email
           transformation: none
           transformation_spec: null
@@ -413,7 +413,7 @@ mapping_plan:
           notes: 10% null.
 
         - target_property: payment_terms
-          source: 580ea3721ca9
+          source: vendor
           source_field: payment_terms
           transformation: normalize
           transformation_spec: "Validate against enum [net_30, net_15, due_on_receipt]"
@@ -426,7 +426,7 @@ mapping_plan:
           notes: Already clean enum values. Vendors use 3 of 4 possible terms (no net_45).
 
         - target_property: tax_id
-          source: 580ea3721ca9
+          source: vendor
           source_field: tax_id
           transformation: none
           transformation_spec: null
@@ -439,7 +439,7 @@ mapping_plan:
           notes: 10% null. Federal EIN format XX-XXXXXXX.
 
         - target_property: w9_on_file
-          source: 580ea3721ca9
+          source: vendor
           source_field: w9_on_file
           transformation: cast
           transformation_spec: "Cast string 'True'/'False' to boolean"
@@ -452,7 +452,7 @@ mapping_plan:
           notes: Source stores as string "True"/"False". Cast to boolean.
 
         - target_property: insurance_expiry
-          source: 580ea3721ca9
+          source: vendor
           source_field: insurance_expiry
           transformation: cast
           transformation_spec: "Cast string to ISO-8601 date (YYYY-MM-DD)"
@@ -465,7 +465,7 @@ mapping_plan:
           notes: 50% null (suppliers without insurance tracking). Already ISO-8601 format.
 
         - target_property: rating
-          source: 580ea3721ca9
+          source: vendor
           source_field: rating
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -478,7 +478,7 @@ mapping_plan:
           notes: 10% null. Quality rating 3.0-5.0 scale.
 
         - target_property: credit_limit
-          source: 580ea3721ca9
+          source: vendor
           source_field: credit_limit
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -491,7 +491,7 @@ mapping_plan:
           notes: 90% null. Only one vendor has a credit limit.
 
         - target_property: account_opened
-          source: 580ea3721ca9
+          source: vendor
           source_field: account_opened
           transformation: cast
           transformation_spec: "Cast string to ISO-8601 date (YYYY-MM-DD)"
@@ -505,13 +505,13 @@ mapping_plan:
 
     # ── Employee ─────────────────────────────────────────────────────────
     - entity_type: Employee
-      system_of_record: 78b8b8fdb27f
+      system_of_record: employee
       additional_sources: []
       merge_key: id
       conflict_resolution: not_applicable
       field_mappings:
         - target_property: id
-          source: 78b8b8fdb27f
+          source: employee
           source_field: id
           transformation: none
           transformation_spec: null
@@ -524,7 +524,7 @@ mapping_plan:
           notes: Primary key. EMP-NNN pattern.
 
         - target_property: name
-          source: 78b8b8fdb27f
+          source: employee
           source_field: name
           transformation: none
           transformation_spec: null
@@ -537,7 +537,7 @@ mapping_plan:
           notes: Direct copy.
 
         - target_property: role
-          source: 78b8b8fdb27f
+          source: employee
           source_field: role
           transformation: none
           transformation_spec: null
@@ -550,7 +550,7 @@ mapping_plan:
           notes: Enum values (owner, foreman, journeyman).
 
         - target_property: trade
-          source: 78b8b8fdb27f
+          source: employee
           source_field: trade
           transformation: none
           transformation_spec: null
@@ -563,7 +563,7 @@ mapping_plan:
           notes: All "general" in current data.
 
         - target_property: base_rate
-          source: 78b8b8fdb27f
+          source: employee
           source_field: base_rate
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -576,7 +576,7 @@ mapping_plan:
           notes: Hourly base pay. Owner has 0.0.
 
         - target_property: burden_rate
-          source: 78b8b8fdb27f
+          source: employee
           source_field: burden_rate
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -589,7 +589,7 @@ mapping_plan:
           notes: Fully burdened hourly cost. Already float in source.
 
         - target_property: bill_rate
-          source: 78b8b8fdb27f
+          source: employee
           source_field: bill_rate
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -602,7 +602,7 @@ mapping_plan:
           notes: Hourly rate charged to customers.
 
         - target_property: status
-          source: 78b8b8fdb27f
+          source: employee
           source_field: status
           transformation: none
           transformation_spec: null
@@ -615,7 +615,7 @@ mapping_plan:
           notes: Enum (active, terminated).
 
         - target_property: hire_date
-          source: 78b8b8fdb27f
+          source: employee
           source_field: hire_date
           transformation: cast
           transformation_spec: "Cast string to ISO-8601 date (YYYY-MM-DD)"
@@ -628,7 +628,7 @@ mapping_plan:
           notes: Already ISO-8601 format.
 
         - target_property: termination_date
-          source: 78b8b8fdb27f
+          source: employee
           source_field: termination_date
           transformation: cast
           transformation_spec: "Cast string to ISO-8601 date (YYYY-MM-DD)"
@@ -642,13 +642,13 @@ mapping_plan:
 
     # ── Estimate ─────────────────────────────────────────────────────────
     - entity_type: Estimate
-      system_of_record: ce1c4e604911
+      system_of_record: estimate
       additional_sources: []
       merge_key: estimate_id
       conflict_resolution: not_applicable
       field_mappings:
         - target_property: estimate_id
-          source: ce1c4e604911
+          source: estimate
           source_field: estimate_id
           transformation: none
           transformation_spec: null
@@ -661,7 +661,7 @@ mapping_plan:
           notes: Primary key. EST-XXXXXXXX UUID pattern.
 
         - target_property: estimate_number
-          source: ce1c4e604911
+          source: estimate
           source_field: estimate_number
           transformation: none
           transformation_spec: null
@@ -674,7 +674,7 @@ mapping_plan:
           notes: Sequential human-readable number (EST-0001).
 
         - target_property: version
-          source: ce1c4e604911
+          source: estimate
           source_field: version
           transformation: cast
           transformation_spec: "Cast string to integer"
@@ -687,7 +687,7 @@ mapping_plan:
           notes: All version 1 in current data.
 
         - target_property: customer_id
-          source: ce1c4e604911
+          source: estimate
           source_field: customer_id
           transformation: none
           transformation_spec: null
@@ -700,7 +700,7 @@ mapping_plan:
           notes: FK to Customer entity. 100% overlap.
 
         - target_property: archetype
-          source: ce1c4e604911
+          source: estimate
           source_field: archetype
           transformation: none
           transformation_spec: null
@@ -713,7 +713,7 @@ mapping_plan:
           notes: 7 archetypes. Direct copy.
 
         - target_property: status
-          source: ce1c4e604911
+          source: estimate
           source_field: status
           transformation: none
           transformation_spec: null
@@ -726,7 +726,7 @@ mapping_plan:
           notes: Enum (accepted, expired, declined, sent).
 
         - target_property: scope_description
-          source: ce1c4e604911
+          source: estimate
           source_field: scope_description
           transformation: none
           transformation_spec: null
@@ -739,7 +739,7 @@ mapping_plan:
           notes: Direct copy. Free-text scope description.
 
         - target_property: exclusions
-          source: ce1c4e604911
+          source: estimate
           source_field: exclusions
           transformation: none
           transformation_spec: null
@@ -752,7 +752,7 @@ mapping_plan:
           notes: Direct copy.
 
         - target_property: assumptions
-          source: ce1c4e604911
+          source: estimate
           source_field: assumptions
           transformation: none
           transformation_spec: null
@@ -765,7 +765,7 @@ mapping_plan:
           notes: Direct copy.
 
         - target_property: total
-          source: ce1c4e604911
+          source: estimate
           source_field: total
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -778,7 +778,7 @@ mapping_plan:
           notes: Total estimate price to customer.
 
         - target_property: cost_estimate
-          source: ce1c4e604911
+          source: estimate
           source_field: cost_estimate
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -791,7 +791,7 @@ mapping_plan:
           notes: Estimated cost before markup.
 
         - target_property: markup_pct
-          source: ce1c4e604911
+          source: estimate
           source_field: markup_pct
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -804,7 +804,7 @@ mapping_plan:
           notes: Markup percentage as decimal (e.g. 0.44 = 44%).
 
         - target_property: tax_amount
-          source: ce1c4e604911
+          source: estimate
           source_field: tax_amount
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -817,7 +817,7 @@ mapping_plan:
           notes: All 0.0 in current data.
 
         - target_property: created_at
-          source: ce1c4e604911
+          source: estimate
           source_field: created_at
           transformation: cast
           transformation_spec: "Cast string to ISO-8601 date (YYYY-MM-DD)"
@@ -830,7 +830,7 @@ mapping_plan:
           notes: Already ISO-8601 format.
 
         - target_property: sent_at
-          source: ce1c4e604911
+          source: estimate
           source_field: sent_at
           transformation: cast
           transformation_spec: "Cast string to ISO-8601 date (YYYY-MM-DD)"
@@ -843,7 +843,7 @@ mapping_plan:
           notes: Already ISO-8601 format.
 
         - target_property: valid_until
-          source: ce1c4e604911
+          source: estimate
           source_field: valid_until
           transformation: cast
           transformation_spec: "Cast string to ISO-8601 date (YYYY-MM-DD)"
@@ -856,7 +856,7 @@ mapping_plan:
           notes: Already ISO-8601 format.
 
         - target_property: accepted_at
-          source: ce1c4e604911
+          source: estimate
           source_field: accepted_at
           transformation: cast
           transformation_spec: "Cast string to ISO-8601 date (YYYY-MM-DD)"
@@ -869,7 +869,7 @@ mapping_plan:
           notes: 49% null (non-accepted estimates). Preserve nulls.
 
         - target_property: project_id
-          source: ce1c4e604911
+          source: estimate
           source_field: project_id
           transformation: none
           transformation_spec: null
@@ -883,13 +883,13 @@ mapping_plan:
 
     # ── EstimateLineItem ─────────────────────────────────────────────────
     - entity_type: EstimateLineItem
-      system_of_record: e03d6c5ed7d7
+      system_of_record: estimate_line_item
       additional_sources: []
       merge_key: line_id
       conflict_resolution: not_applicable
       field_mappings:
         - target_property: line_id
-          source: e03d6c5ed7d7
+          source: estimate_line_item
           source_field: line_id
           transformation: none
           transformation_spec: null
@@ -902,7 +902,7 @@ mapping_plan:
           notes: Primary key. ELI-XXXXXXXX UUID pattern.
 
         - target_property: estimate_id
-          source: e03d6c5ed7d7
+          source: estimate_line_item
           source_field: estimate_id
           transformation: none
           transformation_spec: null
@@ -915,7 +915,7 @@ mapping_plan:
           notes: FK to parent Estimate. 100% overlap.
 
         - target_property: cost_code
-          source: e03d6c5ed7d7
+          source: estimate_line_item
           source_field: cost_code
           transformation: none
           transformation_spec: null
@@ -928,7 +928,7 @@ mapping_plan:
           notes: Cost code identifier. Links semantically to Job.code.
 
         - target_property: description
-          source: e03d6c5ed7d7
+          source: estimate_line_item
           source_field: description
           transformation: none
           transformation_spec: null
@@ -941,7 +941,7 @@ mapping_plan:
           notes: Direct copy.
 
         - target_property: quantity
-          source: e03d6c5ed7d7
+          source: estimate_line_item
           source_field: quantity
           transformation: cast
           transformation_spec: "Cast string to integer"
@@ -954,7 +954,7 @@ mapping_plan:
           notes: Always 1 in current data (lump sum).
 
         - target_property: unit
-          source: e03d6c5ed7d7
+          source: estimate_line_item
           source_field: unit
           transformation: none
           transformation_spec: null
@@ -967,7 +967,7 @@ mapping_plan:
           notes: Always "ls" (lump sum) in current data.
 
         - target_property: unit_cost
-          source: e03d6c5ed7d7
+          source: estimate_line_item
           source_field: unit_cost
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -980,7 +980,7 @@ mapping_plan:
           notes: Cost per unit to Ridgeline.
 
         - target_property: unit_price
-          source: e03d6c5ed7d7
+          source: estimate_line_item
           source_field: unit_price
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -993,7 +993,7 @@ mapping_plan:
           notes: Price per unit to customer.
 
         - target_property: line_total
-          source: e03d6c5ed7d7
+          source: estimate_line_item
           source_field: line_total
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -1006,7 +1006,7 @@ mapping_plan:
           notes: Quantity * unit_price. Equals unit_price when quantity=1.
 
         - target_property: category
-          source: e03d6c5ed7d7
+          source: estimate_line_item
           source_field: category
           transformation: none
           transformation_spec: null
@@ -1020,13 +1020,13 @@ mapping_plan:
 
     # ── Project ──────────────────────────────────────────────────────────
     - entity_type: Project
-      system_of_record: 7b95d9ad0f5f
+      system_of_record: project
       additional_sources: []
       merge_key: project_id
       conflict_resolution: not_applicable
       field_mappings:
         - target_property: project_id
-          source: 7b95d9ad0f5f
+          source: project
           source_field: project_id
           transformation: none
           transformation_spec: null
@@ -1039,7 +1039,7 @@ mapping_plan:
           notes: Primary key. PROJ-XXXXXXXX UUID pattern.
 
         - target_property: estimate_id
-          source: 7b95d9ad0f5f
+          source: project
           source_field: estimate_id
           transformation: none
           transformation_spec: null
@@ -1052,7 +1052,7 @@ mapping_plan:
           notes: FK to originating Estimate. 1:1 mapping.
 
         - target_property: customer_id
-          source: 7b95d9ad0f5f
+          source: project
           source_field: customer_id
           transformation: none
           transformation_spec: null
@@ -1065,7 +1065,7 @@ mapping_plan:
           notes: FK to Customer. 100% overlap.
 
         - target_property: name
-          source: 7b95d9ad0f5f
+          source: project
           source_field: name
           transformation: none
           transformation_spec: null
@@ -1078,7 +1078,7 @@ mapping_plan:
           notes: Project name (CustomerLastName - ArchetypeDescription).
 
         - target_property: archetype
-          source: 7b95d9ad0f5f
+          source: project
           source_field: archetype
           transformation: none
           transformation_spec: null
@@ -1091,7 +1091,7 @@ mapping_plan:
           notes: 7 archetypes matching estimate archetypes.
 
         - target_property: type
-          source: 7b95d9ad0f5f
+          source: project
           source_field: type
           transformation: none
           transformation_spec: null
@@ -1104,7 +1104,7 @@ mapping_plan:
           notes: 5 project types.
 
         - target_property: trade
-          source: 7b95d9ad0f5f
+          source: project
           source_field: trade
           transformation: none
           transformation_spec: null
@@ -1117,7 +1117,7 @@ mapping_plan:
           notes: All "general" in current data.
 
         - target_property: status
-          source: 7b95d9ad0f5f
+          source: project
           source_field: status
           transformation: none
           transformation_spec: null
@@ -1130,7 +1130,7 @@ mapping_plan:
           notes: All "complete" (historical data).
 
         - target_property: site_address
-          source: 7b95d9ad0f5f
+          source: project
           source_field: site_address
           transformation: none
           transformation_spec: null
@@ -1143,7 +1143,7 @@ mapping_plan:
           notes: Direct copy.
 
         - target_property: start_date
-          source: 7b95d9ad0f5f
+          source: project
           source_field: start_date
           transformation: cast
           transformation_spec: "Cast string to ISO-8601 date (YYYY-MM-DD)"
@@ -1156,7 +1156,7 @@ mapping_plan:
           notes: Planned start date. Already ISO-8601.
 
         - target_property: end_date
-          source: 7b95d9ad0f5f
+          source: project
           source_field: end_date
           transformation: cast
           transformation_spec: "Cast string to ISO-8601 date (YYYY-MM-DD)"
@@ -1169,7 +1169,7 @@ mapping_plan:
           notes: Planned end date. Already ISO-8601.
 
         - target_property: actual_start
-          source: 7b95d9ad0f5f
+          source: project
           source_field: actual_start
           transformation: cast
           transformation_spec: "Cast string to ISO-8601 date (YYYY-MM-DD)"
@@ -1182,7 +1182,7 @@ mapping_plan:
           notes: Actual start date. Already ISO-8601.
 
         - target_property: actual_end
-          source: 7b95d9ad0f5f
+          source: project
           source_field: actual_end
           transformation: cast
           transformation_spec: "Cast string to ISO-8601 date (YYYY-MM-DD)"
@@ -1195,7 +1195,7 @@ mapping_plan:
           notes: Actual end date. Already ISO-8601.
 
         - target_property: contract_amount
-          source: 7b95d9ad0f5f
+          source: project
           source_field: contract_amount
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -1208,7 +1208,7 @@ mapping_plan:
           notes: Total contract value.
 
         - target_property: contract_type
-          source: 7b95d9ad0f5f
+          source: project
           source_field: contract_type
           transformation: none
           transformation_spec: null
@@ -1221,7 +1221,7 @@ mapping_plan:
           notes: All "fixed_price" in current data.
 
         - target_property: markup_pct
-          source: 7b95d9ad0f5f
+          source: project
           source_field: markup_pct
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -1234,7 +1234,7 @@ mapping_plan:
           notes: Markup percentage as decimal.
 
         - target_property: retention_pct
-          source: 7b95d9ad0f5f
+          source: project
           source_field: retention_pct
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -1247,7 +1247,7 @@ mapping_plan:
           notes: Retention percentage (0.05 or 0.10).
 
         - target_property: retention_released
-          source: 7b95d9ad0f5f
+          source: project
           source_field: retention_released
           transformation: cast
           transformation_spec: "Cast string 'True'/'False' to boolean"
@@ -1260,7 +1260,7 @@ mapping_plan:
           notes: All "True" in current data (complete projects).
 
         - target_property: permit_required
-          source: 7b95d9ad0f5f
+          source: project
           source_field: permit_required
           transformation: cast
           transformation_spec: "Cast string 'True'/'False' to boolean"
@@ -1273,7 +1273,7 @@ mapping_plan:
           notes: Boolean indicating permit requirement.
 
         - target_property: permit_number
-          source: 7b95d9ad0f5f
+          source: project
           source_field: permit_number
           transformation: none
           transformation_spec: null
@@ -1287,13 +1287,13 @@ mapping_plan:
 
     # ── Job ──────────────────────────────────────────────────────────────
     - entity_type: Job
-      system_of_record: d8e86831c3bc
+      system_of_record: job
       additional_sources: []
       merge_key: job_id
       conflict_resolution: not_applicable
       field_mappings:
         - target_property: job_id
-          source: d8e86831c3bc
+          source: job
           source_field: job_id
           transformation: none
           transformation_spec: null
@@ -1306,7 +1306,7 @@ mapping_plan:
           notes: Primary key. JOB-XXXXXXXX UUID pattern.
 
         - target_property: project_id
-          source: d8e86831c3bc
+          source: job
           source_field: project_id
           transformation: none
           transformation_spec: null
@@ -1319,7 +1319,7 @@ mapping_plan:
           notes: FK to parent Project. 100% overlap.
 
         - target_property: code
-          source: d8e86831c3bc
+          source: job
           source_field: code
           transformation: none
           transformation_spec: null
@@ -1332,7 +1332,7 @@ mapping_plan:
           notes: Cost code (e.g. 01-DEMO, 03-FRAMING). 56 distinct values.
 
         - target_property: name
-          source: d8e86831c3bc
+          source: job
           source_field: name
           transformation: none
           transformation_spec: null
@@ -1345,7 +1345,7 @@ mapping_plan:
           notes: Human-readable cost code name.
 
         - target_property: budgeted_labor_hours
-          source: d8e86831c3bc
+          source: job
           source_field: budgeted_labor_hours
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -1358,7 +1358,7 @@ mapping_plan:
           notes: Budgeted labor hours for this job.
 
         - target_property: budgeted_labor_cost
-          source: d8e86831c3bc
+          source: job
           source_field: budgeted_labor_cost
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -1371,7 +1371,7 @@ mapping_plan:
           notes: Budgeted labor cost.
 
         - target_property: budgeted_material_cost
-          source: d8e86831c3bc
+          source: job
           source_field: budgeted_material_cost
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -1384,7 +1384,7 @@ mapping_plan:
           notes: Budgeted material cost.
 
         - target_property: budgeted_sub_cost
-          source: d8e86831c3bc
+          source: job
           source_field: budgeted_sub_cost
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -1397,7 +1397,7 @@ mapping_plan:
           notes: Budgeted subcontractor cost.
 
         - target_property: budgeted_equipment_cost
-          source: d8e86831c3bc
+          source: job
           source_field: budgeted_equipment_cost
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -1410,7 +1410,7 @@ mapping_plan:
           notes: Always 0.0 in current data.
 
         - target_property: budgeted_other_cost
-          source: d8e86831c3bc
+          source: job
           source_field: budgeted_other_cost
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -1423,7 +1423,7 @@ mapping_plan:
           notes: Always 0.0 in current data.
 
         - target_property: status
-          source: d8e86831c3bc
+          source: job
           source_field: status
           transformation: none
           transformation_spec: null
@@ -1436,7 +1436,7 @@ mapping_plan:
           notes: All "complete" in historical data.
 
         - target_property: sort_order
-          source: d8e86831c3bc
+          source: job
           source_field: sort_order
           transformation: cast
           transformation_spec: "Cast string to integer"
@@ -1449,7 +1449,7 @@ mapping_plan:
           notes: Display order within project.
 
         - target_property: sub_vendor_type
-          source: d8e86831c3bc
+          source: job
           source_field: sub_vendor_type
           transformation: none
           transformation_spec: null
@@ -1462,7 +1462,7 @@ mapping_plan:
           notes: 77% null. Only subcontractor jobs have vendor types.
 
         - target_property: equipment_needed
-          source: d8e86831c3bc
+          source: job
           source_field: equipment_needed
           transformation: cast
           transformation_spec: "Cast string 'True'/'False' to boolean"
@@ -1475,7 +1475,7 @@ mapping_plan:
           notes: Boolean flag for equipment rental requirement.
 
         - target_property: actual_start
-          source: d8e86831c3bc
+          source: job
           source_field: actual_start
           transformation: cast
           transformation_spec: "Cast string to ISO-8601 date (YYYY-MM-DD)"
@@ -1488,7 +1488,7 @@ mapping_plan:
           notes: Actual start date of the job.
 
         - target_property: actual_end
-          source: d8e86831c3bc
+          source: job
           source_field: actual_end
           transformation: cast
           transformation_spec: "Cast string to ISO-8601 date (YYYY-MM-DD)"
@@ -1502,13 +1502,13 @@ mapping_plan:
 
     # ── TimeEntry ────────────────────────────────────────────────────────
     - entity_type: TimeEntry
-      system_of_record: a1d7892ddd7d
+      system_of_record: time_entry
       additional_sources: []
       merge_key: entry_id
       conflict_resolution: not_applicable
       field_mappings:
         - target_property: entry_id
-          source: a1d7892ddd7d
+          source: time_entry
           source_field: entry_id
           transformation: none
           transformation_spec: null
@@ -1521,7 +1521,7 @@ mapping_plan:
           notes: Primary key. TE-XXXXXXXX UUID pattern.
 
         - target_property: employee_id
-          source: a1d7892ddd7d
+          source: time_entry
           source_field: employee_id
           transformation: none
           transformation_spec: null
@@ -1534,7 +1534,7 @@ mapping_plan:
           notes: FK to Employee. 4 distinct employees (owner does not log time).
 
         - target_property: project_id
-          source: a1d7892ddd7d
+          source: time_entry
           source_field: project_id
           transformation: none
           transformation_spec: null
@@ -1547,7 +1547,7 @@ mapping_plan:
           notes: FK to Project. 100% overlap.
 
         - target_property: job_id
-          source: a1d7892ddd7d
+          source: time_entry
           source_field: job_id
           transformation: none
           transformation_spec: null
@@ -1560,7 +1560,7 @@ mapping_plan:
           notes: FK to Job. 79.2% overlap with job table (labor-only cost codes).
 
         - target_property: date
-          source: a1d7892ddd7d
+          source: time_entry
           source_field: date
           transformation: cast
           transformation_spec: "Cast string to ISO-8601 date (YYYY-MM-DD)"
@@ -1573,7 +1573,7 @@ mapping_plan:
           notes: Already ISO-8601 format.
 
         - target_property: hours_regular
-          source: a1d7892ddd7d
+          source: time_entry
           source_field: hours_regular
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -1586,7 +1586,7 @@ mapping_plan:
           notes: Regular hours worked.
 
         - target_property: hours_overtime
-          source: a1d7892ddd7d
+          source: time_entry
           source_field: hours_overtime
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -1599,7 +1599,7 @@ mapping_plan:
           notes: Overtime hours worked. 0.0 when no overtime.
 
         - target_property: cost
-          source: a1d7892ddd7d
+          source: time_entry
           source_field: cost
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -1612,7 +1612,7 @@ mapping_plan:
           notes: Pre-computed labor cost in source. Computed property in ontology.
 
         - target_property: notes
-          source: a1d7892ddd7d
+          source: time_entry
           source_field: notes
           transformation: none
           transformation_spec: null
@@ -1626,13 +1626,13 @@ mapping_plan:
 
     # ── Bill ─────────────────────────────────────────────────────────────
     - entity_type: Bill
-      system_of_record: 3ec971acc703
+      system_of_record: bill
       additional_sources: []
       merge_key: bill_id
       conflict_resolution: not_applicable
       field_mappings:
         - target_property: bill_id
-          source: 3ec971acc703
+          source: bill
           source_field: bill_id
           transformation: none
           transformation_spec: null
@@ -1645,7 +1645,7 @@ mapping_plan:
           notes: Primary key. BILL-XXXXXXXX UUID pattern.
 
         - target_property: vendor_id
-          source: 3ec971acc703
+          source: bill
           source_field: vendor_id
           transformation: none
           transformation_spec: null
@@ -1658,7 +1658,7 @@ mapping_plan:
           notes: FK to Vendor. 9 of 10 vendors appear in bills.
 
         - target_property: project_id
-          source: 3ec971acc703
+          source: bill
           source_field: project_id
           transformation: none
           transformation_spec: null
@@ -1671,7 +1671,7 @@ mapping_plan:
           notes: FK to Project. 22.8% null for overhead bills.
 
         - target_property: job_id
-          source: 3ec971acc703
+          source: bill
           source_field: job_id
           transformation: none
           transformation_spec: null
@@ -1684,7 +1684,7 @@ mapping_plan:
           notes: FK to Job. 22.8% null for overhead bills.
 
         - target_property: vendor_invoice_number
-          source: 3ec971acc703
+          source: bill
           source_field: vendor_invoice_number
           transformation: none
           transformation_spec: null
@@ -1697,7 +1697,7 @@ mapping_plan:
           notes: Vendor's own invoice number. SI-NNNNN pattern.
 
         - target_property: status
-          source: 3ec971acc703
+          source: bill
           source_field: status
           transformation: none
           transformation_spec: null
@@ -1710,7 +1710,7 @@ mapping_plan:
           notes: All "paid" in historical data.
 
         - target_property: received_date
-          source: 3ec971acc703
+          source: bill
           source_field: received_date
           transformation: cast
           transformation_spec: "Cast string to ISO-8601 date (YYYY-MM-DD)"
@@ -1723,7 +1723,7 @@ mapping_plan:
           notes: Already ISO-8601 format.
 
         - target_property: due_date
-          source: 3ec971acc703
+          source: bill
           source_field: due_date
           transformation: cast
           transformation_spec: "Cast string to ISO-8601 date (YYYY-MM-DD)"
@@ -1736,7 +1736,7 @@ mapping_plan:
           notes: Already ISO-8601 format.
 
         - target_property: total
-          source: 3ec971acc703
+          source: bill
           source_field: total
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -1749,7 +1749,7 @@ mapping_plan:
           notes: Total bill amount.
 
         - target_property: paid_date
-          source: 3ec971acc703
+          source: bill
           source_field: paid_date
           transformation: cast
           transformation_spec: "Cast string to ISO-8601 date (YYYY-MM-DD)"
@@ -1762,7 +1762,7 @@ mapping_plan:
           notes: Already ISO-8601 format.
 
         - target_property: payment_method
-          source: 3ec971acc703
+          source: bill
           source_field: payment_method
           transformation: none
           transformation_spec: null
@@ -1775,7 +1775,7 @@ mapping_plan:
           notes: Enum (check, ach).
 
         - target_property: check_number
-          source: 3ec971acc703
+          source: bill
           source_field: check_number
           transformation: cast
           transformation_spec: "Cast string to integer"
@@ -1788,7 +1788,7 @@ mapping_plan:
           notes: 24.2% null (ACH payments). Preserve nulls.
 
         - target_property: category
-          source: 3ec971acc703
+          source: bill
           source_field: category
           transformation: none
           transformation_spec: null
@@ -1802,13 +1802,13 @@ mapping_plan:
 
     # ── BillLineItem ─────────────────────────────────────────────────────
     - entity_type: BillLineItem
-      system_of_record: cc08c48ce725
+      system_of_record: bill_line_item
       additional_sources: []
       merge_key: line_id
       conflict_resolution: not_applicable
       field_mappings:
         - target_property: line_id
-          source: cc08c48ce725
+          source: bill_line_item
           source_field: line_id
           transformation: none
           transformation_spec: null
@@ -1821,7 +1821,7 @@ mapping_plan:
           notes: Primary key. BLI-XXXXXXXX UUID pattern.
 
         - target_property: bill_id
-          source: cc08c48ce725
+          source: bill_line_item
           source_field: bill_id
           transformation: none
           transformation_spec: null
@@ -1834,7 +1834,7 @@ mapping_plan:
           notes: FK to parent Bill. 1:1 in current data.
 
         - target_property: project_id
-          source: cc08c48ce725
+          source: bill_line_item
           source_field: project_id
           transformation: none
           transformation_spec: null
@@ -1847,7 +1847,7 @@ mapping_plan:
           notes: FK to Project. 22.8% null for overhead bills.
 
         - target_property: job_id
-          source: cc08c48ce725
+          source: bill_line_item
           source_field: job_id
           transformation: none
           transformation_spec: null
@@ -1860,7 +1860,7 @@ mapping_plan:
           notes: FK to Job. 22.8% null for overhead bills.
 
         - target_property: description
-          source: cc08c48ce725
+          source: bill_line_item
           source_field: description
           transformation: none
           transformation_spec: null
@@ -1873,7 +1873,7 @@ mapping_plan:
           notes: Direct copy.
 
         - target_property: quantity
-          source: cc08c48ce725
+          source: bill_line_item
           source_field: quantity
           transformation: cast
           transformation_spec: "Cast string to integer"
@@ -1886,7 +1886,7 @@ mapping_plan:
           notes: Always 1 in current data.
 
         - target_property: unit_cost
-          source: cc08c48ce725
+          source: bill_line_item
           source_field: unit_cost
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -1899,7 +1899,7 @@ mapping_plan:
           notes: Cost per unit.
 
         - target_property: line_total
-          source: cc08c48ce725
+          source: bill_line_item
           source_field: line_total
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -1912,7 +1912,7 @@ mapping_plan:
           notes: Quantity * unit_cost.
 
         - target_property: category
-          source: cc08c48ce725
+          source: bill_line_item
           source_field: category
           transformation: none
           transformation_spec: null
@@ -1926,13 +1926,13 @@ mapping_plan:
 
     # ── Invoice ──────────────────────────────────────────────────────────
     - entity_type: Invoice
-      system_of_record: d03c595c4b33
+      system_of_record: invoice
       additional_sources: []
       merge_key: invoice_id
       conflict_resolution: not_applicable
       field_mappings:
         - target_property: invoice_id
-          source: d03c595c4b33
+          source: invoice
           source_field: invoice_id
           transformation: none
           transformation_spec: null
@@ -1945,7 +1945,7 @@ mapping_plan:
           notes: Primary key. INV-XXXXXXXX UUID pattern.
 
         - target_property: invoice_number
-          source: d03c595c4b33
+          source: invoice
           source_field: invoice_number
           transformation: none
           transformation_spec: null
@@ -1958,7 +1958,7 @@ mapping_plan:
           notes: Sequential human-readable number (INV-0001).
 
         - target_property: project_id
-          source: d03c595c4b33
+          source: invoice
           source_field: project_id
           transformation: none
           transformation_spec: null
@@ -1971,7 +1971,7 @@ mapping_plan:
           notes: FK to Project. 100% overlap.
 
         - target_property: customer_id
-          source: d03c595c4b33
+          source: invoice
           source_field: customer_id
           transformation: none
           transformation_spec: null
@@ -1984,7 +1984,7 @@ mapping_plan:
           notes: FK to Customer. 100% overlap.
 
         - target_property: type
-          source: d03c595c4b33
+          source: invoice
           source_field: type
           transformation: none
           transformation_spec: null
@@ -1997,7 +1997,7 @@ mapping_plan:
           notes: Enum (progress, final, retention).
 
         - target_property: status
-          source: d03c595c4b33
+          source: invoice
           source_field: status
           transformation: none
           transformation_spec: null
@@ -2010,7 +2010,7 @@ mapping_plan:
           notes: All "paid" in historical data.
 
         - target_property: issued_date
-          source: d03c595c4b33
+          source: invoice
           source_field: issued_date
           transformation: cast
           transformation_spec: "Cast string to ISO-8601 date (YYYY-MM-DD)"
@@ -2023,7 +2023,7 @@ mapping_plan:
           notes: Already ISO-8601 format.
 
         - target_property: due_date
-          source: d03c595c4b33
+          source: invoice
           source_field: due_date
           transformation: cast
           transformation_spec: "Cast string to ISO-8601 date (YYYY-MM-DD)"
@@ -2036,7 +2036,7 @@ mapping_plan:
           notes: Already ISO-8601 format.
 
         - target_property: subtotal
-          source: d03c595c4b33
+          source: invoice
           source_field: subtotal
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -2049,7 +2049,7 @@ mapping_plan:
           notes: Invoice subtotal before retention and tax.
 
         - target_property: retention_held
-          source: d03c595c4b33
+          source: invoice
           source_field: retention_held
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -2062,7 +2062,7 @@ mapping_plan:
           notes: Amount of retention withheld.
 
         - target_property: tax
-          source: d03c595c4b33
+          source: invoice
           source_field: tax
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -2075,7 +2075,7 @@ mapping_plan:
           notes: All 0.0 in current data.
 
         - target_property: total_due
-          source: d03c595c4b33
+          source: invoice
           source_field: total_due
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -2089,13 +2089,13 @@ mapping_plan:
 
     # ── Payment ──────────────────────────────────────────────────────────
     - entity_type: Payment
-      system_of_record: 491b7ff7ab76
+      system_of_record: payment
       additional_sources: []
       merge_key: payment_id
       conflict_resolution: not_applicable
       field_mappings:
         - target_property: payment_id
-          source: 491b7ff7ab76
+          source: payment
           source_field: payment_id
           transformation: none
           transformation_spec: null
@@ -2108,7 +2108,7 @@ mapping_plan:
           notes: Primary key. PAY-XXXXXXXX UUID pattern.
 
         - target_property: invoice_id
-          source: 491b7ff7ab76
+          source: payment
           source_field: invoice_id
           transformation: none
           transformation_spec: null
@@ -2121,7 +2121,7 @@ mapping_plan:
           notes: FK to Invoice. 1:1 mapping.
 
         - target_property: project_id
-          source: 491b7ff7ab76
+          source: payment
           source_field: project_id
           transformation: none
           transformation_spec: null
@@ -2134,7 +2134,7 @@ mapping_plan:
           notes: FK to Project. 100% overlap.
 
         - target_property: customer_id
-          source: 491b7ff7ab76
+          source: payment
           source_field: customer_id
           transformation: none
           transformation_spec: null
@@ -2147,7 +2147,7 @@ mapping_plan:
           notes: FK to Customer. 100% overlap.
 
         - target_property: amount
-          source: 491b7ff7ab76
+          source: payment
           source_field: amount
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -2160,7 +2160,7 @@ mapping_plan:
           notes: Payment amount.
 
         - target_property: method
-          source: 491b7ff7ab76
+          source: payment
           source_field: method
           transformation: none
           transformation_spec: null
@@ -2173,7 +2173,7 @@ mapping_plan:
           notes: Enum (ach, check, credit_card).
 
         - target_property: reference
-          source: 491b7ff7ab76
+          source: payment
           source_field: reference
           transformation: none
           transformation_spec: null
@@ -2186,7 +2186,7 @@ mapping_plan:
           notes: Check number or transaction ID. Source is integer, keep as string for generality.
 
         - target_property: received_date
-          source: 491b7ff7ab76
+          source: payment
           source_field: received_date
           transformation: cast
           transformation_spec: "Cast string to ISO-8601 date (YYYY-MM-DD)"
@@ -2199,7 +2199,7 @@ mapping_plan:
           notes: Already ISO-8601 format.
 
         - target_property: deposited_date
-          source: 491b7ff7ab76
+          source: payment
           source_field: deposited_date
           transformation: cast
           transformation_spec: "Cast string to ISO-8601 date (YYYY-MM-DD)"
@@ -2213,15 +2213,15 @@ mapping_plan:
 
     # ── NarrativeEvent ───────────────────────────────────────────────────
     - entity_type: NarrativeEvent
-      system_of_record: fadb29a0034e
+      system_of_record: loc_event
       additional_sources:
-        - d17411f8d40e
-        - 28104fac72b5
+        - overtime_event
+        - pricing_change
       merge_key: event_id
       conflict_resolution: not_applicable
       field_mappings:
         - target_property: event_id
-          source: fadb29a0034e
+          source: loc_event
           source_field: event_id
           transformation: none
           transformation_spec: null
@@ -2237,7 +2237,7 @@ mapping_plan:
             pricing_change.csv (EVT-014).
 
         - target_property: event_type
-          source: fadb29a0034e
+          source: loc_event
           source_field: null
           transformation: calculate
           transformation_spec: >-
@@ -2255,7 +2255,7 @@ mapping_plan:
             Discriminator based on which source file the event comes from.
 
         - target_property: date
-          source: fadb29a0034e
+          source: loc_event
           source_field: date
           transformation: cast
           transformation_spec: >-
@@ -2271,7 +2271,7 @@ mapping_plan:
           notes: Mapped from date, start_date, or effective_date depending on source.
 
         - target_property: description
-          source: fadb29a0034e
+          source: loc_event
           source_field: description
           transformation: none
           transformation_spec: null
@@ -2286,7 +2286,7 @@ mapping_plan:
             pricing_change.csv uses "notes" column mapped to description.
 
         - target_property: amount
-          source: fadb29a0034e
+          source: loc_event
           source_field: amount
           transformation: cast
           transformation_spec: "Cast string to float"
@@ -2301,7 +2301,7 @@ mapping_plan:
             and pricing_change events.
 
         - target_property: event_metadata
-          source: fadb29a0034e
+          source: loc_event
           source_field: null
           transformation: calculate
           transformation_spec: >-
@@ -2327,7 +2327,7 @@ mapping_plan:
 
     - relationship_type: customer_has_estimate
       extraction_method: fk_lookup
-      source: ce1c4e604911
+      source: estimate
       from_field: customer_id
       to_field: estimate_id
       property_mappings: []
@@ -2338,7 +2338,7 @@ mapping_plan:
 
     - relationship_type: customer_has_project
       extraction_method: fk_lookup
-      source: 7b95d9ad0f5f
+      source: project
       from_field: customer_id
       to_field: project_id
       property_mappings: []
@@ -2349,7 +2349,7 @@ mapping_plan:
 
     - relationship_type: estimate_becomes_project
       extraction_method: fk_lookup
-      source: 7b95d9ad0f5f
+      source: project
       from_field: estimate_id
       to_field: project_id
       property_mappings: []
@@ -2360,7 +2360,7 @@ mapping_plan:
 
     - relationship_type: estimate_has_line_item
       extraction_method: fk_lookup
-      source: e03d6c5ed7d7
+      source: estimate_line_item
       from_field: estimate_id
       to_field: line_id
       property_mappings: []
@@ -2371,7 +2371,7 @@ mapping_plan:
 
     - relationship_type: project_has_job
       extraction_method: fk_lookup
-      source: d8e86831c3bc
+      source: job
       from_field: project_id
       to_field: job_id
       property_mappings: []
@@ -2382,7 +2382,7 @@ mapping_plan:
 
     - relationship_type: project_has_invoice
       extraction_method: fk_lookup
-      source: d03c595c4b33
+      source: invoice
       from_field: project_id
       to_field: invoice_id
       property_mappings: []
@@ -2393,7 +2393,7 @@ mapping_plan:
 
     - relationship_type: project_has_bill
       extraction_method: fk_lookup
-      source: 3ec971acc703
+      source: bill
       from_field: project_id
       to_field: bill_id
       property_mappings: []
@@ -2405,7 +2405,7 @@ mapping_plan:
 
     - relationship_type: job_has_time_entry
       extraction_method: fk_lookup
-      source: a1d7892ddd7d
+      source: time_entry
       from_field: job_id
       to_field: entry_id
       property_mappings: []
@@ -2417,7 +2417,7 @@ mapping_plan:
 
     - relationship_type: job_has_bill
       extraction_method: fk_lookup
-      source: 3ec971acc703
+      source: bill
       from_field: job_id
       to_field: bill_id
       property_mappings: []
@@ -2428,7 +2428,7 @@ mapping_plan:
 
     - relationship_type: employee_logs_time
       extraction_method: fk_lookup
-      source: a1d7892ddd7d
+      source: time_entry
       from_field: employee_id
       to_field: entry_id
       property_mappings: []
@@ -2439,7 +2439,7 @@ mapping_plan:
 
     - relationship_type: vendor_has_bill
       extraction_method: fk_lookup
-      source: 3ec971acc703
+      source: bill
       from_field: vendor_id
       to_field: bill_id
       property_mappings: []
@@ -2450,7 +2450,7 @@ mapping_plan:
 
     - relationship_type: invoice_has_payment
       extraction_method: fk_lookup
-      source: 491b7ff7ab76
+      source: payment
       from_field: invoice_id
       to_field: payment_id
       property_mappings: []
@@ -2461,7 +2461,7 @@ mapping_plan:
 
     - relationship_type: company_employs
       extraction_method: fk_lookup
-      source: 381f49880b21
+      source: company
       from_field: owner_employee_id
       to_field: name
       property_mappings: []
@@ -2473,7 +2473,7 @@ mapping_plan:
 
     - relationship_type: estimate_line_item_maps_to_job
       extraction_method: fk_lookup
-      source: e03d6c5ed7d7
+      source: estimate_line_item
       from_field: cost_code
       to_field: job_id
       property_mappings: []
@@ -2496,15 +2496,15 @@ mapping_plan:
       target_entity_type: Project
       target_property: gross_margin
       inputs:
-        - source: 7b95d9ad0f5f
+        - source: project
           field: contract_amount
           aggregation: null
           window: null
-        - source: 3ec971acc703
+        - source: bill
           field: total
           aggregation: sum
           window: null
-        - source: a1d7892ddd7d
+        - source: time_entry
           field: cost
           aggregation: sum
           window: null
@@ -2522,11 +2522,11 @@ mapping_plan:
       target_entity_type: Project
       target_property: total_costs
       inputs:
-        - source: 3ec971acc703
+        - source: bill
           field: total
           aggregation: sum
           window: null
-        - source: a1d7892ddd7d
+        - source: time_entry
           field: cost
           aggregation: sum
           window: null
@@ -2543,11 +2543,11 @@ mapping_plan:
       target_entity_type: Employee
       target_property: utilization_rate
       inputs:
-        - source: a1d7892ddd7d
+        - source: time_entry
           field: hours_regular
           aggregation: sum
           window: trailing_12m
-        - source: a1d7892ddd7d
+        - source: time_entry
           field: hours_overtime
           aggregation: sum
           window: trailing_12m
@@ -2565,7 +2565,7 @@ mapping_plan:
       target_entity_type: Customer
       target_property: lifetime_value
       inputs:
-        - source: 7b95d9ad0f5f
+        - source: project
           field: contract_amount
           aggregation: sum
           window: null
@@ -2582,7 +2582,7 @@ mapping_plan:
       target_entity_type: Vendor
       target_property: total_spend
       inputs:
-        - source: 3ec971acc703
+        - source: bill
           field: total
           aggregation: sum
           window: trailing_12m
@@ -2600,15 +2600,15 @@ mapping_plan:
       target_entity_type: Project
       target_property: cost_variance
       inputs:
-        - source: 3ec971acc703
+        - source: bill
           field: total
           aggregation: sum
           window: null
-        - source: a1d7892ddd7d
+        - source: time_entry
           field: cost
           aggregation: sum
           window: null
-        - source: ce1c4e604911
+        - source: estimate
           field: cost_estimate
           aggregation: null
           window: null
@@ -2637,14 +2637,14 @@ mapping_plan:
   # ════════════════════════════════════════════════════════════════════════
   source_utilization:
 
-    - source_id: 381f49880b21
+    - source_id: company
       consumed: true
       consumed_by:
         - Company
         - company_employs
       exclusion_reason: null
 
-    - source_id: dab846594bbb
+    - source_id: customer
       consumed: true
       consumed_by:
         - Customer
@@ -2652,14 +2652,14 @@ mapping_plan:
         - customer_has_project
       exclusion_reason: null
 
-    - source_id: 580ea3721ca9
+    - source_id: vendor
       consumed: true
       consumed_by:
         - Vendor
         - vendor_has_bill
       exclusion_reason: null
 
-    - source_id: 78b8b8fdb27f
+    - source_id: employee
       consumed: true
       consumed_by:
         - Employee
@@ -2667,7 +2667,7 @@ mapping_plan:
         - company_employs
       exclusion_reason: null
 
-    - source_id: ce1c4e604911
+    - source_id: estimate
       consumed: true
       consumed_by:
         - Estimate
@@ -2676,7 +2676,7 @@ mapping_plan:
         - estimate_has_line_item
       exclusion_reason: null
 
-    - source_id: e03d6c5ed7d7
+    - source_id: estimate_line_item
       consumed: true
       consumed_by:
         - EstimateLineItem
@@ -2684,7 +2684,7 @@ mapping_plan:
         - estimate_line_item_maps_to_job
       exclusion_reason: null
 
-    - source_id: 7b95d9ad0f5f
+    - source_id: project
       consumed: true
       consumed_by:
         - Project
@@ -2695,7 +2695,7 @@ mapping_plan:
         - project_has_bill
       exclusion_reason: null
 
-    - source_id: d8e86831c3bc
+    - source_id: job
       consumed: true
       consumed_by:
         - Job
@@ -2705,7 +2705,7 @@ mapping_plan:
         - estimate_line_item_maps_to_job
       exclusion_reason: null
 
-    - source_id: a1d7892ddd7d
+    - source_id: time_entry
       consumed: true
       consumed_by:
         - TimeEntry
@@ -2713,7 +2713,7 @@ mapping_plan:
         - job_has_time_entry
       exclusion_reason: null
 
-    - source_id: 3ec971acc703
+    - source_id: bill
       consumed: true
       consumed_by:
         - Bill
@@ -2722,13 +2722,13 @@ mapping_plan:
         - job_has_bill
       exclusion_reason: null
 
-    - source_id: cc08c48ce725
+    - source_id: bill_line_item
       consumed: true
       consumed_by:
         - BillLineItem
       exclusion_reason: null
 
-    - source_id: d03c595c4b33
+    - source_id: invoice
       consumed: true
       consumed_by:
         - Invoice
@@ -2736,26 +2736,26 @@ mapping_plan:
         - invoice_has_payment
       exclusion_reason: null
 
-    - source_id: 491b7ff7ab76
+    - source_id: payment
       consumed: true
       consumed_by:
         - Payment
         - invoice_has_payment
       exclusion_reason: null
 
-    - source_id: fadb29a0034e
+    - source_id: loc_event
       consumed: true
       consumed_by:
         - NarrativeEvent
       exclusion_reason: null
 
-    - source_id: d17411f8d40e
+    - source_id: overtime_event
       consumed: true
       consumed_by:
         - NarrativeEvent
       exclusion_reason: null
 
-    - source_id: 28104fac72b5
+    - source_id: pricing_change
       consumed: true
       consumed_by:
         - NarrativeEvent

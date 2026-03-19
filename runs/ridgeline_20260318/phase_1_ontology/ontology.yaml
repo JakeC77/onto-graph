@@ -85,7 +85,7 @@ ontology:
         states: []
         state_field: null
       sources:
-        - 381f49880b21
+        - company
       instance_count: 1
       simulation_mapping:
         maps_to: null
@@ -194,7 +194,7 @@ ontology:
           - active
         state_field: status
       sources:
-        - dab846594bbb
+        - customer
       instance_count: 13
       simulation_mapping:
         maps_to: Customer
@@ -309,7 +309,7 @@ ontology:
         states: []
         state_field: null
       sources:
-        - 580ea3721ca9
+        - vendor
       instance_count: 10
       simulation_mapping:
         maps_to: null
@@ -402,7 +402,7 @@ ontology:
           - terminated
         state_field: status
       sources:
-        - 78b8b8fdb27f
+        - employee
       instance_count: 5
       simulation_mapping:
         maps_to: Person
@@ -544,7 +544,7 @@ ontology:
           - expired
         state_field: status
       sources:
-        - ce1c4e604911
+        - estimate
       instance_count: 100
       simulation_mapping:
         maps_to: null
@@ -634,7 +634,7 @@ ontology:
         states: []
         state_field: null
       sources:
-        - e03d6c5ed7d7
+        - estimate_line_item
       instance_count: 1173
       simulation_mapping:
         maps_to: null
@@ -787,7 +787,7 @@ ontology:
           - complete
         state_field: status
       sources:
-        - 7b95d9ad0f5f
+        - project
       instance_count: 51
       simulation_mapping:
         maps_to: Initiative
@@ -916,7 +916,7 @@ ontology:
           - complete
         state_field: status
       sources:
-        - d8e86831c3bc
+        - job
       instance_count: 279
       simulation_mapping:
         maps_to: null
@@ -999,7 +999,7 @@ ontology:
         states: []
         state_field: null
       sources:
-        - a1d7892ddd7d
+        - time_entry
       instance_count: 1710
       simulation_mapping:
         maps_to: null
@@ -1108,7 +1108,7 @@ ontology:
           - paid
         state_field: status
       sources:
-        - 3ec971acc703
+        - bill
       instance_count: 745
       simulation_mapping:
         maps_to: VendorContract
@@ -1193,7 +1193,7 @@ ontology:
         states: []
         state_field: null
       sources:
-        - cc08c48ce725
+        - bill_line_item
       instance_count: 745
       simulation_mapping:
         maps_to: null
@@ -1296,7 +1296,7 @@ ontology:
           - paid
         state_field: status
       sources:
-        - d03c595c4b33
+        - invoice
       instance_count: 134
       simulation_mapping:
         maps_to: CustomerContract
@@ -1381,7 +1381,7 @@ ontology:
         states: []
         state_field: null
       sources:
-        - 491b7ff7ab76
+        - payment
       instance_count: 134
       simulation_mapping:
         maps_to: null
@@ -1448,9 +1448,9 @@ ontology:
         states: []
         state_field: null
       sources:
-        - fadb29a0034e
-        - d17411f8d40e
-        - 28104fac72b5
+        - loc_event
+        - overtime_event
+        - pricing_change
       instance_count: 3
       simulation_mapping:
         maps_to: null
@@ -1490,8 +1490,8 @@ ontology:
       discovery_method: explicit_fk
       confidence: 1.0
       sources:
-        - dab846594bbb
-        - ce1c4e604911
+        - customer
+        - estimate
       simulation_mapping:
         maps_to: null
         mapping_notes: No Simulation edge equivalent for customer-to-estimate.
@@ -1511,8 +1511,8 @@ ontology:
       discovery_method: explicit_fk
       confidence: 1.0
       sources:
-        - dab846594bbb
-        - 7b95d9ad0f5f
+        - customer
+        - project
       simulation_mapping:
         maps_to: null
         mapping_notes: >-
@@ -1534,8 +1534,8 @@ ontology:
       discovery_method: explicit_fk
       confidence: 1.0
       sources:
-        - ce1c4e604911
-        - 7b95d9ad0f5f
+        - estimate
+        - project
       simulation_mapping:
         maps_to: null
         mapping_notes: >-
@@ -1562,8 +1562,8 @@ ontology:
       discovery_method: explicit_fk
       confidence: 1.0
       sources:
-        - ce1c4e604911
-        - e03d6c5ed7d7
+        - estimate
+        - estimate_line_item
       simulation_mapping:
         maps_to: null
         mapping_notes: Detail-level relationship, no Simulation equivalent.
@@ -1583,8 +1583,8 @@ ontology:
       discovery_method: explicit_fk
       confidence: 1.0
       sources:
-        - 7b95d9ad0f5f
-        - d8e86831c3bc
+        - project
+        - job
       simulation_mapping:
         maps_to: null
         mapping_notes: >-
@@ -1606,8 +1606,8 @@ ontology:
       discovery_method: explicit_fk
       confidence: 1.0
       sources:
-        - 7b95d9ad0f5f
-        - d03c595c4b33
+        - project
+        - invoice
       simulation_mapping:
         maps_to: null
         mapping_notes: Financial relationship, no direct Simulation edge.
@@ -1627,8 +1627,8 @@ ontology:
       discovery_method: explicit_fk
       confidence: 1.0
       sources:
-        - 7b95d9ad0f5f
-        - 3ec971acc703
+        - project
+        - bill
       simulation_mapping:
         maps_to: null
         mapping_notes: Cost-side relationship, no direct Simulation edge.
@@ -1649,8 +1649,8 @@ ontology:
       discovery_method: explicit_fk
       confidence: 0.792
       sources:
-        - d8e86831c3bc
-        - a1d7892ddd7d
+        - job
+        - time_entry
       simulation_mapping:
         maps_to: null
         mapping_notes: Labor tracking, no Simulation edge equivalent.
@@ -1671,8 +1671,8 @@ ontology:
       discovery_method: explicit_fk
       confidence: 0.829
       sources:
-        - d8e86831c3bc
-        - 3ec971acc703
+        - job
+        - bill
       simulation_mapping:
         maps_to: null
         mapping_notes: Cost allocation relationship, no Simulation edge equivalent.
@@ -1693,8 +1693,8 @@ ontology:
       discovery_method: explicit_fk
       confidence: 0.86
       sources:
-        - 78b8b8fdb27f
-        - a1d7892ddd7d
+        - employee
+        - time_entry
       simulation_mapping:
         maps_to: null
         mapping_notes: >-
@@ -1717,8 +1717,8 @@ ontology:
       discovery_method: explicit_fk
       confidence: 0.93
       sources:
-        - 580ea3721ca9
-        - 3ec971acc703
+        - vendor
+        - bill
       simulation_mapping:
         maps_to: null
         mapping_notes: Vendor-to-bill transactional link. No Simulation edge.
@@ -1738,8 +1738,8 @@ ontology:
       discovery_method: explicit_fk
       confidence: 1.0
       sources:
-        - d03c595c4b33
-        - 491b7ff7ab76
+        - invoice
+        - payment
       simulation_mapping:
         maps_to: null
         mapping_notes: Financial settlement link. No direct Simulation edge.
@@ -1759,8 +1759,8 @@ ontology:
       discovery_method: explicit_fk
       confidence: 0.44
       sources:
-        - 381f49880b21
-        - 78b8b8fdb27f
+        - company
+        - employee
       simulation_mapping:
         maps_to: null
         mapping_notes: >-
@@ -1783,8 +1783,8 @@ ontology:
       discovery_method: explicit_fk
       confidence: 1.0
       sources:
-        - e03d6c5ed7d7
-        - d8e86831c3bc
+        - estimate_line_item
+        - job
       simulation_mapping:
         maps_to: null
         mapping_notes: >-

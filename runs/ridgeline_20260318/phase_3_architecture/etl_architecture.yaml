@@ -326,10 +326,10 @@ etl_architecture:
         depends_on: []
         type: ingest
         sources:
-          - 381f49880b21   # company.csv
-          - dab846594bbb   # customer.csv
-          - 580ea3721ca9   # vendor.csv
-          - 78b8b8fdb27f   # employee.csv
+          - company   # company.csv
+          - customer   # customer.csv
+          - vendor   # vendor.csv
+          - employee   # employee.csv
         entity_types:
           - Company
           - Customer
@@ -341,8 +341,8 @@ etl_architecture:
         depends_on: [ingest_master_data]
         type: ingest
         sources:
-          - ce1c4e604911   # estimate.csv
-          - e03d6c5ed7d7   # estimate_line_item.csv
+          - estimate   # estimate.csv
+          - estimate_line_item   # estimate_line_item.csv
         entity_types:
           - Estimate
           - EstimateLineItem
@@ -352,8 +352,8 @@ etl_architecture:
         depends_on: [ingest_master_data, ingest_estimates]
         type: ingest
         sources:
-          - 7b95d9ad0f5f   # project.csv
-          - d8e86831c3bc   # job.csv
+          - project   # project.csv
+          - job   # job.csv
         entity_types:
           - Project
           - Job
@@ -363,10 +363,10 @@ etl_architecture:
         depends_on: [ingest_projects]
         type: ingest
         sources:
-          - 3ec971acc703   # bill.csv
-          - cc08c48ce725   # bill_line_item.csv
-          - d03c595c4b33   # invoice.csv
-          - 491b7ff7ab76   # payment.csv
+          - bill   # bill.csv
+          - bill_line_item   # bill_line_item.csv
+          - invoice   # invoice.csv
+          - payment   # payment.csv
         entity_types:
           - Bill
           - BillLineItem
@@ -378,7 +378,7 @@ etl_architecture:
         depends_on: [ingest_projects]
         type: ingest
         sources:
-          - a1d7892ddd7d   # time_entry.csv
+          - time_entry   # time_entry.csv
         entity_types:
           - TimeEntry
         estimated_rows: 1710
@@ -387,9 +387,9 @@ etl_architecture:
         depends_on: []
         type: ingest
         sources:
-          - fadb29a0034e   # loc_event.csv
-          - d17411f8d40e   # overtime_event.csv
-          - 28104fac72b5   # pricing_change.csv
+          - loc_event   # loc_event.csv
+          - overtime_event   # overtime_event.csv
+          - pricing_change   # pricing_change.csv
         entity_types:
           - NarrativeEvent
         estimated_rows: 3
@@ -438,7 +438,7 @@ etl_architecture:
   pipeline_specs:
 
     # -- company.csv ---------------------------------------------------------
-    - source_id: 381f49880b21
+    - source_id: company
       reader:
         connection_type: file
         format: csv
@@ -476,7 +476,7 @@ etl_architecture:
         quarantine_path: runs/ridgeline_20260318/quarantine/
 
     # -- customer.csv --------------------------------------------------------
-    - source_id: dab846594bbb
+    - source_id: customer
       reader:
         connection_type: file
         format: csv
@@ -524,7 +524,7 @@ etl_architecture:
         quarantine_path: runs/ridgeline_20260318/quarantine/
 
     # -- vendor.csv ----------------------------------------------------------
-    - source_id: 580ea3721ca9
+    - source_id: vendor
       reader:
         connection_type: file
         format: csv
@@ -578,7 +578,7 @@ etl_architecture:
         quarantine_path: runs/ridgeline_20260318/quarantine/
 
     # -- employee.csv --------------------------------------------------------
-    - source_id: 78b8b8fdb27f
+    - source_id: employee
       reader:
         connection_type: file
         format: csv
@@ -630,7 +630,7 @@ etl_architecture:
         quarantine_path: runs/ridgeline_20260318/quarantine/
 
     # -- estimate.csv --------------------------------------------------------
-    - source_id: ce1c4e604911
+    - source_id: estimate
       reader:
         connection_type: file
         format: csv
@@ -698,7 +698,7 @@ etl_architecture:
         quarantine_path: runs/ridgeline_20260318/quarantine/
 
     # -- estimate_line_item.csv ----------------------------------------------
-    - source_id: e03d6c5ed7d7
+    - source_id: estimate_line_item
       reader:
         connection_type: file
         format: csv
@@ -754,7 +754,7 @@ etl_architecture:
         quarantine_path: runs/ridgeline_20260318/quarantine/
 
     # -- project.csv ---------------------------------------------------------
-    - source_id: 7b95d9ad0f5f
+    - source_id: project
       reader:
         connection_type: file
         format: csv
@@ -826,7 +826,7 @@ etl_architecture:
         quarantine_path: runs/ridgeline_20260318/quarantine/
 
     # -- job.csv -------------------------------------------------------------
-    - source_id: d8e86831c3bc
+    - source_id: job
       reader:
         connection_type: file
         format: csv
@@ -889,7 +889,7 @@ etl_architecture:
         quarantine_path: runs/ridgeline_20260318/quarantine/
 
     # -- time_entry.csv ------------------------------------------------------
-    - source_id: a1d7892ddd7d
+    - source_id: time_entry
       reader:
         connection_type: file
         format: csv
@@ -939,7 +939,7 @@ etl_architecture:
         quarantine_path: runs/ridgeline_20260318/quarantine/
 
     # -- bill.csv ------------------------------------------------------------
-    - source_id: 3ec971acc703
+    - source_id: bill
       reader:
         connection_type: file
         format: csv
@@ -1000,7 +1000,7 @@ etl_architecture:
         quarantine_path: runs/ridgeline_20260318/quarantine/
 
     # -- bill_line_item.csv --------------------------------------------------
-    - source_id: cc08c48ce725
+    - source_id: bill_line_item
       reader:
         connection_type: file
         format: csv
@@ -1048,7 +1048,7 @@ etl_architecture:
         quarantine_path: runs/ridgeline_20260318/quarantine/
 
     # -- invoice.csv ---------------------------------------------------------
-    - source_id: d03c595c4b33
+    - source_id: invoice
       reader:
         connection_type: file
         format: csv
@@ -1107,7 +1107,7 @@ etl_architecture:
         quarantine_path: runs/ridgeline_20260318/quarantine/
 
     # -- payment.csv ---------------------------------------------------------
-    - source_id: 491b7ff7ab76
+    - source_id: payment
       reader:
         connection_type: file
         format: csv
@@ -1152,7 +1152,7 @@ etl_architecture:
         quarantine_path: runs/ridgeline_20260318/quarantine/
 
     # -- loc_event.csv -------------------------------------------------------
-    - source_id: fadb29a0034e
+    - source_id: loc_event
       reader:
         connection_type: file
         format: csv
@@ -1198,7 +1198,7 @@ etl_architecture:
         quarantine_path: runs/ridgeline_20260318/quarantine/
 
     # -- overtime_event.csv --------------------------------------------------
-    - source_id: d17411f8d40e
+    - source_id: overtime_event
       reader:
         connection_type: file
         format: csv
@@ -1249,7 +1249,7 @@ etl_architecture:
         quarantine_path: runs/ridgeline_20260318/quarantine/
 
     # -- pricing_change.csv --------------------------------------------------
-    - source_id: 28104fac72b5
+    - source_id: pricing_change
       reader:
         connection_type: file
         format: csv
